@@ -13,7 +13,7 @@ public class IntegerStorage implements Storage{
     private List<Integer> column;
 
     public void generateRepresentation() {
-        representation = new ArrayList<String>();
+        representation = new ArrayList<>();
 
         String minus = "_";
 
