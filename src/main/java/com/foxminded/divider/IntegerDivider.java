@@ -19,9 +19,11 @@ public class IntegerDivider implements Divider {
 
         int intermediateDividend = findIntermediateDividend(dividend, divider);
 
-        int string = intermediateDividend - (intermediateDividend % divider);
+        int mod=intermediateDividend % divider;
+        int string = intermediateDividend - mod;
         System.out.println("string=" + string);
         column.add(string);
+
         return column;
     }
 
