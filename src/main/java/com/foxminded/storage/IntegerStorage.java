@@ -3,7 +3,7 @@ package com.foxminded.storage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IntegerStorage implements Storage{
+public class IntegerStorage implements Storage {
     private List<String> representation;
 
     private Integer dividend;
@@ -11,6 +11,15 @@ public class IntegerStorage implements Storage{
     private Integer mod;
     private Integer result;
     private List<Integer> column;
+
+    public IntegerStorage(Integer dividend, Integer divider,
+                          Integer mod, Integer result, List<Integer> column) {
+        this.dividend = dividend;
+        this.divider = divider;
+        this.mod = mod;
+        this.result = result;
+        this.column = column;
+    }
 
     public void generateRepresentation() {
         representation = new ArrayList<>();
