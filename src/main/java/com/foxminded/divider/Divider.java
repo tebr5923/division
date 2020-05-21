@@ -1,7 +1,7 @@
 package com.foxminded.divider;
 
-import com.foxminded.storage.Representation;
+import com.foxminded.storage.Storage;
 
 public interface Divider {
-    Representation divide(int dividend, int divider);
+    Storage divide(int dividend, int divider);
 }
