@@ -1,4 +1,4 @@
-package com.foxminded;
+package com.foxminded.storage;
 
 import java.util.List;
 
