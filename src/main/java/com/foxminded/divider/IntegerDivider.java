@@ -58,7 +58,7 @@ public class IntegerDivider implements Divider {
     // find intermediateDividend, dividend*divider(second line),
 // concat intermediate mod with next digit from dividend drop intermediateDividend (fourth line)
 //
-    public List<Integer> findNextLines(Integer dividend, Integer divider) {
+    public List<Integer> doOneStep(Integer dividend, Integer divider) {
         List<Integer> list = new ArrayList<>();
         StringBuilder sbDividend = new StringBuilder(dividend.toString());
         int intermediateDividend = Integer.parseInt(sbDividend.substring(0, 1));
