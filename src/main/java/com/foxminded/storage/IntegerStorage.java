@@ -27,12 +27,15 @@ public class IntegerStorage implements Storage {
         String minus = "_";
 
         representation.add(minus + dividend + "|" + divider);
-        representation.add(" " + column.get(0) + " " + "|" + "-----");
-        representation.add(" " + "--" + " " + "|" + result);
+        representation.add(" " + column.get(0) + "  " + "|" + "-----");
+        representation.add(" " + "--" + "  " + "|" + result);
         representation.add(" " + minus + column.get(1));
         representation.add(" " + " " + column.get(2));
         representation.add(" " + " " + "--");
-        representation.add(" " + " " + " " + mod);
+        representation.add("  " + minus + column.get(3));
+        representation.add("   "  + column.get(4));
+        representation.add(" " + "  " + "--");
+        representation.add(" " + " " + "  " + mod);
     }
 
     public List<String> getRepresentation() {

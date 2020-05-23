@@ -9,43 +9,14 @@ public class IntegerDivider implements Divider {
     public IntegerStorage divide(Integer dividend, Integer divider) {
         int mod = dividend % divider;
         int result = dividend / divider;
-        List<Integer> columnInt = generateColumnInt(dividend, divider);
 
-        List<String> columnStr = generateColumnStr(dividend, divider);
+        List<Integer> columnInt = new ArrayList<>();
 
         return new IntegerStorage(dividend, divider, mod, result, columnInt);
     }
 
-    private List<Integer> generateColumnInt(Integer dividend, Integer divider) {
-        List<Integer> columnInt = new ArrayList<>();
-
-        int intermediateDividend = findIntermediateDividend(dividend, divider);
-
-        int mod = intermediateDividend % divider;
-        int lineInt = intermediateDividend - mod;
-        System.out.println("lineInt=" + lineInt);
-        columnInt.add(lineInt);
-
-        return columnInt;
-    }
-
-    private List<String> generateColumnStr(Integer dividend, Integer divider) {
-        List<String> columnStr = new ArrayList<>();
-
-        int intermediateDividend = findIntermediateDividend(dividend, divider);
-
-        int mod = intermediateDividend % divider;
-        int lineInt = intermediateDividend - mod;
-
-        String lineStr = Integer.toString(lineInt);
-        System.out.println("lineStr=" + lineStr);
-        columnStr.add(lineStr);
-
-        return columnStr;
-    }
-
-    private int findIntermediateDividend(Integer dividend, Integer divider) {
-        StringBuilder sbDividend = new StringBuilder(dividend.toString());
+    private int findIntermediateDividend(int dividend, int divider) {
+        StringBuilder sbDividend = new StringBuilder(Integer.toString(dividend));
         int intermediateDividend = Integer.parseInt(sbDividend.substring(0, 1));
         int i = 1;
         while (intermediateDividend <= divider) {
@@ -55,9 +26,7 @@ public class IntegerDivider implements Divider {
         return intermediateDividend;
     }
 
-    // find intermediateDividend, dividend*divider(second line),
-// concat intermediate mod with next digit from dividend drop intermediateDividend (fourth line)
-//
+    // find intermediateDividend, dividend*divider(second line), next dividend (fourth line)
     public List<Integer> doOneStep(Integer dividend, Integer divider) {
         List<Integer> list = new ArrayList<>();
         StringBuilder sbDividend = new StringBuilder(dividend.toString());
@@ -79,15 +48,6 @@ public class IntegerDivider implements Divider {
                 arrayOfDividend[i];
         list.add(Integer.parseInt(sbForFourthLine));
 
-/*        StringBuilder sbForFourthLine= new StringBuilder();
-        sbForFourthLine.append(intermediateMod);
-        sbForFourthLine.append(arrayOfDividend[i]);
-        list.add(Integer.parseInt(sbForFourthLine.toString()));*/
-
-
-
-
-
 
         return list;
     }
@@ -105,14 +65,14 @@ public class IntegerDivider implements Divider {
 
         int intermediateDividend = findIntermediateDividend(dividend, divider);
         int intermediateMod = intermediateDividend % divider;
-        //int intForSecondLine =  (intermediateDividend/divider)*divider;
         int intForSecondLine = intermediateDividend - intermediateMod;
-        int timesForSpace = dividend.toString().length() - Integer.toString(intForSecondLine).length();
+        int dividendLength = lengthInt(dividend);
+        int timesForSpace = dividendLength - lengthInt(intForSecondLine);
         int timesForMinus;
         if (result >= divider) {
-            timesForMinus = Integer.toString(result).length();
+            timesForMinus = lengthInt(result);
         } else {
-            timesForMinus = Integer.toString(divider).length();
+            timesForMinus = lengthInt(divider);
         }
         String secondLine;
         secondLine = " " + intForSecondLine +
@@ -120,7 +80,7 @@ public class IntegerDivider implements Divider {
                 "|" + printStringSomeTimes("-", timesForMinus);
         columnStr.add(secondLine);
 
-        timesForMinus = Integer.toString(intForSecondLine).length();
+        timesForMinus = lengthInt(intForSecondLine);
         String thirdLine;
         thirdLine = " " + printStringSomeTimes("-", timesForMinus) +
                 printStringSomeTimes(" ", timesForSpace) +
@@ -128,15 +88,33 @@ public class IntegerDivider implements Divider {
         columnStr.add(thirdLine);
 
 
-/*        StringBuilder sbDividend = new StringBuilder(dividend.toString());
-        StringBuilder sb = new StringBuilder(intermediateMod);
-        sb.append();
-        while () {
+        int intermediateDividendLength = lengthInt(intermediateDividend);
+        int intermediateModLength = lengthInt(intermediateMod);
+        int countForMod = intermediateDividendLength - intermediateModLength;
+        if (intermediateDividendLength == dividendLength) {
+            String fourthLine = printStringSomeTimes(" ", countForMod + 1) + mod;
+            columnStr.add(fourthLine);
+            return columnStr;
+        }
 
-        }*/
+// надо прибавить слева остаток от деления
+        int nextDivided = concatIntegerAndString(intermediateMod,
+                cutIntToIndex(dividend, intermediateDividendLength - 1));
+        int nextIntermediateDividend =findIntermediateDividend(nextDivided, divider);
 
+        char[] arrayOfDividend = dividend.toString().toCharArray();
 
-        columnStr.forEach(System.out::println);
+        String stringNextDividend = String.valueOf(intermediateMod) +
+                arrayOfDividend[intermediateDividendLength];
+        int nextDividend = Integer.parseInt(stringNextDividend);
+        if (nextDividend >= divider) {
+            String fourthLine = printStringSomeTimes(" ", countForMod) + minus + nextDividend;
+            columnStr.add(fourthLine);
+        } else {
+            String fourthLine = printStringSomeTimes(" ", intermediateDividendLength) + mod;
+            columnStr.add(fourthLine);
+            return columnStr;
+        }
 
 
         return columnStr;
@@ -149,17 +127,18 @@ public class IntegerDivider implements Divider {
         }
         return stringBuilder.toString();
     }
-    //-----------------------------------------------------
 
-    private int findNextLine(Integer dividend, Integer divider) {
-        StringBuilder sbDividend = new StringBuilder(dividend.toString());
-        int intermediateDividend = Integer.parseInt(sbDividend.substring(0, 1));
-        int i = 1;
-        while (intermediateDividend <= divider) {
-            i++;
-            intermediateDividend = Integer.parseInt(sbDividend.substring(0, i));
-        }
-        return intermediateDividend;
+    private int lengthInt(int integer) {
+        return Integer.toString(integer).length();
     }
 
+    private String cutIntToIndex(int integer, int index) {
+        StringBuilder sb = new StringBuilder(Integer.toString(integer));
+        return sb.substring(index + 1);
+    }
+
+    private int concatIntegerAndString(int left, String right) {
+        String result = left + right;
+        return Integer.parseInt(result);
+    }
 }
