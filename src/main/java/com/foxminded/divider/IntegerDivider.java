@@ -19,37 +19,11 @@ public class IntegerDivider implements Divider {
         StringBuilder sbDividend = new StringBuilder(Integer.toString(dividend));
         int intermediateDividend = Integer.parseInt(sbDividend.substring(0, 1));
         int i = 1;
-        while (intermediateDividend <= divider) {
+        while (intermediateDividend < divider) {
             i++;
             intermediateDividend = Integer.parseInt(sbDividend.substring(0, i));
         }
         return intermediateDividend;
-    }
-
-    // find intermediateDividend, dividend*divider(second line), next dividend (fourth line)
-    public List<Integer> doOneStep(Integer dividend, Integer divider) {
-        List<Integer> list = new ArrayList<>();
-        StringBuilder sbDividend = new StringBuilder(dividend.toString());
-        int intermediateDividend = Integer.parseInt(sbDividend.substring(0, 1));
-        int i = 1;
-        while (intermediateDividend <= divider) {
-            i++;
-            intermediateDividend = Integer.parseInt(sbDividend.substring(0, i));
-        }
-
-        int intermediateMod = intermediateDividend % divider;
-        int intForSecondLine = intermediateDividend - intermediateMod;
-
-        list.add(intermediateDividend);
-        list.add(intForSecondLine);
-
-        char[] arrayOfDividend = dividend.toString().toCharArray();
-        String sbForFourthLine = String.valueOf(intermediateMod) +
-                arrayOfDividend[i];
-        list.add(Integer.parseInt(sbForFourthLine));
-
-
-        return list;
     }
 
     //-----------------------------------------------------
@@ -74,6 +48,7 @@ public class IntegerDivider implements Divider {
         } else {
             timesForMinus = lengthInt(divider);
         }
+
         String secondLine;
         secondLine = " " + intForSecondLine +
                 printStringSomeTimes(" ", timesForSpace) +
@@ -87,7 +62,7 @@ public class IntegerDivider implements Divider {
                 "|" + result;
         columnStr.add(thirdLine);
 
-
+//если 4я строка последняя
         int intermediateDividendLength = lengthInt(intermediateDividend);
         int intermediateModLength = lengthInt(intermediateMod);
         int countForMod = intermediateDividendLength - intermediateModLength;
@@ -97,18 +72,31 @@ public class IntegerDivider implements Divider {
             return columnStr;
         }
 
-// надо прибавить слева остаток от деления
-        int nextDivided = concatIntegerAndString(intermediateMod,
-                cutIntToIndex(dividend, intermediateDividendLength - 1));
-        int nextIntermediateDividend =findIntermediateDividend(nextDivided, divider);
+        //main loop
+        //надо прибавить слева остаток от деления
+        //основной divided теперь nextMainDivided
 
+        int nextMainDivided = nextMainDivided(dividend, intermediateMod, intermediateDividendLength);
+      /*  int nextMainDivided = concatIntegerAndString(intermediateMod,
+                cut(dividend, intermediateDividendLength - 1));*/
+
+        if (intermediateMod == 0) {
+            countForMod++;
+        }
+        int nextIntermediateDividend = findIntermediateDividend(nextMainDivided, divider);
+
+//если списывается вниз 0 то добавляем 1 пробел
         char[] arrayOfDividend = dividend.toString().toCharArray();
+        int i = intermediateDividendLength;
+        while (arrayOfDividend[i] == '0') {
+            countForMod++;
+            i++;
+        }
 
-        String stringNextDividend = String.valueOf(intermediateMod) +
-                arrayOfDividend[intermediateDividendLength];
-        int nextDividend = Integer.parseInt(stringNextDividend);
-        if (nextDividend >= divider) {
-            String fourthLine = printStringSomeTimes(" ", countForMod) + minus + nextDividend;
+        if (nextIntermediateDividend >= divider) {
+            String fourthLine = printStringSomeTimes(" ", countForMod) +
+                    minus +
+                    nextIntermediateDividend;
             columnStr.add(fourthLine);
         } else {
             String fourthLine = printStringSomeTimes(" ", intermediateDividendLength) + mod;
@@ -132,13 +120,20 @@ public class IntegerDivider implements Divider {
         return Integer.toString(integer).length();
     }
 
-    private String cutIntToIndex(int integer, int index) {
+    private String cut(int integer, int toIndex) {
         StringBuilder sb = new StringBuilder(Integer.toString(integer));
-        return sb.substring(index + 1);
+        return sb.substring(toIndex + 1);
     }
 
     private int concatIntegerAndString(int left, String right) {
         String result = left + right;
         return Integer.parseInt(result);
+    }
+
+    private int nextMainDivided(int dividend,
+                                int intermediateMod,
+                                int intermediateDividendLength) {
+        return concatIntegerAndString(intermediateMod,
+                cut(dividend, intermediateDividendLength - 1));
     }
 }
