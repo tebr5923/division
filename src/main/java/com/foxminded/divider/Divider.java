@@ -3,5 +3,5 @@ package com.foxminded.divider;
 import com.foxminded.storage.Storage;
 
 public interface Divider {
-    Storage divide(Integer dividend, Integer divider);
+    Storage divide(int dividend, int divider);
 }

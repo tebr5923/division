@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IntegerDivider implements Divider {
-    public IntegerStorage divide(Integer divided, Integer divider) {
+    public IntegerStorage divide(int divided, int divider) {
         int mod = divided % divider;
         int result = divided / divider;
 
@@ -14,7 +14,7 @@ public class IntegerDivider implements Divider {
         return new IntegerStorage(divided, divider, mod, result, representation);
     }
 
-    private List<String> generateColumn(Integer divided, Integer divider) {
+    private List<String> generateColumn(int divided, int divider) {
         int maimMod = divided % divider;
         int mainResult = divided / divider;
         List<String> columnStr = new ArrayList<>();
@@ -78,7 +78,7 @@ public class IntegerDivider implements Divider {
             count = count + lengthInt(multiplication) - lengthInt(intermediateMod);
             if (intermediateMod == 0) {
                 count++;
-                char[] arrayOfDivided = divided.toString().toCharArray();
+                char[] arrayOfDivided = Integer.toString(divided).toCharArray();
                 int i = count - 1;
                 while (arrayOfDivided[i] == '0') {
                     count++;
