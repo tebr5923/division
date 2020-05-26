@@ -24,7 +24,6 @@ public class IntegerDivider implements Divider {
         firstLine = minus + divided + "|" + divider;
         columnStr.add(firstLine);
 
-        //----------string 2-----------------
         int intermediateDivided = findIntermediateDivided(divided, divider);
         int intermediateMod = intermediateDivided % divider;
 
@@ -53,7 +52,6 @@ public class IntegerDivider implements Divider {
                 "|" + printStringSomeTimes("-", timesForMinus);
         columnStr.add(secondLine);
 
-        //----------string 3-----------------
         timesForMinus = lengthInt(multiplication);
         String thirdLine;
         thirdLine = printStringSomeTimes(" ", count + kForMultLeftSpaces) +
@@ -62,9 +60,8 @@ public class IntegerDivider implements Divider {
                 "|" + mainResult;
         columnStr.add(thirdLine);
 
-//if 4th string is last
+        //if 4th string is last
         int intermediateDividedLength = lengthInt(intermediateDivided);
-        //      count = intermediateDividedLength - lengthInt(multiplication);
         if (intermediateDividedLength == dividedLength) {
             String fourthLine =
                     printStringSomeTimes(" ",
@@ -74,19 +71,14 @@ public class IntegerDivider implements Divider {
             return columnStr;
         }
 
-        //main loop
         int nextMainDivided = nextMainDivided(divided, intermediateMod, intermediateDividedLength);
-        //while (count < dividedLength-5) {
         while (true) {
             count = count + kForMultLeftSpaces;
             int nextIntermediateDivided = findIntermediateDivided(nextMainDivided, divider);
-            // count = count + lengthInt(intermediateDivided) - lengthInt(intermediateMod);
             count = count + lengthInt(multiplication) - lengthInt(intermediateMod);
             if (intermediateMod == 0) {
                 count++;
-                //если списывается вниз 0 то добавляем 1 пробел
                 char[] arrayOfDivided = divided.toString().toCharArray();
-                //int i = intermediateDividedLength;
                 int i = count - 1;
                 while (arrayOfDivided[i] == '0') {
                     count++;
@@ -108,28 +100,25 @@ public class IntegerDivider implements Divider {
                 columnStr.add(firstLineInLoop);
                 return columnStr;
             }
-//----------string 2 in loop-----------------
+
             String secondLineInLoop;
             int multiplicationInLoop = getMultiplication(nextIntermediateDivided, divider);
-            int nextIntermediateMod = nextIntermediateDivided % divider; // need to delete
+            int nextIntermediateMod = nextIntermediateDivided % divider;
             kForMultLeftSpaces = 0;
             if (lengthInt(nextIntermediateDivided) > lengthInt(multiplicationInLoop)) {
-                //if (lengthInt(nextIntermediateDivided) > lengthInt(multiplication)) {
                 kForMultLeftSpaces++;
             }
             secondLineInLoop = printStringSomeTimes(" ", count + kForMultLeftSpaces) +
                     multiplicationInLoop;
             columnStr.add(secondLineInLoop);
 
-//----------string 3 in loop-----------------
             String thirdLineInLoop;
             thirdLineInLoop = printStringSomeTimes(" ", count + kForMultLeftSpaces) +
                     printStringSomeTimes("-", lengthInt(multiplicationInLoop));
 
             columnStr.add(thirdLineInLoop);
-//----------string 4 in loop-----------------
+
             //if 4th string is last
-            //      count = intermediateDividedLength - lengthInt(multiplication);
             if ((count + lengthInt(nextIntermediateDivided)) > lengthInt(divided)) {
                 String fourthLineInLoop =
                         printStringSomeTimes(" ",
@@ -138,22 +127,13 @@ public class IntegerDivider implements Divider {
                 columnStr.add(fourthLineInLoop);
                 return columnStr;
             }
-            //инит для следующей петли
 
             nextMainDivided = nextMainDivided(nextMainDivided,
                     nextIntermediateMod,
                     lengthInt(nextIntermediateDivided));
-
-            // nextMainDivided = nextMainDivided(divided, intermediateMod, intermediateDividedLength);
-
-            intermediateDivided = nextIntermediateDivided;
-            intermediateDividedLength = lengthInt(intermediateDivided);
             intermediateMod = nextIntermediateMod;
             multiplication = multiplicationInLoop;
-
-            //count++;
         }
-        //return columnStr;
     }
 
     private String printStringSomeTimes(String string, int times) {
