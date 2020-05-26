@@ -1,9 +1,9 @@
 package com.foxminded.printer;
 
-import java.util.List;
+import com.foxminded.storage.Storage;
 
-public class ConsolePrinter implements Printer{
-    public void print(List<String> representation) {
-        representation.forEach(System.out::println);
+public class ConsolePrinter implements Printer {
+    public void print(Storage storage) {
+        storage.getRepresentation().forEach(System.out::println);
     }
 }

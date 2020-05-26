@@ -1,7 +1,7 @@
 package com.foxminded.printer;
 
-import java.util.List;
+import com.foxminded.storage.Storage;
 
 public interface Printer {
-    void print(List<String> representation);
+    void print(Storage storage);
 }
