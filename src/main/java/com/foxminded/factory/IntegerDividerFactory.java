@@ -7,7 +7,7 @@ import com.foxminded.printer.Printer;
 import com.foxminded.storage.IntegerStorage;
 import com.foxminded.storage.Storage;
 
-public class IntegerDivaderFactory implements CalculationFactory {
+public class IntegerDividerFactory implements CalculationFactory {
     @Override
     public Divider getDivider() {
         return new IntegerDivider();
