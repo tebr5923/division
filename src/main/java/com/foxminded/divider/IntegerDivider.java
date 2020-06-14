@@ -12,9 +12,11 @@ public class IntegerDivider implements Divider {
     public IntegerStorage divide(int bigDividend, int divider) {
         if (divider == 0) {
             throw new NullPointerException("division by zero");
-        } else if (divider < 0) {
+        }
+        if (divider < 0) {
             throw new IllegalArgumentException("divider must be positive");
-        } else if (bigDividend < divider) {
+        }
+        if (bigDividend < divider) {
             throw new IllegalArgumentException("divider must be more then dividend");
         }
         List<Representation> representations = new ArrayList<>();
