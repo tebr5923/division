@@ -1,185 +1,118 @@
 package com.foxminded.divider;
 
 import com.foxminded.storage.IntegerStorage;
+import com.foxminded.storage.Representation;
+import com.foxminded.utils.OneStepResultStorage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class IntegerDivider implements Divider {
-    public IntegerStorage divide(int divided, int divider) {
-        int mod = divided % divider;
-        int result = divided / divider;
-
-        List<String> representation = generateColumn(divided, divider);
-        return new IntegerStorage(divided, divider, mod, result, representation);
-    }
-
-    private List<String> generateColumn(int divided, int divider) {
-        int maimMod = divided % divider;
-        int mainResult = divided / divider;
-        List<String> columnStr = new ArrayList<>();
-        String minus = "_";
-
-        String firstLine;
-        firstLine = minus + divided + "|" + divider;
-        columnStr.add(firstLine);
-
-        int intermediateDivided = findIntermediateDivided(divided, divider);
-        int intermediateMod = intermediateDivided % divider;
-
-        int multiplication = getMultiplication(intermediateDivided, divider);
-
-        int dividedLength = lengthInt(divided);
-        int timesForSpace = dividedLength - lengthInt(multiplication);
-        int timesForMinus;
-        if (mainResult >= divider) {
-            timesForMinus = lengthInt(mainResult);
-        } else {
-            timesForMinus = lengthInt(divider);
+    @Override
+    public IntegerStorage divide(int bigDividend, int divider) {
+        if (divider == 0) {
+            throw new NullPointerException("division by zero");
+        } else if (divider < 0) {
+            throw new IllegalArgumentException("divider must be positive");
         }
-
-        int count = 1;
-        int kForMultLeftSpaces = 0;
-        int kForMultRightSpaces = 0;
-        if (lengthInt(intermediateDivided) > lengthInt(multiplication)) {
-            kForMultLeftSpaces++;
-            kForMultRightSpaces++;
-        }
-        String secondLine;
-        secondLine = printStringSomeTimes(" ", count + kForMultLeftSpaces) +
-                multiplication +
-                printStringSomeTimes(" ", timesForSpace - kForMultRightSpaces) +
-                "|" + printStringSomeTimes("-", timesForMinus);
-        columnStr.add(secondLine);
-
-        timesForMinus = lengthInt(multiplication);
-        String thirdLine;
-        thirdLine = printStringSomeTimes(" ", count + kForMultLeftSpaces) +
-                printStringSomeTimes("-", timesForMinus) +
-                printStringSomeTimes(" ", timesForSpace - kForMultRightSpaces) +
-                "|" + mainResult;
-        columnStr.add(thirdLine);
-
-        //if 4th string is last
-        int intermediateDividedLength = lengthInt(intermediateDivided);
-        if (intermediateDividedLength == dividedLength) {
-            String fourthLine =
-                    printStringSomeTimes(" ",
-                            count + kForMultLeftSpaces + timesForMinus - lengthInt(maimMod))
-                            + maimMod;
-            columnStr.add(fourthLine);
-            return columnStr;
-        }
-
-        int nextMainDivided = nextMainDivided(divided, intermediateMod, intermediateDividedLength);
-        while (true) {
-            count = count + kForMultLeftSpaces;
-            int nextIntermediateDivided = findIntermediateDivided(nextMainDivided, divider);
-            count = count + lengthInt(multiplication) - lengthInt(intermediateMod);
-            if (intermediateMod == 0) {
-                count++;
-                char[] arrayOfDivided = Integer.toString(divided).toCharArray();
-                int i = count - 1;
-                while (arrayOfDivided[i] == '0') {
-                    count++;
-                    i++;
-                    if (count > arrayOfDivided.length) {
-                        count--;
-                        break;
-                    }
-                }
+        List<Representation> representations = new ArrayList<>();
+        int currentPosition = 0;
+        representations.add(new Representation(bigDividend, currentPosition));
+        int intermediateDividend = findFirstSmallDividend(bigDividend, divider);
+        int positionInBigDivider = lengthInt(intermediateDividend);
+        int countTo = lengthInt(bigDividend) - positionInBigDivider;
+        for (int count = 0; count < countTo; count++) {
+            OneStepResultStorage result = doOneStep(intermediateDividend, divider);
+            representations.add(
+                    new Representation(result.getMultiplication().getNumber(),
+                            currentPosition + result.getMultiplication().getPosition()));
+            if (intermediateDividend == 0) {
+                currentPosition++;
             }
-            if (nextIntermediateDivided >= divider) {
-                String firstLineInLoop = printStringSomeTimes(" ", count - 1) +
-                        minus +
-                        nextIntermediateDivided;
-                columnStr.add(firstLineInLoop);
+            int nextSmallDividend = nextSmallDividend(bigDividend,
+                    result.getMod().getNumber(), positionInBigDivider);
+            representations.add(new Representation(nextSmallDividend,
+                    currentPosition + result.getMod().getPosition()));
+            if (result.getMultiplication().getNumber() == 0) {
+                currentPosition = currentPosition + result.getMod().getPosition();
             } else {
-                String firstLineInLoop = printStringSomeTimes(" ", count) +
-                        maimMod;
-                columnStr.add(firstLineInLoop);
-                return columnStr;
+                currentPosition = currentPosition +
+                        Math.max(result.getMultiplication().getPosition(), result.getMod().getPosition());
             }
-
-            String secondLineInLoop;
-            int multiplicationInLoop = getMultiplication(nextIntermediateDivided, divider);
-            int nextIntermediateMod = nextIntermediateDivided % divider;
-            kForMultLeftSpaces = 0;
-            if (lengthInt(nextIntermediateDivided) > lengthInt(multiplicationInLoop)) {
-                kForMultLeftSpaces++;
-            }
-            secondLineInLoop = printStringSomeTimes(" ", count + kForMultLeftSpaces) +
-                    multiplicationInLoop;
-            columnStr.add(secondLineInLoop);
-
-            String thirdLineInLoop;
-            thirdLineInLoop = printStringSomeTimes(" ", count + kForMultLeftSpaces) +
-                    printStringSomeTimes("-", lengthInt(multiplicationInLoop));
-
-            columnStr.add(thirdLineInLoop);
-
-            //if 4th string is last
-            if ((count + lengthInt(nextIntermediateDivided)) > lengthInt(divided)) {
-                String fourthLineInLoop =
-                        printStringSomeTimes(" ",
-                                count + kForMultLeftSpaces + lengthInt(multiplicationInLoop) - lengthInt(maimMod))
-                                + maimMod;
-                columnStr.add(fourthLineInLoop);
-                return columnStr;
-            }
-
-            nextMainDivided = nextMainDivided(nextMainDivided,
-                    nextIntermediateMod,
-                    lengthInt(nextIntermediateDivided));
-            intermediateMod = nextIntermediateMod;
-            multiplication = multiplicationInLoop;
+            intermediateDividend = nextSmallDividend;
+            positionInBigDivider++;
         }
+        representations.add(
+                new Representation(
+                        computeMultiplication(intermediateDividend, divider),
+                        currentPosition
+                                + lengthInt(intermediateDividend)
+                                - lengthInt(computeMultiplication(intermediateDividend, divider)))
+        );
+        representations.add(
+                new Representation(bigDividend % divider,
+                        currentPosition +
+                                lengthInt(intermediateDividend) -
+                                lengthInt(bigDividend % divider))
+        );
+        return new IntegerStorage(representations,
+                bigDividend,
+                divider,
+                bigDividend % divider,
+                bigDividend / divider);
     }
 
-    private String printStringSomeTimes(String string, int times) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < times; i++) {
-            stringBuilder.append(string);
+    private OneStepResultStorage doOneStep(int smallDividend, int divider) {
+        int position = 0;
+        Representation multRepresentation = null;
+        Representation modRepresentation = null;
+
+        if (smallDividend < divider) {
+            multRepresentation = new Representation(0, lengthInt(smallDividend) - 1);
+            modRepresentation = new Representation(smallDividend, position);
+        } else {
+            int multiplication = computeMultiplication(smallDividend, divider);
+            if (lengthInt(smallDividend) > lengthInt(multiplication)) {
+                position++;
+            }
+            multRepresentation = new Representation(multiplication, position);
+            int mod = smallDividend - multiplication;
+            position = position + lengthInt(multiplication) - lengthInt(mod);
+            if (mod == 0) {
+                position++;
+            }
+            modRepresentation = new Representation(mod, position);
         }
-        return stringBuilder.toString();
+        return new OneStepResultStorage(multRepresentation, modRepresentation);
     }
 
     private int lengthInt(int integer) {
         return Integer.toString(integer).length();
     }
 
-    private String cut(int integer, int toIndex) {
-        StringBuilder sb = new StringBuilder(Integer.toString(integer));
-        return sb.substring(toIndex + 1);
+    private int nextSmallDividend(int bigDividend,
+                                  int intermediateMod,
+                                  int positionInBigDividend) {
+        StringBuilder sb = new StringBuilder(Integer.toString(bigDividend));
+        return Integer.parseInt(intermediateMod +
+                sb.substring(positionInBigDividend, positionInBigDividend + 1));
     }
 
-    private int concatIntegerAndString(int left, String right) {
-        String result = left + right;
-        return Integer.parseInt(result);
-    }
-
-    private int nextMainDivided(int divided,
-                                int intermediateMod,
-                                int intermediateDividedLength) {
-        return concatIntegerAndString(intermediateMod,
-                cut(divided, intermediateDividedLength - 1));
-    }
-
-    private int findIntermediateDivided(int divided, int divider) {
-        StringBuilder sbDivided = new StringBuilder(Integer.toString(divided));
-        int intermediateDivided = Integer.parseInt(sbDivided.substring(0, 1));
+    private int findFirstSmallDividend(int dividend, int divider) {
+        StringBuilder sbDividend = new StringBuilder(Integer.toString(dividend));
+        int firstSmallDividend = Integer.parseInt(sbDividend.substring(0, 1));
         int i = 1;
-        while (intermediateDivided < divider) {
+        while (firstSmallDividend < divider) {
             i++;
-            if (i > sbDivided.length()) {
+            if (i > sbDividend.length()) {
                 return 0;
             }
-            intermediateDivided = Integer.parseInt(sbDivided.substring(0, i));
+            firstSmallDividend = Integer.parseInt(sbDividend.substring(0, i));
         }
-        return intermediateDivided;
+        return firstSmallDividend;
     }
 
-    private int getMultiplication(int intermediateDivided, int divider) {
-        return intermediateDivided - intermediateDivided % divider;
+    private int computeMultiplication(int intermediateDividend, int divider) {
+        return intermediateDividend - intermediateDividend % divider;
     }
 }

@@ -3,5 +3,13 @@ package com.foxminded.storage;
 import java.util.List;
 
 public interface Storage {
-    List<String> getRepresentation();
+    List<Representation> getRepresentations();
+
+    int getDividend();
+
+    int getDivider();
+
+    int getMod();
+
+    int getResult();
 }

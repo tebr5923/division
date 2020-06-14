@@ -3,38 +3,70 @@ package com.foxminded.storage;
 import java.util.List;
 
 public class IntegerStorage implements Storage {
-    private List<String> representation;
-    private Integer dividend;
-    private Integer divider;
-    private Integer mod;
-    private Integer result;
+    private List<Representation> representations;
+    private int dividend;
+    private int divider;
+    private int mod;
+    private int result;
 
-    public IntegerStorage(Integer dividend, Integer divider,
-                          Integer mod, Integer result, List<String> representation) {
+    public IntegerStorage(List<Representation> representations,
+                          int dividend,
+                          int divider,
+                          int mod,
+                          int result) {
+        this.representations = representations;
         this.dividend = dividend;
         this.divider = divider;
         this.mod = mod;
         this.result = result;
-        this.representation = representation;
     }
 
-    public List<String> getRepresentation() {
-        return representation;
+    @Override
+    public List<Representation> getRepresentations() {
+        return representations;
     }
 
-    public Integer getDividend() {
+    @Override
+    public int getDividend() {
         return dividend;
     }
 
-    public Integer getDivider() {
+    @Override
+    public int getDivider() {
         return divider;
     }
 
-    public Integer getMod() {
+    @Override
+    public int getMod() {
         return mod;
     }
 
-    public Integer getResult() {
+    @Override
+    public int getResult() {
         return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        IntegerStorage that = (IntegerStorage) o;
+
+        if (dividend != that.dividend) return false;
+        if (divider != that.divider) return false;
+        if (mod != that.mod) return false;
+        if (result != that.result) return false;
+        return representations.equals(that.representations);
+    }
+
+    @Override
+    public int hashCode() {
+        int result1 = representations.hashCode();
+        result1 = 31 * result1 + dividend;
+        result1 = 31 * result1 + divider;
+        result1 = 31 * result1 + mod;
+        result1 = 31 * result1 + result;
+        return result1;
     }
 }
