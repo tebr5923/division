@@ -3,11 +3,11 @@ package com.foxminded.storage;
 import java.util.List;
 
 public class IntegerStorage implements Storage {
-    private List<Representation> representations;
-    private int dividend;
-    private int divider;
-    private int mod;
-    private int result;
+    private final List<Representation> representations;
+    private final int dividend;
+    private final int divider;
+    private final int mod;
+    private final int result;
 
     public IntegerStorage(List<Representation> representations,
                           int dividend,
