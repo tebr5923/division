@@ -70,4 +70,16 @@ class IntegerDividerTest {
                 integerDivider.divide(dividend, divider)
         );
     }
+
+    @Test
+    public void divide_shouldThrowIllegalArgumentException_whenDividerMoreThenDividend() {
+        int dividend = 999;
+        int divider = 9999;
+
+        //IntegerDivider integerDivider = new IntegerDivider();
+
+        assertThrows(IllegalArgumentException.class, () ->
+                integerDivider.divide(dividend, divider)
+        );
+    }
 }

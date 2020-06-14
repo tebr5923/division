@@ -14,6 +14,8 @@ public class IntegerDivider implements Divider {
             throw new NullPointerException("division by zero");
         } else if (divider < 0) {
             throw new IllegalArgumentException("divider must be positive");
+        } else if (bigDividend < divider) {
+            throw new IllegalArgumentException("divider must be more then dividend");
         }
         List<Representation> representations = new ArrayList<>();
         int currentPosition = 0;
