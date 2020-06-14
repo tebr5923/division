@@ -1,10 +1,10 @@
 package com.foxminded.storage;
 
-public class StepRepresentation {
+public class Representation {
     private int number;
     private int position;
 
-    public StepRepresentation(int number, int position) {
+    public Representation(int number, int position) {
         this.number = number;
         this.position = position;
     }
@@ -30,7 +30,7 @@ public class StepRepresentation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StepRepresentation that = (StepRepresentation) o;
+        Representation that = (Representation) o;
 
         if (number != that.number) return false;
         return position == that.position;

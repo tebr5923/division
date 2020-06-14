@@ -3,7 +3,7 @@ package com.foxminded.storage;
 import java.util.List;
 
 public interface Storage {
-    List<StepRepresentation> getStepRepresentations();
+    List<Representation> getRepresentations();
 
     int getDividend();
 

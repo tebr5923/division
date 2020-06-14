@@ -1,7 +1,7 @@
 package com.foxminded.divider;
 
 import com.foxminded.storage.IntegerStorage;
-import com.foxminded.storage.StepRepresentation;
+import com.foxminded.storage.Representation;
 import com.foxminded.utils.StepResultStorage;
 
 import java.util.ArrayList;
@@ -19,23 +19,23 @@ public class IntegerDivider implements Divider {
         if (bigDividend < divider) {
             throw new IllegalArgumentException("divider must be more then dividend");
         }
-        List<StepRepresentation> stepRepresentations = new ArrayList<>();
+        List<Representation> representations = new ArrayList<>();
         int currentPosition = 0;
-        stepRepresentations.add(new StepRepresentation(bigDividend, currentPosition));
+        representations.add(new Representation(bigDividend, currentPosition));
         int intermediateDividend = findFirstSmallDividend(bigDividend, divider);
         int positionInBigDivider = lengthInt(intermediateDividend);
         int countTo = lengthInt(bigDividend) - positionInBigDivider;
         for (int count = 0; count < countTo; count++) {
             StepResultStorage result = doOneStep(intermediateDividend, divider);
-            stepRepresentations.add(
-                    new StepRepresentation(result.getMultiplication().getNumber(),
+            representations.add(
+                    new Representation(result.getMultiplication().getNumber(),
                             currentPosition + result.getMultiplication().getPosition()));
             if (intermediateDividend == 0) {
                 currentPosition++;
             }
             int nextSmallDividend = nextSmallDividend(bigDividend,
                     result.getMod().getNumber(), positionInBigDivider);
-            stepRepresentations.add(new StepRepresentation(nextSmallDividend,
+            representations.add(new Representation(nextSmallDividend,
                     currentPosition + result.getMod().getPosition()));
             if (result.getMultiplication().getNumber() == 0) {
                 currentPosition = currentPosition + result.getMod().getPosition();
@@ -46,20 +46,20 @@ public class IntegerDivider implements Divider {
             intermediateDividend = nextSmallDividend;
             positionInBigDivider++;
         }
-        stepRepresentations.add(
-                new StepRepresentation(
+        representations.add(
+                new Representation(
                         computeMultiplication(intermediateDividend, divider),
                         currentPosition
                                 + lengthInt(intermediateDividend)
                                 - lengthInt(computeMultiplication(intermediateDividend, divider)))
         );
-        stepRepresentations.add(
-                new StepRepresentation(bigDividend % divider,
+        representations.add(
+                new Representation(bigDividend % divider,
                         currentPosition +
                                 lengthInt(intermediateDividend) -
                                 lengthInt(bigDividend % divider))
         );
-        return new IntegerStorage(stepRepresentations,
+        return new IntegerStorage(representations,
                 bigDividend,
                 divider,
                 bigDividend % divider,
@@ -68,24 +68,24 @@ public class IntegerDivider implements Divider {
 
     private StepResultStorage doOneStep(int smallDividend, int divider) {
         int position = 0;
-        StepRepresentation multRepresentation = null;
-        StepRepresentation modRepresentation = null;
+        Representation multRepresentation = null;
+        Representation modRepresentation = null;
 
         if (smallDividend < divider) {
-            multRepresentation = new StepRepresentation(0, lengthInt(smallDividend) - 1);
-            modRepresentation = new StepRepresentation(smallDividend, position);
+            multRepresentation = new Representation(0, lengthInt(smallDividend) - 1);
+            modRepresentation = new Representation(smallDividend, position);
         } else {
             int multiplication = computeMultiplication(smallDividend, divider);
             if (lengthInt(smallDividend) > lengthInt(multiplication)) {
                 position++;
             }
-            multRepresentation = new StepRepresentation(multiplication, position);
+            multRepresentation = new Representation(multiplication, position);
             int mod = smallDividend - multiplication;
             position = position + lengthInt(multiplication) - lengthInt(mod);
             if (mod == 0) {
                 position++;
             }
-            modRepresentation = new StepRepresentation(mod, position);
+            modRepresentation = new Representation(mod, position);
         }
         return new StepResultStorage(multRepresentation, modRepresentation);
     }

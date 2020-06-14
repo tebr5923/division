@@ -1,29 +1,29 @@
 package com.foxminded.utils;
 
-import com.foxminded.storage.StepRepresentation;
+import com.foxminded.storage.Representation;
 
 public class StepResultStorage {
-    private StepRepresentation multiplication;
-    private StepRepresentation mod;
+    private Representation multiplication;
+    private Representation mod;
 
-    public StepResultStorage(StepRepresentation multiplication, StepRepresentation mod) {
+    public StepResultStorage(Representation multiplication, Representation mod) {
         this.multiplication = multiplication;
         this.mod = mod;
     }
 
-    public StepRepresentation getMultiplication() {
+    public Representation getMultiplication() {
         return multiplication;
     }
 
-    public void setMultiplication(StepRepresentation multiplication) {
+    public void setMultiplication(Representation multiplication) {
         this.multiplication = multiplication;
     }
 
-    public StepRepresentation getMod() {
+    public Representation getMod() {
         return mod;
     }
 
-    public void setMod(StepRepresentation mod) {
+    public void setMod(Representation mod) {
         this.mod = mod;
     }
 }

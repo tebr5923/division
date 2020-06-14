@@ -1,6 +1,6 @@
 package com.foxminded.printer;
 
-import com.foxminded.storage.StepRepresentation;
+import com.foxminded.storage.Representation;
 import com.foxminded.storage.Storage;
 
 import java.util.ArrayList;
@@ -19,53 +19,53 @@ public class ConsolePrinter implements Printer {
     }
 
     private void generateStingList(Storage storage) {
-        List<StepRepresentation> stepRepresentations = storage.getStepRepresentations();
+        List<Representation> representations = storage.getRepresentations();
         int i = 0;
         String minus = "_";
 
-        for (StepRepresentation stepRepresentation : stepRepresentations) {
+        for (Representation representation : representations) {
             i++;
             if (i == 1) {
                 stringList.add(String.format("%s%s%s%s%s",
                         minus,
-                        repeatCharSomeTimes(' ', stepRepresentation.getPosition()),
-                        stepRepresentation.getNumber(),
+                        repeatCharSomeTimes(' ', representation.getPosition()),
+                        representation.getNumber(),
                         '|',
                         storage.getDivider()));
             } else if (i == 2) {
                 int timesForSpace = lengthInt(storage.getDividend()) -
-                        lengthInt(stepRepresentation.getNumber()) -
-                        stepRepresentation.getPosition();
+                        lengthInt(representation.getNumber()) -
+                        representation.getPosition();
                 int timesForMinus = Math.max(lengthInt(storage.getDivider()),
                         lengthInt(storage.getResult()));
                 stringList.add(String.format("%s%s%s%s%s",
-                        repeatCharSomeTimes(' ', stepRepresentation.getPosition() + 1),
-                        stepRepresentation.getNumber(),
+                        repeatCharSomeTimes(' ', representation.getPosition() + 1),
+                        representation.getNumber(),
                         repeatCharSomeTimes(' ', timesForSpace),
                         '|',
                         repeatCharSomeTimes('-', timesForMinus)));
                 stringList.add(String.format("%s%s%s%s%s",
-                        repeatCharSomeTimes(' ', stepRepresentation.getPosition() + 1),
-                        repeatCharSomeTimes('-', lengthInt(stepRepresentation.getNumber())),
+                        repeatCharSomeTimes(' ', representation.getPosition() + 1),
+                        repeatCharSomeTimes('-', lengthInt(representation.getNumber())),
                         repeatCharSomeTimes(' ', timesForSpace),
                         '|',
                         storage.getResult()));
-            } else if (i == stepRepresentations.size()) {
+            } else if (i == representations.size()) {
                 stringList.add(String.format("%s%s",
-                        repeatCharSomeTimes(' ', stepRepresentation.getPosition() + 1),
-                        stepRepresentation.getNumber()));
+                        repeatCharSomeTimes(' ', representation.getPosition() + 1),
+                        representation.getNumber()));
             } else if (i % 2 != 0) {
                 stringList.add(String.format("%s%s%s",
-                        repeatCharSomeTimes(' ', stepRepresentation.getPosition()),
+                        repeatCharSomeTimes(' ', representation.getPosition()),
                         minus,
-                        stepRepresentation.getNumber()));
+                        representation.getNumber()));
             } else if (i % 2 == 0) {
                 stringList.add(String.format("%s%s",
-                        repeatCharSomeTimes(' ', stepRepresentation.getPosition() + 1),
-                        stepRepresentation.getNumber()));
+                        repeatCharSomeTimes(' ', representation.getPosition() + 1),
+                        representation.getNumber()));
                 stringList.add(String.format("%s%s",
-                        repeatCharSomeTimes(' ', stepRepresentation.getPosition() + 1),
-                        repeatCharSomeTimes('-', lengthInt(stepRepresentation.getNumber()))));
+                        repeatCharSomeTimes(' ', representation.getPosition() + 1),
+                        repeatCharSomeTimes('-', lengthInt(representation.getNumber()))));
             }
         }
     }
