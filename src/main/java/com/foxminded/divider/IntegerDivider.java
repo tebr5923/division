@@ -2,7 +2,7 @@ package com.foxminded.divider;
 
 import com.foxminded.storage.IntegerStorage;
 import com.foxminded.storage.StepRepresentation;
-import com.foxminded.utils.OneStepResultStorage;
+import com.foxminded.utils.StepResultStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class IntegerDivider implements Divider {
         int positionInBigDivider = lengthInt(intermediateDividend);
         int countTo = lengthInt(bigDividend) - positionInBigDivider;
         for (int count = 0; count < countTo; count++) {
-            OneStepResultStorage result = doOneStep(intermediateDividend, divider);
+            StepResultStorage result = doOneStep(intermediateDividend, divider);
             stepRepresentations.add(
                     new StepRepresentation(result.getMultiplication().getNumber(),
                             currentPosition + result.getMultiplication().getPosition()));
@@ -66,7 +66,7 @@ public class IntegerDivider implements Divider {
                 bigDividend / divider);
     }
 
-    private OneStepResultStorage doOneStep(int smallDividend, int divider) {
+    private StepResultStorage doOneStep(int smallDividend, int divider) {
         int position = 0;
         StepRepresentation multRepresentation = null;
         StepRepresentation modRepresentation = null;
@@ -87,7 +87,7 @@ public class IntegerDivider implements Divider {
             }
             modRepresentation = new StepRepresentation(mod, position);
         }
-        return new OneStepResultStorage(multRepresentation, modRepresentation);
+        return new StepResultStorage(multRepresentation, modRepresentation);
     }
 
     private int lengthInt(int integer) {

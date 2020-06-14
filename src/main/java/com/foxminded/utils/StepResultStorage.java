@@ -2,11 +2,11 @@ package com.foxminded.utils;
 
 import com.foxminded.storage.StepRepresentation;
 
-public class OneStepResultStorage {
+public class StepResultStorage {
     private StepRepresentation multiplication;
     private StepRepresentation mod;
 
-    public OneStepResultStorage(StepRepresentation multiplication, StepRepresentation mod) {
+    public StepResultStorage(StepRepresentation multiplication, StepRepresentation mod) {
         this.multiplication = multiplication;
         this.mod = mod;
     }
