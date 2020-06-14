@@ -3,18 +3,18 @@ package com.foxminded.storage;
 import java.util.List;
 
 public class IntegerStorage implements Storage {
-    private final List<Representation> representations;
+    private final List<StepRepresentation> stepRepresentations;
     private final int dividend;
     private final int divider;
     private final int mod;
     private final int result;
 
-    public IntegerStorage(List<Representation> representations,
+    public IntegerStorage(List<StepRepresentation> stepRepresentations,
                           int dividend,
                           int divider,
                           int mod,
                           int result) {
-        this.representations = representations;
+        this.stepRepresentations = stepRepresentations;
         this.dividend = dividend;
         this.divider = divider;
         this.mod = mod;
@@ -22,8 +22,8 @@ public class IntegerStorage implements Storage {
     }
 
     @Override
-    public List<Representation> getRepresentations() {
-        return representations;
+    public List<StepRepresentation> getStepRepresentations() {
+        return stepRepresentations;
     }
 
     @Override
@@ -57,12 +57,12 @@ public class IntegerStorage implements Storage {
         if (divider != that.divider) return false;
         if (mod != that.mod) return false;
         if (result != that.result) return false;
-        return representations.equals(that.representations);
+        return stepRepresentations.equals(that.stepRepresentations);
     }
 
     @Override
     public int hashCode() {
-        int result1 = representations.hashCode();
+        int result1 = stepRepresentations.hashCode();
         result1 = 31 * result1 + dividend;
         result1 = 31 * result1 + divider;
         result1 = 31 * result1 + mod;

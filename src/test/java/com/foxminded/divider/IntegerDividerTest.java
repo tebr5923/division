@@ -1,7 +1,7 @@
 package com.foxminded.divider;
 
 import com.foxminded.storage.IntegerStorage;
-import com.foxminded.storage.Representation;
+import com.foxminded.storage.StepRepresentation;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,17 +29,17 @@ class IntegerDividerTest {
         int divider = 255;
         int mod = 144;
         int result = 3921;
-        List<Representation> representations = new ArrayList<>();
-        representations.add(new Representation(dividend, 0));
-        representations.add(new Representation(765, 0));
-        representations.add(new Representation(2349, 0));
-        representations.add(new Representation(2295, 0));
-        representations.add(new Representation(549, 2));
-        representations.add(new Representation(510, 2));
-        representations.add(new Representation(399, 3));
-        representations.add(new Representation(255, 3));
-        representations.add(new Representation(144, 3));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider, mod, result);
+        List<StepRepresentation> stepRepresentations = new ArrayList<>();
+        stepRepresentations.add(new StepRepresentation(dividend, 0));
+        stepRepresentations.add(new StepRepresentation(765, 0));
+        stepRepresentations.add(new StepRepresentation(2349, 0));
+        stepRepresentations.add(new StepRepresentation(2295, 0));
+        stepRepresentations.add(new StepRepresentation(549, 2));
+        stepRepresentations.add(new StepRepresentation(510, 2));
+        stepRepresentations.add(new StepRepresentation(399, 3));
+        stepRepresentations.add(new StepRepresentation(255, 3));
+        stepRepresentations.add(new StepRepresentation(144, 3));
+        IntegerStorage excepted = new IntegerStorage(stepRepresentations, dividend, divider, mod, result);
 
         //IntegerDivider integerDivider = new IntegerDivider();
         IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
