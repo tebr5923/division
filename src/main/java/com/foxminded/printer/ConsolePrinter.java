@@ -25,39 +25,77 @@ public class ConsolePrinter implements Printer {
         for (Representation representation : representations) {
             i++;
             if (i == 1) {
-                stringList.add(minus +
+                stringList.add(new StringBuilder()
+                        .append(minus)
+                        .append(printStringSomeTimes(" ", representation.getPosition()))
+                        .append(representation.getNumber())
+                        .append('|')
+                        .append(storage.getDivider())
+                        .toString());
+                /*stringList.add(minus +
                         printStringSomeTimes(" ", representation.getPosition()) +
                         representation.getNumber() +
                         "|" +
-                        storage.getDivider());
+                        storage.getDivider());*/
             } else if (i == 2) {
                 int timesForSpace = lengthInt(storage.getDividend()) -
                         lengthInt(representation.getNumber()) -
                         representation.getPosition(); //pos of 1st line == 0
                 int timesForMinus = Math.max(lengthInt(storage.getDivider()),
                         lengthInt(storage.getResult()));
-                stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
+                stringList.add(new StringBuilder()
+                        .append(printStringSomeTimes(" ", representation.getPosition() + 1))
+                        .append(representation.getNumber())
+                        .append(printStringSomeTimes(" ", timesForSpace))
+                        .append('|')
+                        .append(printStringSomeTimes("-", timesForMinus))
+                        .toString());
+                /*stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
                         representation.getNumber() +
                         printStringSomeTimes(" ", timesForSpace) +
                         "|" +
-                        printStringSomeTimes("-", timesForMinus));
-                stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
+                        printStringSomeTimes("-", timesForMinus));*/
+                stringList.add(new StringBuilder()
+                        .append(printStringSomeTimes(" ", representation.getPosition() + 1))
+                        .append(printStringSomeTimes("-", lengthInt(representation.getNumber())))
+                        .append(printStringSomeTimes(" ", timesForSpace))
+                        .append('|')
+                        .append(storage.getResult())
+                        .toString());
+                /*stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
                         printStringSomeTimes("-", lengthInt(representation.getNumber())) +
                         printStringSomeTimes(" ", timesForSpace) +
                         "|" +
-                        storage.getResult());
+                        storage.getResult());*/
             } else if (i == representations.size()) {
-                stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
-                        representation.getNumber());
+                stringList.add(new StringBuilder()
+                        .append(printStringSomeTimes(" ", representation.getPosition() + 1))
+                        .append(representation.getNumber())
+                        .toString());
+               /* stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
+                        representation.getNumber());*/
             } else if (i % 2 != 0) {
-                stringList.add(printStringSomeTimes(" ", representation.getPosition()) +
+                stringList.add(new StringBuilder()
+                        .append(printStringSomeTimes(" ", representation.getPosition()))
+                        .append(minus)
+                        .append(representation.getNumber())
+                        .toString());
+               /* stringList.add(printStringSomeTimes(" ", representation.getPosition()) +
                         minus +
-                        representation.getNumber());
+                        representation.getNumber());*/
             } else if (i % 2 == 0) {
-                stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
-                        representation.getNumber());
-                stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
-                        printStringSomeTimes("-", lengthInt(representation.getNumber())));
+                stringList.add(new StringBuilder()
+                        .append(printStringSomeTimes(" ", representation.getPosition() + 1))
+                        .append(representation.getNumber())
+                        .toString());
+               /* stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
+                        representation.getNumber());*/
+                stringList.add(new StringBuilder()
+                        .append(printStringSomeTimes(" ", representation.getPosition() + 1))
+                        .append(printStringSomeTimes("-", lengthInt(representation.getNumber())))
+                        .toString());
+               /* stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
+                        printStringSomeTimes("-", lengthInt(representation.getNumber())));*/
             }
         }
     }
