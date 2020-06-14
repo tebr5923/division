@@ -4,6 +4,7 @@ import com.foxminded.storage.Representation;
 import com.foxminded.storage.Storage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ConsolePrinter implements Printer {
@@ -27,16 +28,11 @@ public class ConsolePrinter implements Printer {
             if (i == 1) {
                 stringList.add(new StringBuilder()
                         .append(minus)
-                        .append(printStringSomeTimes(" ", representation.getPosition()))
+                        .append(repeatCharSomeTimes(' ', representation.getPosition()))
                         .append(representation.getNumber())
                         .append('|')
                         .append(storage.getDivider())
                         .toString());
-                /*stringList.add(minus +
-                        printStringSomeTimes(" ", representation.getPosition()) +
-                        representation.getNumber() +
-                        "|" +
-                        storage.getDivider());*/
             } else if (i == 2) {
                 int timesForSpace = lengthInt(storage.getDividend()) -
                         lengthInt(representation.getNumber()) -
@@ -44,58 +40,39 @@ public class ConsolePrinter implements Printer {
                 int timesForMinus = Math.max(lengthInt(storage.getDivider()),
                         lengthInt(storage.getResult()));
                 stringList.add(new StringBuilder()
-                        .append(printStringSomeTimes(" ", representation.getPosition() + 1))
+                        .append(repeatCharSomeTimes(' ', representation.getPosition() + 1))
                         .append(representation.getNumber())
-                        .append(printStringSomeTimes(" ", timesForSpace))
+                        .append(repeatCharSomeTimes(' ', timesForSpace))
                         .append('|')
-                        .append(printStringSomeTimes("-", timesForMinus))
+                        .append(repeatCharSomeTimes('-', timesForMinus))
                         .toString());
-                /*stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
-                        representation.getNumber() +
-                        printStringSomeTimes(" ", timesForSpace) +
-                        "|" +
-                        printStringSomeTimes("-", timesForMinus));*/
                 stringList.add(new StringBuilder()
-                        .append(printStringSomeTimes(" ", representation.getPosition() + 1))
-                        .append(printStringSomeTimes("-", lengthInt(representation.getNumber())))
-                        .append(printStringSomeTimes(" ", timesForSpace))
+                        .append(repeatCharSomeTimes(' ', representation.getPosition() + 1))
+                        .append(repeatCharSomeTimes('-', lengthInt(representation.getNumber())))
+                        .append(repeatCharSomeTimes(' ', timesForSpace))
                         .append('|')
                         .append(storage.getResult())
                         .toString());
-                /*stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
-                        printStringSomeTimes("-", lengthInt(representation.getNumber())) +
-                        printStringSomeTimes(" ", timesForSpace) +
-                        "|" +
-                        storage.getResult());*/
             } else if (i == representations.size()) {
                 stringList.add(new StringBuilder()
-                        .append(printStringSomeTimes(" ", representation.getPosition() + 1))
+                        .append(repeatCharSomeTimes(' ', representation.getPosition() + 1))
                         .append(representation.getNumber())
                         .toString());
-               /* stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
-                        representation.getNumber());*/
             } else if (i % 2 != 0) {
                 stringList.add(new StringBuilder()
-                        .append(printStringSomeTimes(" ", representation.getPosition()))
+                        .append(repeatCharSomeTimes(' ', representation.getPosition()))
                         .append(minus)
                         .append(representation.getNumber())
                         .toString());
-               /* stringList.add(printStringSomeTimes(" ", representation.getPosition()) +
-                        minus +
-                        representation.getNumber());*/
             } else if (i % 2 == 0) {
                 stringList.add(new StringBuilder()
-                        .append(printStringSomeTimes(" ", representation.getPosition() + 1))
+                        .append(repeatCharSomeTimes(' ', representation.getPosition() + 1))
                         .append(representation.getNumber())
                         .toString());
-               /* stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
-                        representation.getNumber());*/
                 stringList.add(new StringBuilder()
-                        .append(printStringSomeTimes(" ", representation.getPosition() + 1))
-                        .append(printStringSomeTimes("-", lengthInt(representation.getNumber())))
+                        .append(repeatCharSomeTimes(' ', representation.getPosition() + 1))
+                        .append(repeatCharSomeTimes('-', lengthInt(representation.getNumber())))
                         .toString());
-               /* stringList.add(printStringSomeTimes(" ", representation.getPosition() + 1) +
-                        printStringSomeTimes("-", lengthInt(representation.getNumber())));*/
             }
         }
     }
@@ -104,11 +81,9 @@ public class ConsolePrinter implements Printer {
         return Integer.toString(integer).length();
     }
 
-    private String printStringSomeTimes(String string, int times) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < times; i++) {
-            stringBuilder.append(string);
-        }
-        return stringBuilder.toString();
+    private String repeatCharSomeTimes(char ch, int times) {
+        char[] chars = new char[times];
+        Arrays.fill(chars, ch);
+        return new String(chars);
     }
 }
