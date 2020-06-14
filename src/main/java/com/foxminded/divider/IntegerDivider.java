@@ -104,9 +104,6 @@ public class IntegerDivider implements Divider {
         int i = 1;
         while (firstSmallDividend < divider) {
             i++;
-            if (i > sbDividend.length()) {
-                return 0;
-            }
             firstSmallDividend = Integer.parseInt(sbDividend.substring(0, i));
         }
         return firstSmallDividend;
