@@ -35,7 +35,7 @@ public class ConsolePrinter implements Printer {
             } else if (i == 2) {
                 int timesForSpace = lengthInt(storage.getDividend()) -
                         lengthInt(stepRepresentation.getNumber()) -
-                        stepRepresentation.getPosition(); //pos of 1st line == 0
+                        stepRepresentation.getPosition();
                 int timesForMinus = Math.max(lengthInt(storage.getDivider()),
                         lengthInt(storage.getResult()));
                 stringList.add(String.format("%s%s%s%s%s",
