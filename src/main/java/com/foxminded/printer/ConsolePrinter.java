@@ -31,9 +31,7 @@ public class ConsolePrinter implements Printer {
                         repeatCharSomeTimes(' ', stepRepresentation.getPosition()),
                         stepRepresentation.getNumber(),
                         '|',
-                        storage.getDivider()
-                        )
-                );
+                        storage.getDivider()));
             } else if (i == 2) {
                 int timesForSpace = lengthInt(storage.getDividend()) -
                         lengthInt(stepRepresentation.getNumber()) -
@@ -45,41 +43,29 @@ public class ConsolePrinter implements Printer {
                         stepRepresentation.getNumber(),
                         repeatCharSomeTimes(' ', timesForSpace),
                         '|',
-                        repeatCharSomeTimes('-', timesForMinus)
-                        )
-                );
+                        repeatCharSomeTimes('-', timesForMinus)));
                 stringList.add(String.format("%s%s%s%s%s",
                         repeatCharSomeTimes(' ', stepRepresentation.getPosition() + 1),
                         repeatCharSomeTimes('-', lengthInt(stepRepresentation.getNumber())),
                         repeatCharSomeTimes(' ', timesForSpace),
                         '|',
-                        storage.getResult()
-                        )
-                );
+                        storage.getResult()));
             } else if (i == stepRepresentations.size()) {
                 stringList.add(String.format("%s%s",
                         repeatCharSomeTimes(' ', stepRepresentation.getPosition() + 1),
-                        stepRepresentation.getNumber()
-                        )
-                );
+                        stepRepresentation.getNumber()));
             } else if (i % 2 != 0) {
                 stringList.add(String.format("%s%s%s",
                         repeatCharSomeTimes(' ', stepRepresentation.getPosition()),
                         minus,
-                        stepRepresentation.getNumber()
-                        )
-                );
+                        stepRepresentation.getNumber()));
             } else if (i % 2 == 0) {
                 stringList.add(String.format("%s%s",
                         repeatCharSomeTimes(' ', stepRepresentation.getPosition() + 1),
-                        stepRepresentation.getNumber()
-                        )
-                );
+                        stepRepresentation.getNumber()));
                 stringList.add(String.format("%s%s",
                         repeatCharSomeTimes(' ', stepRepresentation.getPosition() + 1),
-                        repeatCharSomeTimes('-', lengthInt(stepRepresentation.getNumber()))
-                        )
-                );
+                        repeatCharSomeTimes('-', lengthInt(stepRepresentation.getNumber()))));
             }
         }
     }
