@@ -24,7 +24,7 @@ class IntegerDividerTest {
     }
 
     @Test
-    void divide() {
+    void divide_shouldReturnResult_whenArgumentsIsRandom() {
         int dividend = 999999;
         int divider = 255;
         int mod = 144;
