@@ -18,7 +18,8 @@ public class ConsolePrinter implements Printer {
         List<String> stringList = new ArrayList<>();
         List<Representation> representations = storage.getRepresentations();
         int i = 0;
-        String minus = "_";
+        char minus = '_';
+        char dash = '-';
 
         for (Representation representation : representations) {
             i++;
@@ -29,20 +30,20 @@ public class ConsolePrinter implements Printer {
                         representation.getNumber(),
                         storage.getDivider()));
             } else if (i == 2) {
-                int timesForSpace = lengthInt(storage.getDividend()) -
+                int spacesAmount = lengthInt(storage.getDividend()) -
                         lengthInt(representation.getNumber()) -
                         representation.getPosition();
-                int timesForMinus = Math.max(lengthInt(storage.getDivider()),
+                int minusAmount = Math.max(lengthInt(storage.getDivider()),
                         lengthInt(storage.getResult()));
                 stringList.add(String.format("%s%s%s|%s",
                         repeatCharSomeTimes(' ', representation.getPosition() + 1),
                         representation.getNumber(),
-                        repeatCharSomeTimes(' ', timesForSpace),
-                        repeatCharSomeTimes('-', timesForMinus)));
+                        repeatCharSomeTimes(' ', spacesAmount),
+                        repeatCharSomeTimes(dash, minusAmount)));
                 stringList.add(String.format("%s%s%s|%s",
                         repeatCharSomeTimes(' ', representation.getPosition() + 1),
-                        repeatCharSomeTimes('-', lengthInt(representation.getNumber())),
-                        repeatCharSomeTimes(' ', timesForSpace),
+                        repeatCharSomeTimes(dash, lengthInt(representation.getNumber())),
+                        repeatCharSomeTimes(' ', spacesAmount),
                         storage.getResult()));
             } else if (i == representations.size()) {
                 stringList.add(String.format("%s%s",
@@ -59,7 +60,7 @@ public class ConsolePrinter implements Printer {
                         representation.getNumber()));
                 stringList.add(String.format("%s%s",
                         repeatCharSomeTimes(' ', representation.getPosition() + 1),
-                        repeatCharSomeTimes('-', lengthInt(representation.getNumber()))));
+                        repeatCharSomeTimes(dash, lengthInt(representation.getNumber()))));
             }
         }
         return stringList;
