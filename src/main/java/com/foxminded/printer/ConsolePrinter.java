@@ -23,11 +23,10 @@ public class ConsolePrinter implements Printer {
         for (Representation representation : representations) {
             i++;
             if (i == 1) {
-                stringList.add(String.format("%s%s%s%s%s",
+                stringList.add(String.format("%s%s%s|%s",
                         minus,
                         repeatCharSomeTimes(' ', representation.getPosition()),
                         representation.getNumber(),
-                        '|',
                         storage.getDivider()));
             } else if (i == 2) {
                 int timesForSpace = lengthInt(storage.getDividend()) -
@@ -35,17 +34,15 @@ public class ConsolePrinter implements Printer {
                         representation.getPosition();
                 int timesForMinus = Math.max(lengthInt(storage.getDivider()),
                         lengthInt(storage.getResult()));
-                stringList.add(String.format("%s%s%s%s%s",
+                stringList.add(String.format("%s%s%s|%s",
                         repeatCharSomeTimes(' ', representation.getPosition() + 1),
                         representation.getNumber(),
                         repeatCharSomeTimes(' ', timesForSpace),
-                        '|',
                         repeatCharSomeTimes('-', timesForMinus)));
-                stringList.add(String.format("%s%s%s%s%s",
+                stringList.add(String.format("%s%s%s|%s",
                         repeatCharSomeTimes(' ', representation.getPosition() + 1),
                         repeatCharSomeTimes('-', lengthInt(representation.getNumber())),
                         repeatCharSomeTimes(' ', timesForSpace),
-                        '|',
                         storage.getResult()));
             } else if (i == representations.size()) {
                 stringList.add(String.format("%s%s",

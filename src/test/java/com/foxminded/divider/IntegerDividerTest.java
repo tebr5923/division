@@ -47,6 +47,29 @@ class IntegerDividerTest {
     }
 
     @Test
+    void divide_shouldReturnResult_whenDividendAndDividerMultipleOfTen() {
+        int dividend = 10000;
+        int divider = 10;
+        int mod = dividend % divider;
+        int result = dividend / divider;
+        List<Representation> representations = new ArrayList<>();
+        representations.add(new Representation(dividend, 0));
+        representations.add(new Representation(10, 0));
+        representations.add(new Representation(0, 2));
+        representations.add(new Representation(0, 2));
+        representations.add(new Representation(0, 3));
+        representations.add(new Representation(0, 3));
+        representations.add(new Representation(0, 4));
+        representations.add(new Representation(0, 4));
+        representations.add(new Representation(0, 4));
+        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider, mod, result);
+
+        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
+
+        assertEquals(excepted, integerStorageResult);
+    }
+
+    @Test
     public void divide_shouldThrowNullThrowNullPointerException_whenDividerIsNull() {
         int dividend = 999999;
         int divider = 0;
