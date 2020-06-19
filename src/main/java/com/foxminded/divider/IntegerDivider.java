@@ -103,12 +103,13 @@ public class IntegerDivider implements Divider {
     }
 
     private int findFirstSmallDividend(int dividend, int divider) {
-        StringBuilder sbDividend = new StringBuilder(Integer.toString(dividend));
-        int firstSmallDividend = Integer.parseInt(sbDividend.substring(0, 1));
+        String strDividend = Integer.toString(dividend);
+
+        int firstSmallDividend = Integer.parseInt(strDividend.substring(0, 1));
         int i = 1;
         while (firstSmallDividend < divider) {
             i++;
-            firstSmallDividend = Integer.parseInt(sbDividend.substring(0, i));
+            firstSmallDividend = Integer.parseInt(strDividend.substring(0, i));
         }
         return firstSmallDividend;
     }
