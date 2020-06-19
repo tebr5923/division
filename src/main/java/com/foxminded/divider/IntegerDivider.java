@@ -16,49 +16,52 @@ public class IntegerDivider implements Divider<Integer> {
         if (divider < 0) {
             throw new IllegalArgumentException("divider must be positive");
         }
-        if (bigDividend < divider) {
-            throw new IllegalArgumentException("divider must be more then dividend");
-        }
         List<Representation> representations = new ArrayList<>();
         int currentPosition = 0;
-        representations.add(new Representation(bigDividend, currentPosition));
-        int intermediateDividend = findFirstSmallDividend(bigDividend, divider);
-        int positionInBigDivider = lengthInt(intermediateDividend);
-        int countTo = lengthInt(bigDividend) - positionInBigDivider;
-        for (int count = 0; count < countTo; count++) {
-            StepResultStorage result = doOneStep(intermediateDividend, divider);
+        if (bigDividend < divider) {
+            representations.add(new Representation(bigDividend, currentPosition));
+            representations.add(new Representation(0, lengthInt(bigDividend) - 1));
+            representations.add(new Representation(bigDividend, currentPosition));
+        } else {
+            representations.add(new Representation(bigDividend, currentPosition));
+            int intermediateDividend = findFirstSmallDividend(bigDividend, divider);
+            int positionInBigDivider = lengthInt(intermediateDividend);
+            int countTo = lengthInt(bigDividend) - positionInBigDivider;
+            for (int count = 0; count < countTo; count++) {
+                StepResultStorage result = doOneStep(intermediateDividend, divider);
+                representations.add(
+                        new Representation(result.getMultiplication().getNumber(),
+                                currentPosition + result.getMultiplication().getPosition()));
+                if (intermediateDividend == 0) {
+                    currentPosition++;
+                }
+                int nextSmallDividend = nextSmallDividend(bigDividend,
+                        result.getMod().getNumber(), positionInBigDivider);
+                representations.add(new Representation(nextSmallDividend,
+                        currentPosition + result.getMod().getPosition()));
+                if (result.getMultiplication().getNumber() == 0) {
+                    currentPosition = currentPosition + result.getMod().getPosition();
+                } else {
+                    currentPosition = currentPosition +
+                            Math.max(result.getMultiplication().getPosition(), result.getMod().getPosition());
+                }
+                intermediateDividend = nextSmallDividend;
+                positionInBigDivider++;
+            }
             representations.add(
-                    new Representation(result.getMultiplication().getNumber(),
-                            currentPosition + result.getMultiplication().getPosition()));
-            if (intermediateDividend == 0) {
-                currentPosition++;
-            }
-            int nextSmallDividend = nextSmallDividend(bigDividend,
-                    result.getMod().getNumber(), positionInBigDivider);
-            representations.add(new Representation(nextSmallDividend,
-                    currentPosition + result.getMod().getPosition()));
-            if (result.getMultiplication().getNumber() == 0) {
-                currentPosition = currentPosition + result.getMod().getPosition();
-            } else {
-                currentPosition = currentPosition +
-                        Math.max(result.getMultiplication().getPosition(), result.getMod().getPosition());
-            }
-            intermediateDividend = nextSmallDividend;
-            positionInBigDivider++;
+                    new Representation(
+                            computeMultiplier(intermediateDividend, divider),
+                            currentPosition
+                                    + lengthInt(intermediateDividend)
+                                    - lengthInt(computeMultiplier(intermediateDividend, divider)))
+            );
+            representations.add(
+                    new Representation(bigDividend % divider,
+                            currentPosition +
+                                    lengthInt(intermediateDividend) -
+                                    lengthInt(bigDividend % divider))
+            );
         }
-        representations.add(
-                new Representation(
-                        computeMultiplier(intermediateDividend, divider),
-                        currentPosition
-                                + lengthInt(intermediateDividend)
-                                - lengthInt(computeMultiplier(intermediateDividend, divider)))
-        );
-        representations.add(
-                new Representation(bigDividend % divider,
-                        currentPosition +
-                                lengthInt(intermediateDividend) -
-                                lengthInt(bigDividend % divider))
-        );
         return new IntegerStorage(representations,
                 bigDividend,
                 divider,
@@ -97,14 +100,13 @@ public class IntegerDivider implements Divider<Integer> {
     private int nextSmallDividend(int bigDividend,
                                   int intermediateMod,
                                   int positionInBigDividend) {
-        StringBuilder sb = new StringBuilder(Integer.toString(bigDividend));
         return Integer.parseInt(intermediateMod +
-                sb.substring(positionInBigDividend, positionInBigDividend + 1));
+                Integer.toString(bigDividend).
+                        substring(positionInBigDividend, positionInBigDividend + 1));
     }
 
     private int findFirstSmallDividend(int dividend, int divider) {
         String strDividend = Integer.toString(dividend);
-
         int firstSmallDividend = Integer.parseInt(strDividend.substring(0, 1));
         int i = 1;
         while (firstSmallDividend < divider) {

@@ -70,6 +70,23 @@ class IntegerDividerTest {
     }
 
     @Test
+    public void divide_shouldReturnResult_whenDividerMoreThenDividend() {
+        int dividend = 999;
+        int divider = 9999;
+        int mod = dividend % divider;
+        int result = dividend / divider;
+        List<Representation> representations = new ArrayList<>();
+        representations.add(new Representation(dividend, 0));
+        representations.add(new Representation(0, 2));
+        representations.add(new Representation(dividend, 0));
+        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider, mod, result);
+
+        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
+
+        assertEquals(excepted, integerStorageResult);
+    }
+
+    @Test
     public void divide_shouldThrowNullThrowArithmeticException_whenDividerIsNull() {
         int dividend = 999999;
         int divider = 0;
@@ -89,13 +106,4 @@ class IntegerDividerTest {
         );
     }
 
-    @Test
-    public void divide_shouldThrowIllegalArgumentException_whenDividerMoreThenDividend() {
-        int dividend = 999;
-        int divider = 9999;
-
-        assertThrows(IllegalArgumentException.class, () ->
-                integerDivider.divide(dividend, divider)
-        );
-    }
 }

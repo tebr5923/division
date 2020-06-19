@@ -53,11 +53,14 @@ public class IntegerStorage implements Storage {
         if (o == null || getClass() != o.getClass()) return false;
         IntegerStorage that = (IntegerStorage) o;
         return dividend == that.dividend &&
-                divider == that.divider;
+                divider == that.divider &&
+                mod == that.mod &&
+                result == that.result &&
+                representations.equals(that.representations);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dividend, divider);
+        return Objects.hash(representations, dividend, divider, mod, result);
     }
 }
