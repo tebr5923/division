@@ -54,7 +54,7 @@ public class ConsolePrinter implements Printer {
                         repeatCharSomeTimes(' ', representation.getPosition()),
                         minus,
                         representation.getNumber()));
-            } else if (i % 2 == 0) {
+            } else {
                 stringList.add(String.format("%s%s",
                         repeatCharSomeTimes(' ', representation.getPosition() + 1),
                         representation.getNumber()));
