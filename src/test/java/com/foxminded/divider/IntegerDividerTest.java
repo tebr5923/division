@@ -41,7 +41,6 @@ class IntegerDividerTest {
         representations.add(new Representation(144, 3));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider, mod, result);
 
-        //IntegerDivider integerDivider = new IntegerDivider();
         IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
 
         assertEquals(excepted, integerStorageResult);
@@ -51,8 +50,6 @@ class IntegerDividerTest {
     public void divide_shouldThrowNullThrowNullPointerException_whenDividerIsNull() {
         int dividend = 999999;
         int divider = 0;
-
-        //IntegerDivider integerDivider = new IntegerDivider();
 
         assertThrows(NullPointerException.class, () ->
                 integerDivider.divide(dividend, divider)
@@ -64,8 +61,6 @@ class IntegerDividerTest {
         int dividend = 999999;
         int divider = -1;
 
-        //IntegerDivider integerDivider = new IntegerDivider();
-
         assertThrows(IllegalArgumentException.class, () ->
                 integerDivider.divide(dividend, divider)
         );
@@ -75,8 +70,6 @@ class IntegerDividerTest {
     public void divide_shouldThrowIllegalArgumentException_whenDividerMoreThenDividend() {
         int dividend = 999;
         int divider = 9999;
-
-        //IntegerDivider integerDivider = new IntegerDivider();
 
         assertThrows(IllegalArgumentException.class, () ->
                 integerDivider.divide(dividend, divider)
