@@ -27,8 +27,8 @@ class IntegerDividerTest {
     void divide_shouldReturnResult_whenArgumentsIsRandom() {
         int dividend = 999999;
         int divider = 255;
-        int mod = 144;
-        int result = 3921;
+        int mod = dividend % divider;
+        int result = dividend / divider;
         List<Representation> representations = new ArrayList<>();
         representations.add(new Representation(dividend, 0));
         representations.add(new Representation(765, 0));

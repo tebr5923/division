@@ -8,17 +8,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ConsolePrinter implements Printer {
-    private List<String> stringList = new ArrayList<>();
 
     @Override
     public void print(Storage storage) {
-        if (stringList.isEmpty()) {
-            generateStingList(storage);
-        }
-        stringList.forEach(System.out::println);
+        generateStingList(storage).forEach(System.out::println);
     }
 
-    private void generateStingList(Storage storage) {
+    private List<String> generateStingList(Storage storage) {
+        List<String> stringList = new ArrayList<>();
         List<Representation> representations = storage.getRepresentations();
         int i = 0;
         String minus = "_";
@@ -68,6 +65,7 @@ public class ConsolePrinter implements Printer {
                         repeatCharSomeTimes('-', lengthInt(representation.getNumber()))));
             }
         }
+        return stringList;
     }
 
     private int lengthInt(int integer) {
