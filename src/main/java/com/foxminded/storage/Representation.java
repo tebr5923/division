@@ -3,8 +3,8 @@ package com.foxminded.storage;
 import java.util.Objects;
 
 public class Representation {
-    private int number;
-    private int position;
+    private final int number;
+    private final int position;
 
     public Representation(int number, int position) {
         this.number = number;
@@ -15,16 +15,8 @@ public class Representation {
         return number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     public int getPosition() {
         return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
     }
 
     @Override
