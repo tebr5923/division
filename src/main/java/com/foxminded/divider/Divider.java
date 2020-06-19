@@ -2,6 +2,6 @@ package com.foxminded.divider;
 
 import com.foxminded.storage.Storage;
 
-public interface Divider {
-    Storage divide(int dividend, int divider);
+public interface Divider<T> {
+    Storage divide(T dividend, T divider);
 }

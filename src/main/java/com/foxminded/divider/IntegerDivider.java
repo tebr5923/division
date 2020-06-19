@@ -7,9 +7,9 @@ import com.foxminded.utils.StepResultStorage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IntegerDivider implements Divider {
+public class IntegerDivider implements Divider<Integer> {
     @Override
-    public IntegerStorage divide(int bigDividend, int divider) {
+    public IntegerStorage divide(Integer bigDividend, Integer divider) {
         if (divider == 0) {
             throw new NullPointerException("division by zero");
         }
@@ -68,8 +68,8 @@ public class IntegerDivider implements Divider {
 
     private StepResultStorage doOneStep(int smallDividend, int divider) {
         int position = 0;
-        Representation multRepresentation = null;
-        Representation modRepresentation = null;
+        Representation multRepresentation;
+        Representation modRepresentation;
 
         if (smallDividend < divider) {
             multRepresentation = new Representation(0, lengthInt(smallDividend) - 1);
