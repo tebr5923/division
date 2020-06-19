@@ -50,10 +50,10 @@ public class IntegerDivider implements Divider<Integer> {
             }
             representations.add(
                     new Representation(
-                            computeMultiplier(intermediateDividend, divider),
+                            computeMultiplication(intermediateDividend, divider),
                             currentPosition
                                     + lengthInt(intermediateDividend)
-                                    - lengthInt(computeMultiplier(intermediateDividend, divider)))
+                                    - lengthInt(computeMultiplication(intermediateDividend, divider)))
             );
             representations.add(
                     new Representation(bigDividend % divider,
@@ -78,7 +78,7 @@ public class IntegerDivider implements Divider<Integer> {
             multRepresentation = new Representation(0, lengthInt(smallDividend) - 1);
             modRepresentation = new Representation(smallDividend, position);
         } else {
-            int multiplication = computeMultiplier(smallDividend, divider);
+            int multiplication = computeMultiplication(smallDividend, divider);
             if (lengthInt(smallDividend) > lengthInt(multiplication)) {
                 position++;
             }
@@ -116,7 +116,7 @@ public class IntegerDivider implements Divider<Integer> {
         return firstSmallDividend;
     }
 
-    private int computeMultiplier(int intermediateDividend, int divider) {
+    private int computeMultiplication(int intermediateDividend, int divider) {
         return intermediateDividend - intermediateDividend % divider;
     }
 }
