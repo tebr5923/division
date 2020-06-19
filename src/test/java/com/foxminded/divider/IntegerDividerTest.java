@@ -70,11 +70,11 @@ class IntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldThrowNullThrowNullPointerException_whenDividerIsNull() {
+    public void divide_shouldThrowNullThrowArithmeticException_whenDividerIsNull() {
         int dividend = 999999;
         int divider = 0;
 
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(ArithmeticException.class, () ->
                 integerDivider.divide(dividend, divider)
         );
     }
