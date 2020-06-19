@@ -1,6 +1,7 @@
 package com.foxminded.storage;
 
 import java.util.List;
+import java.util.Objects;
 
 public class IntegerStorage implements Storage {
     private final List<Representation> representations;
@@ -50,23 +51,13 @@ public class IntegerStorage implements Storage {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         IntegerStorage that = (IntegerStorage) o;
-
-        if (dividend != that.dividend) return false;
-        if (divider != that.divider) return false;
-        if (mod != that.mod) return false;
-        if (result != that.result) return false;
-        return representations.equals(that.representations);
+        return dividend == that.dividend &&
+                divider == that.divider;
     }
 
     @Override
     public int hashCode() {
-        int result1 = representations.hashCode();
-        result1 = 31 * result1 + dividend;
-        result1 = 31 * result1 + divider;
-        result1 = 31 * result1 + mod;
-        result1 = 31 * result1 + result;
-        return result1;
+        return Objects.hash(dividend, divider);
     }
 }

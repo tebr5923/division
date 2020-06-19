@@ -1,5 +1,7 @@
 package com.foxminded.storage;
 
+import java.util.Objects;
+
 public class Representation {
     private int number;
     private int position;
@@ -29,17 +31,13 @@ public class Representation {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Representation that = (Representation) o;
-
-        if (number != that.number) return false;
-        return position == that.position;
+        return number == that.number &&
+                position == that.position;
     }
 
     @Override
     public int hashCode() {
-        int result = number;
-        result = 31 * result + position;
-        return result;
+        return Objects.hash(number, position);
     }
 }
