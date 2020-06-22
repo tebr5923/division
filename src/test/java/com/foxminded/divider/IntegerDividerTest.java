@@ -25,20 +25,18 @@ class IntegerDividerTest {
 
     @Test
     void divide_shouldReturnResult_whenArgumentsIsRandom() {
-        int dividend = 999999;
-        int divider = 255;
+        int dividend = 100154;
+        int divider = 249;
         int mod = dividend % divider;
         int result = dividend / divider;
         List<Representation> representations = new ArrayList<>();
         representations.add(new Representation(dividend, 0));
-        representations.add(new Representation(765, 0));
-        representations.add(new Representation(2349, 0));
-        representations.add(new Representation(2295, 0));
-        representations.add(new Representation(549, 2));
-        representations.add(new Representation(510, 2));
-        representations.add(new Representation(399, 3));
-        representations.add(new Representation(255, 3));
-        representations.add(new Representation(144, 3));
+        representations.add(new Representation(996, 1));
+        representations.add(new Representation(55, 3));
+        representations.add(new Representation(0, 4));
+        representations.add(new Representation(554, 3));
+        representations.add(new Representation(498, 3));
+        representations.add(new Representation(56, 4));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider, mod, result);
 
         IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
@@ -87,7 +85,7 @@ class IntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldThrowNullThrowArithmeticException_whenDividerIsNull() {
+    public void divide_shouldThrowArithmeticException_whenDividerIsNull() {
         int dividend = 999999;
         int divider = 0;
 
@@ -105,5 +103,4 @@ class IntegerDividerTest {
                 integerDivider.divide(dividend, divider)
         );
     }
-
 }

@@ -11,7 +11,6 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ConsolePrinterTest {
@@ -62,8 +61,6 @@ class ConsolePrinterTest {
         ConsolePrinter consolePrinter = new ConsolePrinter();
         consolePrinter.print(integerStorage);
 
-
         assertEquals(excepted, output.toString());
-
     }
 }

@@ -30,21 +30,16 @@ public class IntegerDivider implements Divider<Integer> {
             for (int count = 0; count < countTo; count++) {
                 StepResultStorage result = doOneStep(intermediateDividend, divider);
                 representations.add(
-                        new Representation(result.getMultiplication().getNumber(),
-                                currentPosition + result.getMultiplication().getPosition()));
+                        new Representation(result.getMultNumber(),
+                                currentPosition + result.getMultPosition()));
                 if (intermediateDividend == 0) {
                     currentPosition++;
                 }
                 int nextSmallDividend = nextSmallDividend(bigDividend,
-                        result.getMod().getNumber(), positionInBigDivider);
+                        result.getModNumber(), positionInBigDivider);
                 representations.add(new Representation(nextSmallDividend,
-                        currentPosition + result.getMod().getPosition()));
-                if (result.getMultiplication().getNumber() == 0) {
-                    currentPosition = currentPosition + result.getMod().getPosition();
-                } else {
-                    currentPosition = currentPosition +
-                            Math.max(result.getMultiplication().getPosition(), result.getMod().getPosition());
-                }
+                        currentPosition + result.getModPosition()));
+                currentPosition = result.getNextPosition(currentPosition);
                 intermediateDividend = nextSmallDividend;
                 positionInBigDivider++;
             }
