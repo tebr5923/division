@@ -15,14 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class IntegerDividerTest {
     private final IntegerDivider integerDivider = new IntegerDivider();
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void divide_shouldReturnResult_whenArgumentsIsRandom() {
         int dividend = 100154;
