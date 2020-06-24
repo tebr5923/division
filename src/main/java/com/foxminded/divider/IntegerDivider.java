@@ -2,7 +2,7 @@ package com.foxminded.divider;
 
 import com.foxminded.storage.IntegerStorage;
 import com.foxminded.storage.Representation;
-import com.foxminded.utils.StepResultStorage;
+import com.foxminded.divider.utils.StepResultStorage;
 
 import java.util.ArrayList;
 import java.util.List;

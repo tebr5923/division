@@ -1,4 +1,4 @@
-package com.foxminded.utils;
+package com.foxminded.divider.utils;
 
 import com.foxminded.storage.Representation;
 
