@@ -51,13 +51,13 @@ public class ConsolePrinter implements Printer {
         int spacesAmount = lengthInt(storage.getDividend()) -
                 lengthInt(representations.get(1).getNumber()) -
                 representations.get(1).getPosition();
-        int minusAmount = Math.max(lengthInt(storage.getDivider()),
+        int dashAmount = Math.max(lengthInt(storage.getDivider()),
                 lengthInt(storage.getResult()));
         System.out.printf("%s%s%s|%s%n",
                 repeatCharSomeTimes(SPACE, representations.get(1).getPosition() + 1),
                 representations.get(1).getNumber(),
                 repeatCharSomeTimes(SPACE, spacesAmount),
-                repeatCharSomeTimes(DASH, minusAmount));
+                repeatCharSomeTimes(DASH, dashAmount));
         System.out.printf("%s%s%s|%s%n",
                 repeatCharSomeTimes(SPACE, representations.get(1).getPosition() + 1),
                 repeatCharSomeTimes(DASH, lengthInt(representations.get(1).getNumber())),
