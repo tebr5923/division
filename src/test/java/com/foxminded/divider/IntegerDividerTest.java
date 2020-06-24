@@ -89,7 +89,7 @@ class IntegerDividerTest {
         int dividend = 999999;
         int divider = 0;
 
-        assertThrows(ArithmeticException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 integerDivider.divide(dividend, divider)
         );
     }

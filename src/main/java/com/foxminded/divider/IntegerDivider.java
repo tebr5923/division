@@ -11,7 +11,7 @@ public class IntegerDivider implements Divider<Integer> {
     @Override
     public IntegerStorage divide(Integer bigDividend, Integer divider) {
         if (divider == 0) {
-            throw new ArithmeticException("division by zero");
+            throw new IllegalArgumentException("division by zero");
         }
         if (divider < 0) {
             throw new IllegalArgumentException("divider must be positive");
