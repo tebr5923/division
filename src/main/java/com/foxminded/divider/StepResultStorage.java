@@ -12,14 +12,10 @@ public class StepResultStorage {
     }
 
     int getNextPosition(int currentPosition) {
-        int nextPosition;
-        if (getMultNumber() == 0) {
-            nextPosition = currentPosition + getModPosition();
-        } else {
-            nextPosition = currentPosition +
-                    Math.max(getMultPosition(), getModPosition());
-        }
-        return nextPosition;
+        return currentPosition
+                + (getMultNumber() == 0
+                ? getModPosition()
+                : Math.max(getMultPosition(), getModPosition()));
     }
 
     Representation getMultiplication() {

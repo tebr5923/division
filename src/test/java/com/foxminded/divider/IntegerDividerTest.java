@@ -85,7 +85,7 @@ class IntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldThrowArithmeticException_whenDividerIsNull() {
+    public void divide_shouldThrowIllegalArgumentException_whenDividerIsNull() {
         int dividend = 999999;
         int divider = 0;
 
