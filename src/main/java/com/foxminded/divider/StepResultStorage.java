@@ -18,14 +18,6 @@ public class StepResultStorage {
                 : Math.max(getMultPosition(), getModPosition()));
     }
 
-    Representation getMultiplication() {
-        return multiplication;
-    }
-
-    Representation getMod() {
-        return mod;
-    }
-
     int getMultNumber() {
         return multiplication.getNumber();
     }
