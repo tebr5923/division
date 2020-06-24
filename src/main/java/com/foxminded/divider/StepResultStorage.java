@@ -1,4 +1,4 @@
-package com.foxminded.divider.utils;
+package com.foxminded.divider;
 
 import com.foxminded.storage.Representation;
 
@@ -6,12 +6,12 @@ public class StepResultStorage {
     private final Representation multiplication;
     private final Representation mod;
 
-    public StepResultStorage(Representation multiplication, Representation mod) {
+    StepResultStorage(Representation multiplication, Representation mod) {
         this.multiplication = multiplication;
         this.mod = mod;
     }
 
-    public int getNextPosition(int currentPosition) {
+    int getNextPosition(int currentPosition) {
         int nextPosition;
         if (getMultNumber() == 0) {
             nextPosition = currentPosition + getModPosition();
@@ -22,27 +22,27 @@ public class StepResultStorage {
         return nextPosition;
     }
 
-    public Representation getMultiplication() {
+    Representation getMultiplication() {
         return multiplication;
     }
 
-    public Representation getMod() {
+    Representation getMod() {
         return mod;
     }
 
-    public int getMultNumber() {
+    int getMultNumber() {
         return multiplication.getNumber();
     }
 
-    public int getMultPosition() {
+    int getMultPosition() {
         return multiplication.getPosition();
     }
 
-    public int getModNumber() {
+    int getModNumber() {
         return mod.getNumber();
     }
 
-    public int getModPosition() {
+    int getModPosition() {
         return mod.getPosition();
     }
 }

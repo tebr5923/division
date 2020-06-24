@@ -2,7 +2,6 @@ package com.foxminded.divider;
 
 import com.foxminded.storage.IntegerStorage;
 import com.foxminded.storage.Representation;
-import com.foxminded.divider.utils.StepResultStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +16,12 @@ public class IntegerDivider implements Divider<Integer> {
             throw new IllegalArgumentException("divider must be positive");
         }
         List<Representation> representations = new ArrayList<>();
-        int currentPosition = 0;
+        representations.add(new Representation(bigDividend, 0));
         if (bigDividend < divider) {
-            representations.add(new Representation(bigDividend, currentPosition));
             representations.add(new Representation(0, lengthInt(bigDividend) - 1));
-            representations.add(new Representation(bigDividend, currentPosition));
+            representations.add(new Representation(bigDividend, 0));
         } else {
-            representations.add(new Representation(bigDividend, currentPosition));
+            int currentPosition = 0;
             int intermediateDividend = findFirstSmallDividend(bigDividend, divider);
             int positionInBigDivider = lengthInt(intermediateDividend);
             int countTo = lengthInt(bigDividend) - positionInBigDivider;
@@ -102,11 +100,9 @@ public class IntegerDivider implements Divider<Integer> {
 
     private int findFirstSmallDividend(int dividend, int divider) {
         String strDividend = Integer.toString(dividend);
-        int firstSmallDividend = Integer.parseInt(strDividend.substring(0, 1));
-        int i = 1;
-        while (firstSmallDividend < divider) {
-            i++;
-            firstSmallDividend = Integer.parseInt(strDividend.substring(0, i));
+        int firstSmallDividend = Integer.parseInt(strDividend.substring(0, lengthInt(divider)));
+        if (firstSmallDividend < divider) {
+            firstSmallDividend = Integer.parseInt(strDividend.substring(0, lengthInt(divider) + 1));
         }
         return firstSmallDividend;
     }
