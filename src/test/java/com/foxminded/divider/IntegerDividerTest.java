@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class IntegerDividerTest {
-    private IntegerDivider integerDivider = new IntegerDivider();
+    private final IntegerDivider integerDivider = new IntegerDivider();
 
     @BeforeEach
     void setUp() {
@@ -89,6 +89,7 @@ class IntegerDividerTest {
         int dividend = 999999;
         int divider = 0;
 
+        // TODO: 24.06.2020 add test message
         assertThrows(IllegalArgumentException.class, () ->
                 integerDivider.divide(dividend, divider)
         );
@@ -99,6 +100,7 @@ class IntegerDividerTest {
         int dividend = 999999;
         int divider = -1;
 
+        // TODO: 24.06.2020 add test message
         assertThrows(IllegalArgumentException.class, () ->
                 integerDivider.divide(dividend, divider)
         );

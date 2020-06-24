@@ -2,14 +2,14 @@ package com.foxminded.storage;
 
 import java.util.List;
 
-public interface Storage {
+public interface Storage<T> {
     List<Representation> getRepresentations();
 
-    int getDividend();
+    T getDividend();
 
-    int getDivider();
+    T getDivider();
 
-    int getMod();
+    T getMod();
 
-    int getResult();
+    T getResult();
 }

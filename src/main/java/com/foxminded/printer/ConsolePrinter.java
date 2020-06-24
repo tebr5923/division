@@ -12,7 +12,7 @@ public class ConsolePrinter implements Printer {
     private static final char SPACE = ' ';
 
     @Override
-    public void print(Storage storage) {
+    public void print(Storage<?> storage) {
         List<Representation> representations = storage.getRepresentations();
         int i = 0;
 
@@ -40,7 +40,7 @@ public class ConsolePrinter implements Printer {
         }
     }
 
-    private void printHeader(Storage storage) {
+    private void printHeader(Storage<?> storage) {
         List<Representation> representations = storage.getRepresentations();
 
         System.out.printf("%s%s%s|%s%n",
@@ -48,11 +48,11 @@ public class ConsolePrinter implements Printer {
                 repeatCharSomeTimes(SPACE, representations.get(0).getPosition()),
                 representations.get(0).getNumber(),
                 storage.getDivider());
-        int spacesAmount = lengthInt(storage.getDividend()) -
+        int spacesAmount = getPrintedLength(storage.getDividend()) -
                 lengthInt(representations.get(1).getNumber()) -
                 representations.get(1).getPosition();
-        int dashAmount = Math.max(lengthInt(storage.getDivider()),
-                lengthInt(storage.getResult()));
+        int dashAmount = Math.max(getPrintedLength(storage.getDivider()),
+                getPrintedLength(storage.getResult()));
         System.out.printf("%s%s%s|%s%n",
                 repeatCharSomeTimes(SPACE, representations.get(1).getPosition() + 1),
                 representations.get(1).getNumber(),
@@ -67,6 +67,10 @@ public class ConsolePrinter implements Printer {
 
     private int lengthInt(int integer) {
         return Integer.toString(integer).length();
+    }
+
+    private int getPrintedLength(Object object){
+        return String.valueOf(object).length();
     }
 
     private String repeatCharSomeTimes(char ch, int times) {

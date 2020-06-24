@@ -3,7 +3,7 @@ package com.foxminded.storage;
 import java.util.List;
 import java.util.Objects;
 
-public class IntegerStorage implements Storage {
+public class IntegerStorage implements Storage<Integer> {
     private final List<Representation> representations;
     private final int dividend;
     private final int divider;
@@ -28,22 +28,22 @@ public class IntegerStorage implements Storage {
     }
 
     @Override
-    public int getDividend() {
+    public Integer getDividend() {
         return dividend;
     }
 
     @Override
-    public int getDivider() {
+    public Integer getDivider() {
         return divider;
     }
 
     @Override
-    public int getMod() {
+    public Integer getMod() {
         return mod;
     }
 
     @Override
-    public int getResult() {
+    public Integer getResult() {
         return result;
     }
 
