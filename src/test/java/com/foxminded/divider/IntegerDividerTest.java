@@ -27,8 +27,6 @@ class IntegerDividerTest {
     void divide_shouldReturnResult_whenArgumentsIsRandom() {
         int dividend = 100154;
         int divider = 249;
-        int mod = dividend % divider;
-        int result = dividend / divider;
         List<Representation> representations = new ArrayList<>();
         representations.add(new Representation(dividend, 0));
         representations.add(new Representation(996, 1));
@@ -37,7 +35,7 @@ class IntegerDividerTest {
         representations.add(new Representation(554, 3));
         representations.add(new Representation(498, 3));
         representations.add(new Representation(56, 4));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider, mod, result);
+        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
         IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
 
@@ -48,8 +46,6 @@ class IntegerDividerTest {
     void divide_shouldReturnResult_whenDividendAndDividerMultipleOfTen() {
         int dividend = 10000;
         int divider = 10;
-        int mod = dividend % divider;
-        int result = dividend / divider;
         List<Representation> representations = new ArrayList<>();
         representations.add(new Representation(dividend, 0));
         representations.add(new Representation(10, 0));
@@ -60,7 +56,7 @@ class IntegerDividerTest {
         representations.add(new Representation(0, 4));
         representations.add(new Representation(0, 4));
         representations.add(new Representation(0, 4));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider, mod, result);
+        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
         IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
 
@@ -71,13 +67,11 @@ class IntegerDividerTest {
     public void divide_shouldReturnResult_whenDividerMoreThenDividend() {
         int dividend = 999;
         int divider = 9999;
-        int mod = dividend % divider;
-        int result = dividend / divider;
         List<Representation> representations = new ArrayList<>();
         representations.add(new Representation(dividend, 0));
         representations.add(new Representation(0, 2));
         representations.add(new Representation(dividend, 0));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider, mod, result);
+        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
         IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
 

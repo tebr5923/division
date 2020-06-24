@@ -45,8 +45,6 @@ class ConsolePrinterTest {
 
         int dividend = 999999;
         int divider = 255;
-        int mod = 144;
-        int result = 3921;
         List<Representation> representations = new ArrayList<>();
         representations.add(new Representation(dividend, 0));
         representations.add(new Representation(765, 0));
@@ -57,7 +55,7 @@ class ConsolePrinterTest {
         representations.add(new Representation(399, 3));
         representations.add(new Representation(255, 3));
         representations.add(new Representation(144, 3));
-        IntegerStorage integerStorage = new IntegerStorage(representations, dividend, divider, mod, result);
+        IntegerStorage integerStorage = new IntegerStorage(representations, dividend, divider);
         ConsolePrinter consolePrinter = new ConsolePrinter();
         consolePrinter.print(integerStorage);
 

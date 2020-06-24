@@ -10,16 +10,12 @@ public class IntegerStorage implements Storage<Integer> {
     private final int mod;
     private final int result;
 
-    public IntegerStorage(List<Representation> representations,
-                          int dividend,
-                          int divider,
-                          int mod,
-                          int result) {
+    public IntegerStorage(List<Representation> representations, int dividend, int divider) {
         this.representations = representations;
         this.dividend = dividend;
         this.divider = divider;
-        this.mod = mod;
-        this.result = result;
+        this.mod = dividend % divider;
+        this.result = dividend / divider;
     }
 
     @Override
@@ -54,13 +50,11 @@ public class IntegerStorage implements Storage<Integer> {
         IntegerStorage that = (IntegerStorage) o;
         return dividend == that.dividend &&
                 divider == that.divider &&
-                mod == that.mod &&
-                result == that.result &&
                 representations.equals(that.representations);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(representations, dividend, divider, mod, result);
+        return Objects.hash(representations, dividend, divider);
     }
 }

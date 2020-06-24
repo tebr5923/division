@@ -58,9 +58,7 @@ public class IntegerDivider implements Divider<Integer> {
         }
         return new IntegerStorage(representations,
                 bigDividend,
-                divider,
-                bigDividend % divider,
-                bigDividend / divider);
+                divider);
     }
 
     private StepResultStorage doOneStep(int smallDividend, int divider) {
