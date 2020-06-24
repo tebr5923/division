@@ -7,46 +7,45 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ConsolePrinter implements Printer {
+    private static final char MINUS = '_';
+    private static final char DASH = '-';
+    private static final char SPACE = ' ';
+
     @Override
     public void print(Storage storage) {
         List<Representation> representations = storage.getRepresentations();
         int i = 0;
-        char minus = '_';
-        char dash = '-';
 
         printHeader(storage);
-        representations.remove(0);
-        representations.remove(0);
+        representations = representations.subList(2, representations.size());
         for (Representation representation : representations) {
             i++;
             if (i == representations.size()) {
                 System.out.printf("%s%s%n",
-                        repeatCharSomeTimes(' ', representation.getPosition() + 1),
+                        repeatCharSomeTimes(SPACE, representation.getPosition() + 1),
                         representation.getNumber());
             } else if (i % 2 != 0) {
                 System.out.printf("%s%s%s%n",
-                        repeatCharSomeTimes(' ', representation.getPosition()),
-                        minus,
+                        repeatCharSomeTimes(SPACE, representation.getPosition()),
+                        MINUS,
                         representation.getNumber());
             } else {
                 System.out.printf("%s%s%n",
-                        repeatCharSomeTimes(' ', representation.getPosition() + 1),
+                        repeatCharSomeTimes(SPACE, representation.getPosition() + 1),
                         representation.getNumber());
                 System.out.printf("%s%s%n",
-                        repeatCharSomeTimes(' ', representation.getPosition() + 1),
-                        repeatCharSomeTimes(dash, lengthInt(representation.getNumber())));
+                        repeatCharSomeTimes(SPACE, representation.getPosition() + 1),
+                        repeatCharSomeTimes(DASH, lengthInt(representation.getNumber())));
             }
         }
     }
 
     private void printHeader(Storage storage) {
         List<Representation> representations = storage.getRepresentations();
-        char minus = '_';
-        char dash = '-';
 
         System.out.printf("%s%s%s|%s%n",
-                minus,
-                repeatCharSomeTimes(' ', representations.get(0).getPosition()),
+                MINUS,
+                repeatCharSomeTimes(SPACE, representations.get(0).getPosition()),
                 representations.get(0).getNumber(),
                 storage.getDivider());
         int spacesAmount = lengthInt(storage.getDividend()) -
@@ -55,14 +54,14 @@ public class ConsolePrinter implements Printer {
         int minusAmount = Math.max(lengthInt(storage.getDivider()),
                 lengthInt(storage.getResult()));
         System.out.printf("%s%s%s|%s%n",
-                repeatCharSomeTimes(' ', representations.get(1).getPosition() + 1),
+                repeatCharSomeTimes(SPACE, representations.get(1).getPosition() + 1),
                 representations.get(1).getNumber(),
-                repeatCharSomeTimes(' ', spacesAmount),
-                repeatCharSomeTimes(dash, minusAmount));
+                repeatCharSomeTimes(SPACE, spacesAmount),
+                repeatCharSomeTimes(DASH, minusAmount));
         System.out.printf("%s%s%s|%s%n",
-                repeatCharSomeTimes(' ', representations.get(1).getPosition() + 1),
-                repeatCharSomeTimes(dash, lengthInt(representations.get(1).getNumber())),
-                repeatCharSomeTimes(' ', spacesAmount),
+                repeatCharSomeTimes(SPACE, representations.get(1).getPosition() + 1),
+                repeatCharSomeTimes(DASH, lengthInt(representations.get(1).getNumber())),
+                repeatCharSomeTimes(SPACE, spacesAmount),
                 storage.getResult());
     }
 
