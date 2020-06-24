@@ -28,20 +28,20 @@ class ConsolePrinterTest {
 
     @Test
     void print_shouldPrintToSystemOut_whenArgumentsIsRandom() {
-        String excepted= String.format("%s%s%s%s%s%s%s%s%s%s%s%s%s",
-                "_999999|255\r\n",
-                " 765   |----\r\n",
-                " ---   |3921\r\n",
-                "_2349\r\n",
-                " 2295\r\n",
-                " ----\r\n",
-                "  _549\r\n",
-                "   510\r\n",
-                "   ---\r\n",
-                "   _399\r\n",
-                "    255\r\n",
-                "    ---\r\n",
-                "    144\r\n");
+        String excepted= String.format("%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n",
+                "_999999|255",
+                " 765   |----",
+                " ---   |3921",
+                "_2349",
+                " 2295",
+                " ----",
+                "  _549",
+                "   510",
+                "   ---",
+                "   _399",
+                "    255",
+                "    ---",
+                "    144");
 
         int dividend = 999999;
         int divider = 255;
