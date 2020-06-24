@@ -41,12 +41,13 @@ public class IntegerDivider implements Divider<Integer> {
                 intermediateDividend = nextSmallDividend;
                 positionInBigDivider++;
             }
+            int multiplication = computeMultiplication(intermediateDividend, divider);
             representations.add(
                     new Representation(
-                            computeMultiplication(intermediateDividend, divider),
+                            multiplication,
                             currentPosition
                                     + lengthInt(intermediateDividend)
-                                    - lengthInt(computeMultiplication(intermediateDividend, divider)))
+                                    - lengthInt(multiplication))
             );
             representations.add(
                     new Representation(bigDividend % divider,
