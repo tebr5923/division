@@ -2,11 +2,11 @@ package com.foxminded.storage;
 
 import java.util.Objects;
 
-public class Representation {
+public class NumberWithPosition {
     private final int number;
     private final int position;
 
-    public Representation(int number, int position) {
+    public NumberWithPosition(int number, int position) {
         this.number = number;
         this.position = position;
     }
@@ -19,11 +19,15 @@ public class Representation {
         return position;
     }
 
+    public NumberWithPosition addOffSet(int offSet) {
+        return new NumberWithPosition(number, this.position + offSet);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Representation that = (Representation) o;
+        NumberWithPosition that = (NumberWithPosition) o;
         return number == that.number &&
                 position == that.position;
     }

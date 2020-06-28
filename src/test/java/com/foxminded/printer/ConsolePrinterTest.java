@@ -1,7 +1,7 @@
 package com.foxminded.printer;
 
 import com.foxminded.storage.IntegerStorage;
-import com.foxminded.storage.Representation;
+import com.foxminded.storage.NumberWithPosition;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,16 +45,16 @@ class ConsolePrinterTest {
 
         int dividend = 999999;
         int divider = 255;
-        List<Representation> representations = new ArrayList<>();
-        representations.add(new Representation(dividend, 0));
-        representations.add(new Representation(765, 0));
-        representations.add(new Representation(2349, 0));
-        representations.add(new Representation(2295, 0));
-        representations.add(new Representation(549, 2));
-        representations.add(new Representation(510, 2));
-        representations.add(new Representation(399, 3));
-        representations.add(new Representation(255, 3));
-        representations.add(new Representation(144, 3));
+        List<NumberWithPosition> representations = new ArrayList<>();
+        representations.add(new NumberWithPosition(dividend, 0));
+        representations.add(new NumberWithPosition(765, 0));
+        representations.add(new NumberWithPosition(2349, 0));
+        representations.add(new NumberWithPosition(2295, 0));
+        representations.add(new NumberWithPosition(549, 2));
+        representations.add(new NumberWithPosition(510, 2));
+        representations.add(new NumberWithPosition(399, 3));
+        representations.add(new NumberWithPosition(255, 3));
+        representations.add(new NumberWithPosition(144, 3));
         IntegerStorage integerStorage = new IntegerStorage(representations, dividend, divider);
         ConsolePrinter consolePrinter = new ConsolePrinter();
         consolePrinter.print(integerStorage);

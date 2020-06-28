@@ -1,6 +1,6 @@
 package com.foxminded.printer;
 
-import com.foxminded.storage.Representation;
+import com.foxminded.storage.NumberWithPosition;
 import com.foxminded.storage.Storage;
 
 import java.util.Arrays;
@@ -13,12 +13,12 @@ public class ConsolePrinter implements Printer {
 
     @Override
     public void print(Storage<?> storage) {
-        List<Representation> representations = storage.getRepresentations();
+        List<NumberWithPosition> representations = storage.getRepresentations();
         int i = 0;
 
         printHeader(storage);
         representations = representations.subList(2, representations.size());
-        for (Representation representation : representations) {
+        for (NumberWithPosition representation : representations) {
             i++;
             if (i == representations.size()) {
                 System.out.printf("%s%s%n",
@@ -41,7 +41,7 @@ public class ConsolePrinter implements Printer {
     }
 
     private void printHeader(Storage<?> storage) {
-        List<Representation> representations = storage.getRepresentations();
+        List<NumberWithPosition> representations = storage.getRepresentations();
 
         System.out.printf("%s%s%s|%s%n",
                 MINUS,

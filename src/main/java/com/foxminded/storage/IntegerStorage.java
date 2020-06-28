@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class IntegerStorage implements Storage<Integer> {
-    private final List<Representation> representations;
+    private final List<NumberWithPosition> representations;
     private final int dividend;
     private final int divider;
     private final int mod;
     private final int result;
 
-    public IntegerStorage(List<Representation> representations, int dividend, int divider) {
+    public IntegerStorage(List<NumberWithPosition> representations, int dividend, int divider) {
         this.representations = representations;
         this.dividend = dividend;
         this.divider = divider;
@@ -19,7 +19,7 @@ public class IntegerStorage implements Storage<Integer> {
     }
 
     @Override
-    public List<Representation> getRepresentations() {
+    public List<NumberWithPosition> getRepresentations() {
         return representations;
     }
 

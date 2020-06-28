@@ -7,21 +7,18 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
-class IntegerDividerTest {
-    private final IntegerDivider integerDivider = new IntegerDivider();
+class IntegerDividerWithNoZeroStepTest {
+    private IntegerDividerWithNoZeroStep integerDivider = new IntegerDividerWithNoZeroStep();
 
     @Test
-    void divide_shouldReturnResult_whenArgumentsIsRandom() {
+    public void divide_shouldReturnResult_whenArgumentsIsRandom() {
         int dividend = 100154;
         int divider = 249;
         List<NumberWithPosition> representations = new ArrayList<>();
         representations.add(new NumberWithPosition(dividend, 0));
         representations.add(new NumberWithPosition(996, 1));
-        representations.add(new NumberWithPosition(55, 3));
-        representations.add(new NumberWithPosition(0, 4));
         representations.add(new NumberWithPosition(554, 3));
         representations.add(new NumberWithPosition(498, 3));
         representations.add(new NumberWithPosition(56, 4));
@@ -33,7 +30,7 @@ class IntegerDividerTest {
     }
 
     @Test
-    void divide_shouldReturnResult_whenDividendAndDividerMultipleOfTen() {
+    public void divide_shouldReturnResult_whenDividendAndDividerMultipleOfTen() {
         int dividend = 10000;
         int divider = 10;
         List<NumberWithPosition> representations = new ArrayList<>();
@@ -146,13 +143,11 @@ class IntegerDividerTest {
         representations.add(new NumberWithPosition(5, 0));
         representations.add(new NumberWithPosition(30, 0));
         representations.add(new NumberWithPosition(30, 0));
-        representations.add(new NumberWithPosition(4, 2));
-        representations.add(new NumberWithPosition(0,2));
-        representations.add(new NumberWithPosition(46,2));
-        representations.add(new NumberWithPosition(45,2));
-        representations.add(new NumberWithPosition(18,3));
-        representations.add(new NumberWithPosition(15,3));
-        representations.add(new NumberWithPosition(3,4));
+        representations.add(new NumberWithPosition(46, 2));
+        representations.add(new NumberWithPosition(45, 2));
+        representations.add(new NumberWithPosition(18, 3));
+        representations.add(new NumberWithPosition(15, 3));
+        representations.add(new NumberWithPosition(3, 4));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
         IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
@@ -167,16 +162,10 @@ class IntegerDividerTest {
         List<NumberWithPosition> representations = new ArrayList<>();
         representations.add(new NumberWithPosition(dividend, 0));
         representations.add(new NumberWithPosition(998, 0));
-        representations.add(new NumberWithPosition(11, 2));
-        representations.add(new NumberWithPosition(0, 3));
-        representations.add(new NumberWithPosition(110, 2));
-        representations.add(new NumberWithPosition(0, 4));
         representations.add(new NumberWithPosition(1100, 2));
         representations.add(new NumberWithPosition(998, 3));
         representations.add(new NumberWithPosition(1020, 3));
         representations.add(new NumberWithPosition(998, 4));
-        representations.add(new NumberWithPosition(228, 5));
-        representations.add(new NumberWithPosition(0, 7));
         representations.add(new NumberWithPosition(2284, 5));
         representations.add(new NumberWithPosition(1996, 5));
         representations.add(new NumberWithPosition(288, 6));
@@ -194,21 +183,9 @@ class IntegerDividerTest {
         List<NumberWithPosition> representations = new ArrayList<>();
         representations.add(new NumberWithPosition(dividend, 0));
         representations.add(new NumberWithPosition(10, 0));
-        representations.add(new NumberWithPosition(0, 2));
-        representations.add(new NumberWithPosition(0, 2));
-        representations.add(new NumberWithPosition(0, 3));
-        representations.add(new NumberWithPosition(0, 3));
-        representations.add(new NumberWithPosition(0, 4));
-        representations.add(new NumberWithPosition(0, 4));
-
-        representations.add(new NumberWithPosition(1, 5));
-        representations.add(new NumberWithPosition(0, 5));
 
         representations.add(new NumberWithPosition(10, 5));
         representations.add(new NumberWithPosition(10, 5));
-
-        representations.add(new NumberWithPosition(1, 7));
-        representations.add(new NumberWithPosition(0, 7));
 
         representations.add(new NumberWithPosition(12, 7));
         representations.add(new NumberWithPosition(10, 7));
@@ -232,8 +209,6 @@ class IntegerDividerTest {
         List<NumberWithPosition> representations = new ArrayList<>();
         representations.add(new NumberWithPosition(dividend, 0));
         representations.add(new NumberWithPosition(996, 1));
-        representations.add(new NumberWithPosition(55, 3));
-        representations.add(new NumberWithPosition(0, 4));
         representations.add(new NumberWithPosition(554, 3));
         representations.add(new NumberWithPosition(498, 3));
         representations.add(new NumberWithPosition(56, 4));
@@ -260,4 +235,6 @@ class IntegerDividerTest {
 
         assertEquals(excepted, integerStorageResult);
     }
+
+
 }
