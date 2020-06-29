@@ -11,24 +11,22 @@ public class IntegerDividerWithNoZeroStep extends IntegerDividerTemplate{
         int nextSmallDividend = modWithPosition.getNumber();
         int i = 0;
         int positionShift = 0;
-       /* NumberWithPosition nextSmallDividendWithPosition =
-                new NumberWithPosition(Integer.parseInt(modWithPosition.getNumber() +
-                        Integer.toString(bigDividend).
-                                substring(positionInBigDividend, positionInBigDividend + 1)),
-                        modWithPosition.getPosition());*/
-
+        //int lengthBD = lengthInt(bigDividend);
         while (nextSmallDividend < divider) {
+            //while (nextSmallDividend < divider && positionInBigDividend + i != lengthBD) {
             i++;
             nextSmallDividend = Integer.parseInt(modWithPosition.getNumber() +
                     Integer.toString(bigDividend).
                             substring(positionInBigDividend, positionInBigDividend + i));
+            if (positionInBigDividend + i == lengthInt(bigDividend)) {
+                break;
+            }
             if (nextSmallDividend == 0) {
                 positionShift++;
-                positionInBigDividendGlobal++;
-                countGlobal++;
+                this.positionInBigDividend++;
+                count++;
             }
         }
         return new NumberWithPosition(nextSmallDividend, modWithPosition.getPosition() + positionShift);
-        //return new NumberWithPosition(nextSmallDividend, modWithPosition.getPosition());
     }
 }

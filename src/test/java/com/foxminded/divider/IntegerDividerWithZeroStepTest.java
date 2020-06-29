@@ -9,8 +9,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class IntegerDividerWithNoZeroStepTest {
-    private final IntegerDividerWithNoZeroStep integerDivider = new IntegerDividerWithNoZeroStep();
+class IntegerDividerWithZeroStepTest {
+    private final IntegerDividerWithZeroStep integerDivider = new IntegerDividerWithZeroStep();
 
     @Test
     public void divide_shouldReturnResult_whenArgumentsIsRandom() {
@@ -19,6 +19,8 @@ class IntegerDividerWithNoZeroStepTest {
         List<NumberWithPosition> representations = new ArrayList<>();
         representations.add(new NumberWithPosition(dividend, 0));
         representations.add(new NumberWithPosition(996, 1));
+        representations.add(new NumberWithPosition(55, 3));
+        representations.add(new NumberWithPosition(0, 4));
         representations.add(new NumberWithPosition(554, 3));
         representations.add(new NumberWithPosition(498, 3));
         representations.add(new NumberWithPosition(56, 4));
@@ -36,6 +38,12 @@ class IntegerDividerWithNoZeroStepTest {
         List<NumberWithPosition> representations = new ArrayList<>();
         representations.add(new NumberWithPosition(dividend, 0));
         representations.add(new NumberWithPosition(10, 0));
+        representations.add(new NumberWithPosition(0, 2));
+        representations.add(new NumberWithPosition(0, 2));
+        representations.add(new NumberWithPosition(0, 3));
+        representations.add(new NumberWithPosition(0, 3));
+        representations.add(new NumberWithPosition(0, 4));
+        representations.add(new NumberWithPosition(0, 4));
         representations.add(new NumberWithPosition(0, 4));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
@@ -137,6 +145,8 @@ class IntegerDividerWithNoZeroStepTest {
         representations.add(new NumberWithPosition(5, 0));
         representations.add(new NumberWithPosition(30, 0));
         representations.add(new NumberWithPosition(30, 0));
+        representations.add(new NumberWithPosition(4, 2));
+        representations.add(new NumberWithPosition(0, 2));
         representations.add(new NumberWithPosition(46, 2));
         representations.add(new NumberWithPosition(45, 2));
         representations.add(new NumberWithPosition(18, 3));
@@ -156,10 +166,16 @@ class IntegerDividerWithNoZeroStepTest {
         List<NumberWithPosition> representations = new ArrayList<>();
         representations.add(new NumberWithPosition(dividend, 0));
         representations.add(new NumberWithPosition(998, 0));
+        representations.add(new NumberWithPosition(11, 2));
+        representations.add(new NumberWithPosition(0, 3));
+        representations.add(new NumberWithPosition(110, 2));
+        representations.add(new NumberWithPosition(0, 4));
         representations.add(new NumberWithPosition(1100, 2));
         representations.add(new NumberWithPosition(998, 3));
         representations.add(new NumberWithPosition(1020, 3));
         representations.add(new NumberWithPosition(998, 4));
+        representations.add(new NumberWithPosition(228, 5));
+        representations.add(new NumberWithPosition(0, 7));
         representations.add(new NumberWithPosition(2284, 5));
         representations.add(new NumberWithPosition(1996, 5));
         representations.add(new NumberWithPosition(288, 6));
@@ -177,9 +193,21 @@ class IntegerDividerWithNoZeroStepTest {
         List<NumberWithPosition> representations = new ArrayList<>();
         representations.add(new NumberWithPosition(dividend, 0));
         representations.add(new NumberWithPosition(10, 0));
+        representations.add(new NumberWithPosition(0, 2));
+        representations.add(new NumberWithPosition(0, 2));
+        representations.add(new NumberWithPosition(0, 3));
+        representations.add(new NumberWithPosition(0, 3));
+        representations.add(new NumberWithPosition(0, 4));
+        representations.add(new NumberWithPosition(0, 4));
+
+        representations.add(new NumberWithPosition(1, 5));
+        representations.add(new NumberWithPosition(0, 5));
 
         representations.add(new NumberWithPosition(10, 5));
         representations.add(new NumberWithPosition(10, 5));
+
+        representations.add(new NumberWithPosition(1, 7));
+        representations.add(new NumberWithPosition(0, 7));
 
         representations.add(new NumberWithPosition(12, 7));
         representations.add(new NumberWithPosition(10, 7));
@@ -203,6 +231,8 @@ class IntegerDividerWithNoZeroStepTest {
         List<NumberWithPosition> representations = new ArrayList<>();
         representations.add(new NumberWithPosition(dividend, 0));
         representations.add(new NumberWithPosition(996, 1));
+        representations.add(new NumberWithPosition(55, 3));
+        representations.add(new NumberWithPosition(0, 4));
         representations.add(new NumberWithPosition(554, 3));
         representations.add(new NumberWithPosition(498, 3));
         representations.add(new NumberWithPosition(56, 4));
