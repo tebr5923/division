@@ -11,9 +11,7 @@ public class IntegerDividerWithNoZeroStep extends IntegerDividerTemplate{
         int nextSmallDividend = modWithPosition.getNumber();
         int i = 0;
         int positionShift = 0;
-        //int lengthBD = lengthInt(bigDividend);
         while (nextSmallDividend < divider) {
-            //while (nextSmallDividend < divider && positionInBigDividend + i != lengthBD) {
             i++;
             nextSmallDividend = Integer.parseInt(modWithPosition.getNumber() +
                     Integer.toString(bigDividend).

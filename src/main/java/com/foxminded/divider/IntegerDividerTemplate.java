@@ -12,12 +12,7 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
 
     @Override
     public IntegerStorage divide(Integer bigDividend, Integer divider) {
-        if (divider == 0) {
-            throw new IllegalArgumentException("division by zero");
-        }
-        if (divider < 0) {
-            throw new IllegalArgumentException("divider must be positive");
-        }
+        checkDivider(divider);
         List<NumberWithPosition> representations = new ArrayList<>();
         representations.add(new NumberWithPosition(bigDividend, 0));
         if (bigDividend < divider) {
@@ -54,13 +49,6 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
                     count++;
                 }
             }
-           /* if (intermediateDividend == 0 && positionInBigDividend > lengthInt(bigDividend)) {
-                representations.remove(representations.size()-1);
-                representations.add(new NumberWithPosition(intermediateDividend, currentPosition +
-                        lengthInt(intermediateDividend) -
-                        lengthInt(bigDividend % divider)-1));
-
-            } else {*/
             if (intermediateDividend != 0 && positionInBigDividend <= lengthInt(bigDividend)) {
                 int multiplication = computeMultiplication(intermediateDividend, divider);
                 representations.add(
@@ -107,7 +95,6 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
         return new StepResultStorage(multRepresentation, modRepresentation);
     }
 
-    //private int lengthInt(int integer) {
     int lengthInt(int integer) {
         return Integer.toString(integer).length();
     }
@@ -123,6 +110,15 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
 
     private int computeMultiplication(int intermediateDividend, int divider) {
         return intermediateDividend - intermediateDividend % divider;
+    }
+
+    private void checkDivider(int divider){
+        if (divider == 0) {
+            throw new IllegalArgumentException("division by zero");
+        }
+        if (divider < 0) {
+            throw new IllegalArgumentException("divider must be positive");
+        }
     }
 
     abstract NumberWithPosition nextSmallDividendWithPosition(int bigDividend,

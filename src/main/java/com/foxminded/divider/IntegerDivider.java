@@ -27,22 +27,12 @@ public class IntegerDivider implements Divider<Integer> {
             int countTo = lengthInt(bigDividend) - positionInBigDividend;
             for (int count = 0; count < countTo; count++) {
                 StepResultStorage stepResult = doOneStep(intermediateDividend, divider);
-               /* representations.add(
-                        new NumberWithPosition(stepResult.getMultNumber(),
-                                currentPosition + stepResult.getMultPosition()));*/
                 representations.add(stepResult.getMultiplication().addOffSet(currentPosition));
                 if (intermediateDividend == 0) {
                     currentPosition++;
                 }
-/*
-                int nextSmallDividend = nextSmallDividend(bigDividend,
-                        stepResult.getModNumber(), positionInBigDivider);
-*/
                 NumberWithPosition nextSmallDividendWithPosition = nextSmallDividendWithPosition(bigDividend,
                         stepResult.getMod(), positionInBigDividend);
-
-                /*representations.add(new NumberWithPosition(nextSmallDividend,
-                        currentPosition + stepResult.getModPosition()));*/
                 representations.add(nextSmallDividendWithPosition.addOffSet(currentPosition));
 
                 currentPosition = stepResult.getNextPosition(currentPosition);
@@ -97,21 +87,12 @@ public class IntegerDivider implements Divider<Integer> {
         return Integer.toString(integer).length();
     }
 
-/*    private int nextSmallDividend(int bigDividend,
-                                  int intermediateMod,
-                                  int positionInBigDividend) {
-        return Integer.parseInt(intermediateMod +
-                Integer.toString(bigDividend).
-                        substring(positionInBigDividend, positionInBigDividend + 1));
-    }*/
-
     private NumberWithPosition nextSmallDividendWithPosition(int bigDividend,
                                                              NumberWithPosition modWithPosition,
                                                              int positionInBigDividend) {
         return new NumberWithPosition(Integer.parseInt(modWithPosition.getNumber() +
                 Integer.toString(bigDividend).
                         substring(positionInBigDividend, positionInBigDividend + 1)), modWithPosition.getPosition());
-        // if NumberWithPosition.getNumber< divider -> substring(); position++
     }
 
     private int findFirstSmallDividend(int dividend, int divider) {
