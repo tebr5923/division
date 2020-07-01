@@ -19,11 +19,7 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
             int currentPosition = 0;
             int intermediateDividend = findFirstSmallDividend(bigDividend, divider);
             int positionInBigDividend = lengthInt(intermediateDividend);
-            int count = 0;
-            int countTo = lengthInt(bigDividend) - positionInBigDividend;
-
             while (lengthInt(bigDividend) - positionInBigDividend > 0){
-            //while (count < countTo) {
                 StepResultStorage stepResult = doOneStep(intermediateDividend, divider);
                 representations.add(stepResult.getMultiplication().addOffSet(currentPosition));
                 if (intermediateDividend == 0) {
@@ -33,7 +29,6 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
                         stepResult.getMod(), positionInBigDividend, divider);
 
                 positionInBigDividend = positionInBigDividend + nextSmallDividendWithPosition.getPosition();
-                count = count + nextSmallDividendWithPosition.getPosition();
                 nextSmallDividendWithPosition = nextSmallDividendWithPosition.addOffSet(stepResult.getModPosition());
 
                 representations.add(nextSmallDividendWithPosition.addOffSet(currentPosition));
@@ -45,12 +40,8 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
                 positionInBigDividend = positionInBigDividend +
                         lengthInt(nextSmallDividendWithPosition.getNumber()) -
                         lengthInt(stepResult.getModNumber());
-                count = count +
-                        lengthInt(nextSmallDividendWithPosition.getNumber()) -
-                        lengthInt(stepResult.getModNumber());
                 if (stepResult.getModNumber() == 0) {
                     positionInBigDividend++;
-                    count++;
                 }
             }
             if (intermediateDividend != 0 && positionInBigDividend <= lengthInt(bigDividend)) {
