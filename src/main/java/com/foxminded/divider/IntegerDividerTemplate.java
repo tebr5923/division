@@ -8,43 +8,43 @@ import java.util.List;
 
 public abstract class IntegerDividerTemplate implements Divider<Integer> {
     @Override
-    public IntegerStorage divide(Integer bigDividend, Integer divider) {
+    public IntegerStorage divide(Integer mainDividend, Integer divider) {
         checkDivider(divider);
         List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(bigDividend, 0));
-        if (bigDividend < divider) {
-            representations.add(new NumberWithPosition(0, lengthInt(bigDividend) - 1));
-            representations.add(new NumberWithPosition(bigDividend, 0));
+        representations.add(new NumberWithPosition(mainDividend, 0));
+        if (mainDividend < divider) {
+            representations.add(new NumberWithPosition(0, lengthInt(mainDividend) - 1));
+            representations.add(new NumberWithPosition(mainDividend, 0));
         } else {
             int currentPosition = 0;
-            int intermediateDividend = findFirstSmallDividend(bigDividend, divider);
-            int positionInBigDividend = lengthInt(intermediateDividend);
-            while (lengthInt(bigDividend) - positionInBigDividend > 0){
+            int intermediateDividend = findFirstShortDividend(mainDividend, divider);
+            int positionInMainDividend = lengthInt(intermediateDividend);
+            while (lengthInt(mainDividend) - positionInMainDividend > 0){
                 StepResultStorage stepResult = doOneStep(intermediateDividend, divider);
                 representations.add(stepResult.getMultiplication().addOffSet(currentPosition));
                 if (intermediateDividend == 0) {
                     currentPosition++;
                 }
-                NumberWithPosition nextSmallDividendWithPosition = nextSmallDividend(bigDividend,
-                        stepResult.getMod(), positionInBigDividend, divider);
+                NumberWithPosition nextShortDividendWithPosition = nextShortDividend(mainDividend,
+                        stepResult.getMod(), positionInMainDividend, divider);
 
-                positionInBigDividend = positionInBigDividend + nextSmallDividendWithPosition.getPosition();
-                nextSmallDividendWithPosition = nextSmallDividendWithPosition.addOffSet(stepResult.getModPosition());
+                positionInMainDividend = positionInMainDividend + nextShortDividendWithPosition.getPosition();
+                nextShortDividendWithPosition = nextShortDividendWithPosition.addOffSet(stepResult.getModPosition());
 
-                representations.add(nextSmallDividendWithPosition.addOffSet(currentPosition));
+                representations.add(nextShortDividendWithPosition.addOffSet(currentPosition));
                 currentPosition = currentPosition + (stepResult.getMultNumber() == 0
                         ? stepResult.getModPosition()
-                        : Math.max(stepResult.getMultPosition(), nextSmallDividendWithPosition.getPosition()));
+                        : Math.max(stepResult.getMultPosition(), nextShortDividendWithPosition.getPosition()));
 
-                intermediateDividend = nextSmallDividendWithPosition.getNumber();
-                positionInBigDividend = positionInBigDividend +
-                        lengthInt(nextSmallDividendWithPosition.getNumber()) -
+                intermediateDividend = nextShortDividendWithPosition.getNumber();
+                positionInMainDividend = positionInMainDividend +
+                        lengthInt(nextShortDividendWithPosition.getNumber()) -
                         lengthInt(stepResult.getModNumber());
                 if (stepResult.getModNumber() == 0) {
-                    positionInBigDividend++;
+                    positionInMainDividend++;
                 }
             }
-            if (intermediateDividend != 0 && positionInBigDividend <= lengthInt(bigDividend)) {
+            if (intermediateDividend != 0 && positionInMainDividend <= lengthInt(mainDividend)) {
                 int multiplication = computeMultiplication(intermediateDividend, divider);
                 representations.add(
                         new NumberWithPosition(
@@ -54,33 +54,33 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
                                         - lengthInt(multiplication))
                 );
                 representations.add(
-                        new NumberWithPosition(bigDividend % divider,
+                        new NumberWithPosition(mainDividend % divider,
                                 currentPosition +
                                         lengthInt(intermediateDividend) -
-                                        lengthInt(bigDividend % divider))
+                                        lengthInt(mainDividend % divider))
                 );
             }
         }
         return new IntegerStorage(representations,
-                bigDividend,
+                mainDividend,
                 divider);
     }
 
-    private StepResultStorage doOneStep(int smallDividend, int divider) {
+    private StepResultStorage doOneStep(int shortDividend, int divider) {
         int position = 0;
         NumberWithPosition multRepresentation;
         NumberWithPosition modRepresentation;
 
-        if (smallDividend < divider) {
-            multRepresentation = new NumberWithPosition(0, lengthInt(smallDividend) - 1);
-            modRepresentation = new NumberWithPosition(smallDividend, position);
+        if (shortDividend < divider) {
+            multRepresentation = new NumberWithPosition(0, lengthInt(shortDividend) - 1);
+            modRepresentation = new NumberWithPosition(shortDividend, position);
         } else {
-            int multiplication = computeMultiplication(smallDividend, divider);
-            if (lengthInt(smallDividend) > lengthInt(multiplication)) {
+            int multiplication = computeMultiplication(shortDividend, divider);
+            if (lengthInt(shortDividend) > lengthInt(multiplication)) {
                 position++;
             }
             multRepresentation = new NumberWithPosition(multiplication, position);
-            int mod = smallDividend - multiplication;
+            int mod = shortDividend - multiplication;
             position = position + lengthInt(multiplication) - lengthInt(mod);
             if (mod == 0) {
                 position++;
@@ -94,13 +94,13 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
         return Integer.toString(integer).length();
     }
 
-    private int findFirstSmallDividend(int dividend, int divider) {
+    private int findFirstShortDividend(int dividend, int divider) {
         String strDividend = Integer.toString(dividend);
-        int firstSmallDividend = Integer.parseInt(strDividend.substring(0, lengthInt(divider)));
-        if (firstSmallDividend < divider) {
-            firstSmallDividend = Integer.parseInt(strDividend.substring(0, lengthInt(divider) + 1));
+        int firstShortDividend = Integer.parseInt(strDividend.substring(0, lengthInt(divider)));
+        if (firstShortDividend < divider) {
+            firstShortDividend = Integer.parseInt(strDividend.substring(0, lengthInt(divider) + 1));
         }
-        return firstSmallDividend;
+        return firstShortDividend;
     }
 
     private int computeMultiplication(int intermediateDividend, int divider) {
@@ -116,8 +116,8 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
         }
     }
 
-    abstract NumberWithPosition nextSmallDividend(int bigDividend,
+    abstract NumberWithPosition nextShortDividend(int mainDividend,
                                                   NumberWithPosition modWithPosition,
-                                                  int positionInBigDividend,
+                                                  int positionInMainDividend,
                                                   int divider);
 }

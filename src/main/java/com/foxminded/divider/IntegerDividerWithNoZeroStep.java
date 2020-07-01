@@ -4,26 +4,26 @@ import com.foxminded.storage.NumberWithPosition;
 
 public class IntegerDividerWithNoZeroStep extends IntegerDividerTemplate {
     @Override
-    NumberWithPosition nextSmallDividend(int bigDividend,
+    NumberWithPosition nextShortDividend(int mainDividend,
                                          NumberWithPosition modWithPosition,
-                                         int positionInBigDividend,
+                                         int positionInMainDividend,
                                          int divider) {
-        int nextSmallDividend = modWithPosition.getNumber();
+        int nextShortDividend = modWithPosition.getNumber();
         int i = 0;
         int positionShift = 0;
-        while (nextSmallDividend < divider) {
+        while (nextShortDividend < divider) {
             i++;
-            nextSmallDividend = Integer.parseInt(modWithPosition.getNumber() +
-                    Integer.toString(bigDividend).
-                            substring(positionInBigDividend, positionInBigDividend + i));
+            nextShortDividend = Integer.parseInt(modWithPosition.getNumber() +
+                    Integer.toString(mainDividend).
+                            substring(positionInMainDividend, positionInMainDividend + i));
 
-            if (positionInBigDividend + i == lengthInt(bigDividend)) {
+            if (positionInMainDividend + i == lengthInt(mainDividend)) {
                 break;
             }
-            if (nextSmallDividend == 0) {
+            if (nextShortDividend == 0) {
                 positionShift++;
             }
         }
-        return new NumberWithPosition(nextSmallDividend, positionShift);
+        return new NumberWithPosition(nextShortDividend, positionShift);
     }
 }
