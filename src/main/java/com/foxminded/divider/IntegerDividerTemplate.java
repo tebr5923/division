@@ -22,7 +22,8 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
             int count = 0;
             int countTo = lengthInt(bigDividend) - positionInBigDividend;
 
-            while (count < countTo) {
+            while (lengthInt(bigDividend) - positionInBigDividend > 0){
+            //while (count < countTo) {
                 StepResultStorage stepResult = doOneStep(intermediateDividend, divider);
                 representations.add(stepResult.getMultiplication().addOffSet(currentPosition));
                 if (intermediateDividend == 0) {
