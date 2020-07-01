@@ -10,6 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,20 +29,21 @@ class ConsolePrinterTest {
 
     @Test
     void print_shouldPrintToSystemOut_whenArgumentsIsRandom() {
-        String excepted= String.format("%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n",
-                "_999999|255",
-                " 765   |----",
-                " ---   |3921",
-                "_2349",
-                " 2295",
-                " ----",
-                "  _549",
-                "   510",
-                "   ---",
-                "   _399",
-                "    255",
-                "    ---",
-                "    144");
+        StringJoiner excepted = new StringJoiner(System.lineSeparator()).
+                add("_999999|255").
+                add(" 765   |----").
+                add(" ---   |3921").
+                add("_2349").
+                add(" 2295").
+                add(" ----").
+                add("  _549").
+                add("   510").
+                add("   ---").
+                add("   _399").
+                add("    255").
+                add("    ---").
+                add("    144").
+                add("");
 
         int dividend = 999999;
         int divider = 255;
@@ -59,6 +61,6 @@ class ConsolePrinterTest {
         ConsolePrinter consolePrinter = new ConsolePrinter();
         consolePrinter.print(integerStorage);
 
-        assertEquals(excepted, output.toString());
+        assertEquals(excepted.toString(), output.toString());
     }
 }
