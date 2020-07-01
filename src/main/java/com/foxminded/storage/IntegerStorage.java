@@ -7,15 +7,11 @@ public class IntegerStorage implements Storage<Integer> {
     private final List<NumberWithPosition> representations;
     private final int dividend;
     private final int divider;
-    private final int mod;
-    private final int result;
 
     public IntegerStorage(List<NumberWithPosition> representations, int dividend, int divider) {
         this.representations = representations;
         this.dividend = dividend;
         this.divider = divider;
-        this.mod = dividend % divider;
-        this.result = dividend / divider;
     }
 
     @Override
@@ -35,12 +31,12 @@ public class IntegerStorage implements Storage<Integer> {
 
     @Override
     public Integer getMod() {
-        return mod;
+        return dividend % divider;
     }
 
     @Override
     public Integer getResult() {
-        return result;
+        return dividend / divider;
     }
 
     @Override
