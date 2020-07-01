@@ -28,7 +28,7 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
                 if (intermediateDividend == 0) {
                     currentPosition++;
                 }
-                NumberWithPosition nextSmallDividendWithPosition = nextSmallDividendWithPosition(bigDividend,
+                NumberWithPosition nextSmallDividendWithPosition = nextSmallDividend(bigDividend,
                         stepResult.getMod(), positionInBigDividend, divider);
 
                 positionInBigDividend = positionInBigDividend + nextSmallDividendWithPosition.getPosition();
@@ -124,8 +124,8 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
         }
     }
 
-    abstract NumberWithPosition nextSmallDividendWithPosition(int bigDividend,
-                                                              NumberWithPosition modWithPosition,
-                                                              int positionInBigDividend,
-                                                              int divider);
+    abstract NumberWithPosition nextSmallDividend(int bigDividend,
+                                                  NumberWithPosition modWithPosition,
+                                                  int positionInBigDividend,
+                                                  int divider);
 }
