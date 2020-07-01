@@ -7,6 +7,6 @@ public class IntegerDividerWithZeroStep extends IntegerDividerTemplate {
     NumberWithPosition nextSmallDividendWithPosition(int bigDividend, NumberWithPosition modWithPosition, int positionInBigDividend, int divider) {
         return new NumberWithPosition(Integer.parseInt(modWithPosition.getNumber() +
                 Integer.toString(bigDividend).
-                        substring(positionInBigDividend, positionInBigDividend + 1)), modWithPosition.getPosition());
+                        substring(positionInBigDividend, positionInBigDividend + 1)), 0);
     }
 }

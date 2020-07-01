@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class IntegerDividerTemplate implements Divider<Integer> {
-    int positionInBigDividend = 0;
-    int count = 0;
-
     @Override
     public IntegerStorage divide(Integer bigDividend, Integer divider) {
         checkDivider(divider);
@@ -21,7 +18,8 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
         } else {
             int currentPosition = 0;
             int intermediateDividend = findFirstSmallDividend(bigDividend, divider);
-            positionInBigDividend = lengthInt(intermediateDividend);
+            int positionInBigDividend = lengthInt(intermediateDividend);
+            int count = 0;
             int countTo = lengthInt(bigDividend) - positionInBigDividend;
 
             while (count < countTo) {
@@ -32,6 +30,11 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
                 }
                 NumberWithPosition nextSmallDividendWithPosition = nextSmallDividendWithPosition(bigDividend,
                         stepResult.getMod(), positionInBigDividend, divider);
+
+                positionInBigDividend = positionInBigDividend + nextSmallDividendWithPosition.getPosition();
+                count = count + nextSmallDividendWithPosition.getPosition();
+                nextSmallDividendWithPosition = nextSmallDividendWithPosition.addOffSet(stepResult.getModPosition());
+
                 representations.add(nextSmallDividendWithPosition.addOffSet(currentPosition));
                 currentPosition = currentPosition + (stepResult.getMultNumber() == 0
                         ? stepResult.getModPosition()
@@ -95,7 +98,7 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
         return new StepResultStorage(multRepresentation, modRepresentation);
     }
 
-    int lengthInt(int integer) {
+    protected int lengthInt(int integer) {
         return Integer.toString(integer).length();
     }
 
@@ -112,7 +115,7 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
         return intermediateDividend - intermediateDividend % divider;
     }
 
-    private void checkDivider(int divider){
+    private void checkDivider(int divider) {
         if (divider == 0) {
             throw new IllegalArgumentException("division by zero");
         }
