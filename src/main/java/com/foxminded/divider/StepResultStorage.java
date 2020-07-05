@@ -3,42 +3,42 @@ package com.foxminded.divider;
 import com.foxminded.storage.NumberWithPosition;
 
 public class StepResultStorage {
-    private final NumberWithPosition multiplication;
-    private final NumberWithPosition mod;
+    private final NumberWithPosition multiplicationResult;
+    private final NumberWithPosition remainder;
 
-    StepResultStorage(NumberWithPosition multiplication, NumberWithPosition mod) {
-        this.multiplication = multiplication;
-        this.mod = mod;
+    StepResultStorage(NumberWithPosition multiplicationResult, NumberWithPosition remainder) {
+        this.multiplicationResult = multiplicationResult;
+        this.remainder = remainder;
     }
 
     int getNextPosition(int currentPosition) {
         return currentPosition
-                + (getMultNumber() == 0
-                ? getModPosition()
-                : Math.max(getMultPosition(), getModPosition()));
+                + (getMultiplicationResultNumber() == 0
+                ? getRemainderPosition()
+                : Math.max(getMultiplicationResultPosition(), getRemainderPosition()));
     }
 
-    int getMultNumber() {
-        return multiplication.getNumber();
+    int getMultiplicationResultNumber() {
+        return multiplicationResult.getNumber();
     }
 
-    int getMultPosition() {
-        return multiplication.getPosition();
+    int getMultiplicationResultPosition() {
+        return multiplicationResult.getPosition();
     }
 
-    int getModNumber() {
-        return mod.getNumber();
+    int getRemainderNumber() {
+        return remainder.getNumber();
     }
 
-    int getModPosition() {
-        return mod.getPosition();
+    int getRemainderPosition() {
+        return remainder.getPosition();
     }
 
-    NumberWithPosition getMultiplication() {
-        return multiplication;
+    NumberWithPosition getMultiplicationResult() {
+        return multiplicationResult;
     }
 
-    NumberWithPosition getMod() {
-        return mod;
+    NumberWithPosition getRemainder() {
+        return remainder;
     }
 }

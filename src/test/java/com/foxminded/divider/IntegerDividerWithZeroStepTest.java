@@ -42,8 +42,8 @@ class IntegerDividerWithZeroStepTest {
         representations.add(new NumberWithPosition(0, 2));
         representations.add(new NumberWithPosition(0, 3));
         representations.add(new NumberWithPosition(0, 3));
-        representations.add(new NumberWithPosition(0, 4));
-        representations.add(new NumberWithPosition(0, 4));
+       /* representations.add(new NumberWithPosition(0, 4));
+        representations.add(new NumberWithPosition(0, 4));*/
         representations.add(new NumberWithPosition(0, 4));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 

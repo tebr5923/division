@@ -9,7 +9,7 @@ import java.util.List;
 public abstract class IntegerDividerTemplate implements Divider<Integer> {
     @Override
     public IntegerStorage divide(Integer mainDividend, Integer divider) {
-        checkDivider(divider);
+        checkArguments(mainDividend, divider);
         List<NumberWithPosition> representations = new ArrayList<>();
         representations.add(new NumberWithPosition(mainDividend, 0));
         if (mainDividend < divider) {
@@ -21,31 +21,31 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
             int positionInMainDividend = lengthInt(intermediateDividend);
             while (lengthInt(mainDividend) - positionInMainDividend > 0){
                 StepResultStorage stepResult = doOneStep(intermediateDividend, divider);
-                representations.add(stepResult.getMultiplication().addOffSet(currentPosition));
+                representations.add(stepResult.getMultiplicationResult().addOffSet(currentPosition));
                 if (intermediateDividend == 0) {
                     currentPosition++;
                 }
                 NumberWithPosition nextShortDividendWithPosition = nextShortDividend(mainDividend,
-                        stepResult.getMod(), positionInMainDividend, divider);
+                        stepResult.getRemainder(), positionInMainDividend, divider);
 
                 positionInMainDividend = positionInMainDividend + nextShortDividendWithPosition.getPosition();
-                nextShortDividendWithPosition = nextShortDividendWithPosition.addOffSet(stepResult.getModPosition());
+                nextShortDividendWithPosition = nextShortDividendWithPosition.addOffSet(stepResult.getRemainderPosition());
 
                 representations.add(nextShortDividendWithPosition.addOffSet(currentPosition));
-                currentPosition = currentPosition + (stepResult.getMultNumber() == 0
-                        ? stepResult.getModPosition()
-                        : Math.max(stepResult.getMultPosition(), nextShortDividendWithPosition.getPosition()));
+                currentPosition = currentPosition + (stepResult.getMultiplicationResultNumber() == 0
+                        ? stepResult.getRemainderPosition()
+                        : Math.max(stepResult.getMultiplicationResultPosition(), nextShortDividendWithPosition.getPosition()));
 
                 intermediateDividend = nextShortDividendWithPosition.getNumber();
                 positionInMainDividend = positionInMainDividend +
                         lengthInt(nextShortDividendWithPosition.getNumber()) -
-                        lengthInt(stepResult.getModNumber());
-                if (stepResult.getModNumber() == 0) {
+                        lengthInt(stepResult.getRemainderNumber());
+                if (stepResult.getRemainderNumber() == 0) {
                     positionInMainDividend++;
                 }
             }
             if (intermediateDividend != 0 && positionInMainDividend <= lengthInt(mainDividend)) {
-                int multiplication = computeMultiplication(intermediateDividend, divider);
+                int multiplication = computeMultiplicationResult(intermediateDividend, divider);
                 representations.add(
                         new NumberWithPosition(
                                 multiplication,
@@ -68,26 +68,26 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
 
     private StepResultStorage doOneStep(int shortDividend, int divider) {
         int position = 0;
-        NumberWithPosition multRepresentation;
-        NumberWithPosition modRepresentation;
+        NumberWithPosition multiplicationResultWithPosition;
+        NumberWithPosition reminderWithPosition;
 
         if (shortDividend < divider) {
-            multRepresentation = new NumberWithPosition(0, lengthInt(shortDividend) - 1);
-            modRepresentation = new NumberWithPosition(shortDividend, position);
+            multiplicationResultWithPosition = new NumberWithPosition(0, lengthInt(shortDividend) - 1);
+            reminderWithPosition = new NumberWithPosition(shortDividend, position);
         } else {
-            int multiplication = computeMultiplication(shortDividend, divider);
-            if (lengthInt(shortDividend) > lengthInt(multiplication)) {
+            int multiplicationResult = computeMultiplicationResult(shortDividend, divider);
+            if (lengthInt(shortDividend) > lengthInt(multiplicationResult)) {
                 position++;
             }
-            multRepresentation = new NumberWithPosition(multiplication, position);
-            int mod = shortDividend - multiplication;
-            position = position + lengthInt(multiplication) - lengthInt(mod);
-            if (mod == 0) {
+            multiplicationResultWithPosition = new NumberWithPosition(multiplicationResult, position);
+            int reminder = shortDividend - multiplicationResult;
+            position = position + lengthInt(multiplicationResult) - lengthInt(reminder);
+            if (reminder == 0) {
                 position++;
             }
-            modRepresentation = new NumberWithPosition(mod, position);
+            reminderWithPosition = new NumberWithPosition(reminder, position);
         }
-        return new StepResultStorage(multRepresentation, modRepresentation);
+        return new StepResultStorage(multiplicationResultWithPosition, reminderWithPosition);
     }
 
     protected int lengthInt(int integer) {
@@ -103,21 +103,24 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
         return firstShortDividend;
     }
 
-    private int computeMultiplication(int intermediateDividend, int divider) {
+    private int computeMultiplicationResult(int intermediateDividend, int divider) {
         return intermediateDividend - intermediateDividend % divider;
     }
 
-    private void checkDivider(int divider) {
+    private void checkArguments(int dividend, int divider) {
         if (divider == 0) {
             throw new IllegalArgumentException("division by zero");
         }
         if (divider < 0) {
             throw new IllegalArgumentException("divider must be positive");
         }
+        if (dividend < 0) {
+            throw new IllegalArgumentException("dividend must be positive");
+        }
     }
 
     abstract NumberWithPosition nextShortDividend(int mainDividend,
-                                                  NumberWithPosition modWithPosition,
+                                                  NumberWithPosition reminderWithPosition,
                                                   int positionInMainDividend,
                                                   int divider);
 }

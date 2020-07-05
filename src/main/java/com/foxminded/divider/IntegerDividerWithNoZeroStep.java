@@ -5,15 +5,15 @@ import com.foxminded.storage.NumberWithPosition;
 public class IntegerDividerWithNoZeroStep extends IntegerDividerTemplate {
     @Override
     NumberWithPosition nextShortDividend(int mainDividend,
-                                         NumberWithPosition modWithPosition,
+                                         NumberWithPosition reminderWithPosition,
                                          int positionInMainDividend,
                                          int divider) {
-        int nextShortDividend = modWithPosition.getNumber();
+        int nextShortDividend = reminderWithPosition.getNumber();
         int i = 0;
         int positionShift = 0;
         while (nextShortDividend < divider) {
             i++;
-            nextShortDividend = Integer.parseInt(modWithPosition.getNumber() +
+            nextShortDividend = Integer.parseInt(reminderWithPosition.getNumber() +
                     Integer.toString(mainDividend).
                             substring(positionInMainDividend, positionInMainDividend + i));
 

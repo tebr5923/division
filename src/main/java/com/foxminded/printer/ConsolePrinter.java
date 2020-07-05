@@ -6,7 +6,7 @@ import com.foxminded.storage.Storage;
 import java.util.Arrays;
 import java.util.List;
 
-public class ConsolePrinter implements Printer {
+public class ConsolePrinter implements Printer<Storage<?>> {
     private static final char MINUS = '_';
     private static final char DASH = '-';
     private static final char SPACE = ' ';
@@ -21,21 +21,11 @@ public class ConsolePrinter implements Printer {
         for (NumberWithPosition representation : representations) {
             i++;
             if (i == representations.size()) {
-                System.out.printf("%s%s%n",
-                        repeatCharSomeTimes(SPACE, representation.getPosition() + 1),
-                        representation.getNumber());
+                printRemainder(representation);
             } else if (i % 2 != 0) {
-                System.out.printf("%s%s%s%n",
-                        repeatCharSomeTimes(SPACE, representation.getPosition()),
-                        MINUS,
-                        representation.getNumber());
+                printShortDividend(representation);
             } else {
-                System.out.printf("%s%s%n",
-                        repeatCharSomeTimes(SPACE, representation.getPosition() + 1),
-                        representation.getNumber());
-                System.out.printf("%s%s%n",
-                        repeatCharSomeTimes(SPACE, representation.getPosition() + 1),
-                        repeatCharSomeTimes(DASH, lengthInt(representation.getNumber())));
+                printMultiplicationResultAndDelimiter(representation);
             }
         }
     }
@@ -65,11 +55,33 @@ public class ConsolePrinter implements Printer {
                 storage.getResult());
     }
 
+    private void printShortDividend(NumberWithPosition representation) {
+        System.out.printf("%s%s%s%n",
+                repeatCharSomeTimes(SPACE, representation.getPosition()),
+                MINUS,
+                representation.getNumber());
+    }
+
+    private void printMultiplicationResultAndDelimiter(NumberWithPosition representation){
+        System.out.printf("%s%s%n",
+                repeatCharSomeTimes(SPACE, representation.getPosition() + 1),
+                representation.getNumber());
+        System.out.printf("%s%s%n",
+                repeatCharSomeTimes(SPACE, representation.getPosition() + 1),
+                repeatCharSomeTimes(DASH, lengthInt(representation.getNumber())));
+    }
+
+    private void printRemainder(NumberWithPosition representation) {
+        System.out.printf("%s%s%n",
+                repeatCharSomeTimes(SPACE, representation.getPosition() + 1),
+                representation.getNumber());
+    }
+
     private int lengthInt(int integer) {
         return Integer.toString(integer).length();
     }
 
-    private int getPrintedLength(Object object){
+    private int getPrintedLength(Object object) {
         return String.valueOf(object).length();
     }
 

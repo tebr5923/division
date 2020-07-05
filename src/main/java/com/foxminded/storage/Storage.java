@@ -9,7 +9,7 @@ public interface Storage<T> {
 
     T getDivider();
 
-    T getMod();
+    T getRemainder();
 
     T getResult();
 }

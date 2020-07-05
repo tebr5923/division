@@ -30,7 +30,7 @@ public class IntegerStorage implements Storage<Integer> {
     }
 
     @Override
-    public Integer getMod() {
+    public Integer getRemainder() {
         return dividend % divider;
     }
 
