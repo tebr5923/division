@@ -19,7 +19,7 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
             int currentPosition = 0;
             int intermediateDividend = findFirstShortDividend(mainDividend, divider);
             int positionInMainDividend = lengthInt(intermediateDividend);
-            while (lengthInt(mainDividend) - positionInMainDividend > 0){
+            while (lengthInt(mainDividend) - positionInMainDividend > 0) {
                 StepResultStorage stepResult = doOneStep(intermediateDividend, divider);
                 representations.add(stepResult.getMultiplicationResult().addOffSet(currentPosition));
                 if (intermediateDividend == 0) {
@@ -45,20 +45,17 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
                 }
             }
             if (intermediateDividend != 0 && positionInMainDividend <= lengthInt(mainDividend)) {
-                int multiplication = computeMultiplicationResult(intermediateDividend, divider);
-                representations.add(
-                        new NumberWithPosition(
-                                multiplication,
-                                currentPosition
-                                        + lengthInt(intermediateDividend)
-                                        - lengthInt(multiplication))
-                );
-                representations.add(
-                        new NumberWithPosition(mainDividend % divider,
-                                currentPosition +
-                                        lengthInt(intermediateDividend) -
-                                        lengthInt(mainDividend % divider))
-                );
+                int multiplicationResult = computeMultiplicationResult(intermediateDividend, divider);
+                NumberWithPosition multiplicationResultWithPosition =
+                        new NumberWithPosition(multiplicationResult, currentPosition);
+                representations.add(multiplicationResultWithPosition
+                        .addOffSet(lengthInt(intermediateDividend)
+                                - lengthInt(multiplicationResult)));
+                int reminder = mainDividend % divider;
+                NumberWithPosition reminderWithPosition = new NumberWithPosition(reminder, currentPosition);
+                representations.add(reminderWithPosition
+                        .addOffSet(lengthInt(intermediateDividend)
+                                - lengthInt(reminder)));
             }
         }
         return new IntegerStorage(representations,
