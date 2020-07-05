@@ -63,4 +63,26 @@ class ConsolePrinterTest {
 
         assertEquals(excepted.toString(), output.toString());
     }
+
+    @Test
+    void print_shouldPrintOnlyHeaderAndReminder_whenOnlyOneStep() {
+        StringJoiner excepted = new StringJoiner(System.lineSeparator()).
+                add("_8|5").
+                add(" 5|-").
+                add(" -|1").
+                add(" 3").
+                add("");
+
+        int dividend = 8;
+        int divider = 5;
+        List<NumberWithPosition> representations = new ArrayList<>();
+        representations.add(new NumberWithPosition(dividend, 0));
+        representations.add(new NumberWithPosition(5, 0));
+        representations.add(new NumberWithPosition(3, 0));
+        IntegerStorage integerStorage = new IntegerStorage(representations, dividend, divider);
+        ConsolePrinter consolePrinter = new ConsolePrinter();
+        consolePrinter.print(integerStorage);
+
+        assertEquals(excepted.toString(), output.toString());
+    }
 }
