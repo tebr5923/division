@@ -9,8 +9,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class IntegerDividerWithZeroStepTest {
-    private final IntegerDividerWithZeroStep integerDivider = new IntegerDividerWithZeroStep();
+class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest{
+
+    public IntegerDividerWithZeroStepTest() {
+        super(new IntegerDividerWithZeroStep());
+    }
 
     @Test
     public void divide_shouldReturnResult_whenArgumentsIsRandom() {
