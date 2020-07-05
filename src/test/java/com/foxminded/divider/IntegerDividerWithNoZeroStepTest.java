@@ -16,6 +16,23 @@ class IntegerDividerWithNoZeroStepTest extends AbstractIntegerDividerTest{
     }
 
     @Test
+    public void divide_shouldReturnResultWithPositiveReminder() {
+        int dividend = 100154;
+        int divider = 249;
+        List<NumberWithPosition> representations = new ArrayList<>();
+        representations.add(new NumberWithPosition(dividend, 0));
+        representations.add(new NumberWithPosition(996, 1));
+        representations.add(new NumberWithPosition(554, 3));
+        representations.add(new NumberWithPosition(498, 3));
+        representations.add(new NumberWithPosition(56, 4));
+        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
+
+        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
+
+        assertEquals(excepted, integerStorageResult);
+    }
+
+    @Test
     public void divide_shouldReturnResult_whenDividendAndDividerMultipleOfTen() {
         int dividend = 10000;
         int divider = 10;

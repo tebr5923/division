@@ -51,23 +51,6 @@ public abstract class AbstractIntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldReturnResult_whenArgumentsIsRandom() {
-        int dividend = 100154;
-        int divider = 249;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(996, 1));
-        representations.add(new NumberWithPosition(554, 3));
-        representations.add(new NumberWithPosition(498, 3));
-        representations.add(new NumberWithPosition(56, 4));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
-
-        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
-
-        assertEquals(excepted, integerStorageResult);
-    }
-
-    @Test
     public void divide_shouldReturnResult_whenDividerMoreThenDividend() {
         int dividend = 999;
         int divider = 9999;
@@ -130,23 +113,6 @@ public abstract class AbstractIntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldReturnResultWithPositiveReminder() {
-        int dividend = 100154;
-        int divider = 249;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(996, 1));
-        representations.add(new NumberWithPosition(554, 3));
-        representations.add(new NumberWithPosition(498, 3));
-        representations.add(new NumberWithPosition(56, 4));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
-
-        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
-
-        assertEquals(excepted, integerStorageResult);
-    }
-
-    @Test
     public void divide_shouldReturnResultWithZeroReminder() {
         int dividend = 840;
         int divider = 24;
@@ -162,6 +128,9 @@ public abstract class AbstractIntegerDividerTest {
 
         assertEquals(excepted, integerStorageResult);
     }
+
+    @Test
+    abstract void divide_shouldReturnResultWithPositiveReminder();
 
     @Test
     abstract void divide_shouldReturnResult_whenDividendAndDividerMultipleOfTen();

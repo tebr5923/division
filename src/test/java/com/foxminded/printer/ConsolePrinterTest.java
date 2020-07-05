@@ -28,7 +28,7 @@ class ConsolePrinterTest {
     }
 
     @Test
-    void print_shouldPrintToSystemOut_whenArgumentsIsRandom() {
+    void print_shouldPrintToSystemOut_whenNotOneStep() {
         StringJoiner excepted = new StringJoiner(System.lineSeparator()).
                 add("_999999|255").
                 add(" 765   |----").
