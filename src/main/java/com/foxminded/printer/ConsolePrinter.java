@@ -4,6 +4,7 @@ import com.foxminded.storage.NumberWithPosition;
 import com.foxminded.storage.Storage;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class ConsolePrinter implements Printer<Storage<?>> {
@@ -14,11 +15,21 @@ public class ConsolePrinter implements Printer<Storage<?>> {
     @Override
     public void print(Storage<?> storage) {
         List<NumberWithPosition> representations = storage.getRepresentations();
-        int i = 0;
-
+        //int i = 0;
         printHeader(storage);
         representations = representations.subList(2, representations.size());
-        for (NumberWithPosition representation : representations) {
+
+        Iterator<NumberWithPosition> iterator = representations.iterator();
+        while (iterator.hasNext()) {
+            NumberWithPosition print = iterator.next();
+            if (iterator.hasNext()) {
+                printShortDividend(print);
+                printMultiplicationResultAndDelimiter(iterator.next());
+            } else {
+                printRemainder(print);
+            }
+        }
+      /*  for (NumberWithPosition representation : representations) {
             i++;
             if (i == representations.size()) {
                 printRemainder(representation);
@@ -27,7 +38,7 @@ public class ConsolePrinter implements Printer<Storage<?>> {
             } else {
                 printMultiplicationResultAndDelimiter(representation);
             }
-        }
+        }*/
     }
 
     private void printHeader(Storage<?> storage) {
