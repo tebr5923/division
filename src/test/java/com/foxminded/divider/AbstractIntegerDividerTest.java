@@ -29,7 +29,7 @@ public abstract class AbstractIntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldThrowIllegalArgumentException_whenDividerIsNull() {
+    public void divide_shouldThrowIllegalArgumentException_whenDividerIsZero() {
         int dividend = 999999;
         int divider = 0;
 

@@ -19,8 +19,8 @@ public class NumberWithPosition {
         return position;
     }
 
-    public NumberWithPosition addOffSet(int offSet) {
-        return new NumberWithPosition(number, this.position + offSet);
+    public NumberWithPosition addOffset(int offset) {
+        return new NumberWithPosition(number, this.position + offset);
     }
 
     @Override

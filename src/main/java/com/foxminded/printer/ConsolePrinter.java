@@ -14,11 +14,10 @@ public class ConsolePrinter implements Printer<Storage<?>> {
 
     @Override
     public void print(Storage<?> storage) {
-        List<NumberWithPosition> representations = storage.getRepresentations();
-        //int i = 0;
         printHeader(storage);
-        representations = representations.subList(2, representations.size());
 
+        List<NumberWithPosition> representations = storage.getRepresentations();
+        representations = representations.subList(2, representations.size());
         Iterator<NumberWithPosition> iterator = representations.iterator();
         while (iterator.hasNext()) {
             NumberWithPosition print = iterator.next();
@@ -29,16 +28,6 @@ public class ConsolePrinter implements Printer<Storage<?>> {
                 printRemainder(print);
             }
         }
-      /*  for (NumberWithPosition representation : representations) {
-            i++;
-            if (i == representations.size()) {
-                printRemainder(representation);
-            } else if (i % 2 != 0) {
-                printShortDividend(representation);
-            } else {
-                printMultiplicationResultAndDelimiter(representation);
-            }
-        }*/
     }
 
     private void printHeader(Storage<?> storage) {
@@ -73,7 +62,7 @@ public class ConsolePrinter implements Printer<Storage<?>> {
                 representation.getNumber());
     }
 
-    private void printMultiplicationResultAndDelimiter(NumberWithPosition representation){
+    private void printMultiplicationResultAndDelimiter(NumberWithPosition representation) {
         System.out.printf("%s%s%n",
                 repeatCharSomeTimes(SPACE, representation.getPosition() + 1),
                 representation.getNumber());
