@@ -60,9 +60,9 @@ public abstract class AbstractIntegerDividerTest {
         representations.add(new NumberWithPosition(dividend, 0));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
-        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
+        IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, integerStorageResult);
+        assertEquals(excepted, actual);
     }
 
     @Test
@@ -75,9 +75,9 @@ public abstract class AbstractIntegerDividerTest {
         representations.add(new NumberWithPosition(0, 1));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
-        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
+        IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, integerStorageResult);
+        assertEquals(excepted, actual);
     }
 
     @Test
@@ -90,9 +90,9 @@ public abstract class AbstractIntegerDividerTest {
         representations.add(new NumberWithPosition(4, 0));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
-        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
+        IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, integerStorageResult);
+        assertEquals(excepted, actual);
     }
 
     @Test
@@ -107,9 +107,9 @@ public abstract class AbstractIntegerDividerTest {
         representations.add(new NumberWithPosition(4, 1));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
-        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
+        IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, integerStorageResult);
+        assertEquals(excepted, actual);
     }
 
     @Test
@@ -124,9 +124,9 @@ public abstract class AbstractIntegerDividerTest {
         representations.add(new NumberWithPosition(0, 2));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
-        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
+        IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, integerStorageResult);
+        assertEquals(excepted, actual);
     }
 
     @Test

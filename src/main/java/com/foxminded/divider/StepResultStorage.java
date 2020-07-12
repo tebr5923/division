@@ -2,7 +2,7 @@ package com.foxminded.divider;
 
 import com.foxminded.storage.NumberWithPosition;
 
-public class StepResultStorage {
+class StepResultStorage {
     private final NumberWithPosition multiplicationResult;
     private final NumberWithPosition remainder;
 

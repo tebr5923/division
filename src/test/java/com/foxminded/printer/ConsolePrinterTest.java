@@ -29,21 +29,21 @@ class ConsolePrinterTest {
 
     @Test
     void print_shouldPrintToSystemOut_whenNotOneStep() {
-        StringJoiner excepted = new StringJoiner(System.lineSeparator()).
-                add("_999999|255").
-                add(" 765   |----").
-                add(" ---   |3921").
-                add("_2349").
-                add(" 2295").
-                add(" ----").
-                add("  _549").
-                add("   510").
-                add("   ---").
-                add("   _399").
-                add("    255").
-                add("    ---").
-                add("    144").
-                add("");
+        StringJoiner excepted = new StringJoiner(System.lineSeparator())
+                .add("_999999|255")
+                .add(" 765   |----")
+                .add(" ---   |3921")
+                .add("_2349")
+                .add(" 2295")
+                .add(" ----")
+                .add("  _549")
+                .add("   510")
+                .add("   ---")
+                .add("   _399")
+                .add("    255")
+                .add("    ---")
+                .add("    144")
+                .add("");
 
         int dividend = 999999;
         int divider = 255;
@@ -66,12 +66,12 @@ class ConsolePrinterTest {
 
     @Test
     void print_shouldPrintOnlyHeaderAndReminder_whenOnlyOneStep() {
-        StringJoiner excepted = new StringJoiner(System.lineSeparator()).
-                add("_8|5").
-                add(" 5|-").
-                add(" -|1").
-                add(" 3").
-                add("");
+        StringJoiner excepted = new StringJoiner(System.lineSeparator())
+                .add("_8|5")
+                .add(" 5|-")
+                .add(" -|1")
+                .add(" 3")
+                .add("");
 
         int dividend = 8;
         int divider = 5;

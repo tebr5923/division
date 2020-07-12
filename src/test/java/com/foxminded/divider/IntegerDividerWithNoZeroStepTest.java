@@ -27,9 +27,9 @@ class IntegerDividerWithNoZeroStepTest extends AbstractIntegerDividerTest{
         representations.add(new NumberWithPosition(56, 4));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
-        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
+        IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, integerStorageResult);
+        assertEquals(excepted, actual);
     }
 
     @Test
@@ -42,9 +42,9 @@ class IntegerDividerWithNoZeroStepTest extends AbstractIntegerDividerTest{
         representations.add(new NumberWithPosition(0, 4));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
-        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
+        IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, integerStorageResult);
+        assertEquals(excepted, actual);
     }
 
     @Test
@@ -63,9 +63,9 @@ class IntegerDividerWithNoZeroStepTest extends AbstractIntegerDividerTest{
         representations.add(new NumberWithPosition(3, 4));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
-        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
+        IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, integerStorageResult);
+        assertEquals(excepted, actual);
     }
 
     @Test
@@ -84,9 +84,9 @@ class IntegerDividerWithNoZeroStepTest extends AbstractIntegerDividerTest{
         representations.add(new NumberWithPosition(288, 6));
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
-        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
+        IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, integerStorageResult);
+        assertEquals(excepted, actual);
     }
 
     @Test
@@ -110,8 +110,8 @@ class IntegerDividerWithNoZeroStepTest extends AbstractIntegerDividerTest{
 
         IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
 
-        IntegerStorage integerStorageResult = integerDivider.divide(dividend, divider);
+        IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, integerStorageResult);
+        assertEquals(excepted, actual);
     }
 }
