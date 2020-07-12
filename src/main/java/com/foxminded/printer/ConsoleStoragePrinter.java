@@ -1,5 +1,7 @@
 package com.foxminded.printer;
 
+import com.foxminded.printer.println.Print;
+import com.foxminded.printer.println.RemainderPrinter;
 import com.foxminded.storage.NumberWithPosition;
 import com.foxminded.storage.Storage;
 
@@ -7,17 +9,35 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class ConsolePrinter implements Printer<Storage<?>> {
+public class ConsoleStoragePrinter implements StoragePrinter<Storage<?>> {
     private static final char MINUS = '_';
     private static final char DASH = '-';
     private static final char SPACE = ' ';
 
     @Override
     public void print(Storage<?> storage) {
-        printHeader(storage);
+        Print print = new Print(storage);
+        Iterator<NumberWithPosition> iterator = storage.getRepresentations().iterator();
+        while (iterator.hasNext()) {
+            NumberWithPosition numberWithPosition = iterator.next();
+            if (iterator.hasNext()) {
+                print.printLine(numberWithPosition);
+                print.changePrinter();
 
-        List<NumberWithPosition> representations = storage.getRepresentations();
-        representations = representations.subList(2, representations.size());
+               // printShortDividend(numberWithPosition);
+               // printMultiplicationResultAndDelimiter(iterator.next());
+            } else {
+                //printRemainder(numberWithPosition);
+                print.setLinePrinter(new RemainderPrinter());
+                print.printLine(numberWithPosition);
+            }
+        }
+
+
+        /*printHeader(storage);
+
+        List<NumberWithPosition> representations;
+        representations = storage.getRepresentations().subList(2, storage.getRepresentations().size());
         Iterator<NumberWithPosition> iterator = representations.iterator();
         while (iterator.hasNext()) {
             NumberWithPosition print = iterator.next();
@@ -27,7 +47,7 @@ public class ConsolePrinter implements Printer<Storage<?>> {
             } else {
                 printRemainder(print);
             }
-        }
+        }*/
     }
 
     private void printHeader(Storage<?> storage) {

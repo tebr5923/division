@@ -14,7 +14,7 @@ import java.util.StringJoiner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ConsolePrinterTest {
+class ConsoleStoragePrinterTest {
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
     @BeforeEach
@@ -58,7 +58,7 @@ class ConsolePrinterTest {
         representations.add(new NumberWithPosition(255, 3));
         representations.add(new NumberWithPosition(144, 3));
         IntegerStorage integerStorage = new IntegerStorage(representations, dividend, divider);
-        ConsolePrinter consolePrinter = new ConsolePrinter();
+        ConsoleStoragePrinter consolePrinter = new ConsoleStoragePrinter();
         consolePrinter.print(integerStorage);
 
         assertEquals(excepted.toString(), output.toString());
@@ -80,7 +80,7 @@ class ConsolePrinterTest {
         representations.add(new NumberWithPosition(5, 0));
         representations.add(new NumberWithPosition(3, 0));
         IntegerStorage integerStorage = new IntegerStorage(representations, dividend, divider);
-        ConsolePrinter consolePrinter = new ConsolePrinter();
+        ConsoleStoragePrinter consolePrinter = new ConsoleStoragePrinter();
         consolePrinter.print(integerStorage);
 
         assertEquals(excepted.toString(), output.toString());
