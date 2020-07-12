@@ -39,7 +39,7 @@ public class ConsolePrinter implements Printer<Storage<?>> {
                 representations.get(0).getNumber(),
                 storage.getDivider());
         int spacesAmount = getPrintedLength(storage.getDividend()) -
-                lengthInt(representations.get(1).getNumber()) -
+                getPrintedLength(representations.get(1).getNumber()) -
                 representations.get(1).getPosition();
         int dashAmount = Math.max(getPrintedLength(storage.getDivider()),
                 getPrintedLength(storage.getResult()));
@@ -50,7 +50,7 @@ public class ConsolePrinter implements Printer<Storage<?>> {
                 repeatCharSomeTimes(DASH, dashAmount));
         System.out.printf("%s%s%s|%s%n",
                 repeatCharSomeTimes(SPACE, representations.get(1).getPosition() + 1),
-                repeatCharSomeTimes(DASH, lengthInt(representations.get(1).getNumber())),
+                repeatCharSomeTimes(DASH, getPrintedLength(representations.get(1).getNumber())),
                 repeatCharSomeTimes(SPACE, spacesAmount),
                 storage.getResult());
     }
@@ -68,17 +68,13 @@ public class ConsolePrinter implements Printer<Storage<?>> {
                 representation.getNumber());
         System.out.printf("%s%s%n",
                 repeatCharSomeTimes(SPACE, representation.getPosition() + 1),
-                repeatCharSomeTimes(DASH, lengthInt(representation.getNumber())));
+                repeatCharSomeTimes(DASH, getPrintedLength(representation.getNumber())));
     }
 
     private void printRemainder(NumberWithPosition representation) {
         System.out.printf("%s%s%n",
                 repeatCharSomeTimes(SPACE, representation.getPosition() + 1),
                 representation.getNumber());
-    }
-
-    private int lengthInt(int integer) {
-        return Integer.toString(integer).length();
     }
 
     private int getPrintedLength(Object object) {
