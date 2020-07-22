@@ -2,7 +2,11 @@ package com.foxminded.printer.println;
 
 import com.foxminded.storage.NumberWithPosition;
 
-public class RemainderPrinter extends LinePrinter {
+class RemainderPrinter extends LinePrinter {
+    RemainderPrinter(Print print) {
+        super(print);
+    }
+
     @Override
     void printLine(NumberWithPosition numberWithPosition) {
         System.out.printf("%s%s%n",

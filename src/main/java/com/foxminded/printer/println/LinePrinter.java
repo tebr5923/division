@@ -4,13 +4,16 @@ import com.foxminded.storage.NumberWithPosition;
 
 import java.util.Arrays;
 
-public abstract class LinePrinter {
+abstract class LinePrinter {
     protected static final char MINUS = '_';
     protected static final char DASH = '-';
     protected static final char SPACE = ' ';
 
-    abstract void printLine(NumberWithPosition numberWithPosition);
+    protected final Print print;
 
+    protected LinePrinter(Print print) {
+        this.print = print;
+    }
 
     protected int getPrintedLength(Object object) {
         return String.valueOf(object).length();
@@ -21,4 +24,6 @@ public abstract class LinePrinter {
         Arrays.fill(chars, ch);
         return new String(chars);
     }
+
+    abstract void printLine(NumberWithPosition numberWithPosition);
 }

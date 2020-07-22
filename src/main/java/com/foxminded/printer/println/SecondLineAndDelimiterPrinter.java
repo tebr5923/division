@@ -1,23 +1,21 @@
 package com.foxminded.printer.println;
 
 import com.foxminded.storage.NumberWithPosition;
-import com.foxminded.storage.Storage;
 
-public class SecondLineAndDelimiterPrinter extends LinePrinter{
-    private final Storage<?> storage;
+class SecondLineAndDelimiterPrinter extends LinePrinter {
 
-    public SecondLineAndDelimiterPrinter(Storage<?> storage) {
-        this.storage = storage;
+    SecondLineAndDelimiterPrinter(Print print) {
+        super(print);
     }
 
     @Override
     void printLine(NumberWithPosition numberWithPosition) {
-
-        int spacesAmount = getPrintedLength(storage.getDividend()) -
+        print.setLinePrinter(new ShortDividendPrinter(print));
+        int spacesAmount = getPrintedLength(print.getStorage().getDividend()) -
                 getPrintedLength(numberWithPosition.getNumber()) -
                 numberWithPosition.getPosition();
-        int dashAmount = Math.max(getPrintedLength(storage.getDivider()),
-                getPrintedLength(storage.getResult()));
+        int dashAmount = Math.max(getPrintedLength(print.getStorage().getDivider()),
+                getPrintedLength(print.getStorage().getResult()));
         System.out.printf("%s%s%s|%s%n",
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
                 numberWithPosition.getNumber(),
@@ -27,6 +25,6 @@ public class SecondLineAndDelimiterPrinter extends LinePrinter{
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
                 repeatCharSomeTimes(DASH, getPrintedLength(numberWithPosition.getNumber())),
                 repeatCharSomeTimes(SPACE, spacesAmount),
-                storage.getResult());
+                print.getStorage().getResult());
     }
 }

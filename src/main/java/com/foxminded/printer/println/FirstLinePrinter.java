@@ -4,18 +4,18 @@ import com.foxminded.storage.NumberWithPosition;
 import com.foxminded.storage.Storage;
 
 public class FirstLinePrinter extends LinePrinter{
-    private final Storage<?> storage;
 
-    public FirstLinePrinter(Storage<?> storage) {
-        this.storage = storage;
+    FirstLinePrinter(Print print) {
+        super(print);
     }
-    
+
     @Override
-    public void printLine(NumberWithPosition numberWithPosition) {
+    void printLine(NumberWithPosition numberWithPosition) {
+        print.setLinePrinter(new SecondLineAndDelimiterPrinter(print));
         System.out.printf("%s%s%s|%s%n",
                 MINUS,
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition()),
                 numberWithPosition.getNumber(),
-                storage.getDivider());
+                print.getStorage().getDivider());
     }
 }
