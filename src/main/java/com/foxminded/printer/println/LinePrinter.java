@@ -3,6 +3,7 @@ package com.foxminded.printer.println;
 import com.foxminded.storage.NumberWithPosition;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 abstract class LinePrinter {
     protected static final char MINUS = '_';
@@ -25,5 +26,5 @@ abstract class LinePrinter {
         return new String(chars);
     }
 
-    abstract void printLine(NumberWithPosition numberWithPosition);
+    abstract void printLine(Iterator<NumberWithPosition> iterator);
 }

@@ -2,13 +2,14 @@ package com.foxminded.printer.println;
 
 import com.foxminded.storage.NumberWithPosition;
 
-class SecondLineAndDelimiterPrinter extends LinePrinter {
+//class SecondLineAndDelimiterPrinter extends LinePrinter {
+class SecondLineAndDelimiterPrinter  {
 
-    SecondLineAndDelimiterPrinter(Print print) {
+   /* SecondLineAndDelimiterPrinter(Print print) {
         super(print);
-    }
+    }*/
 
-    @Override
+  /*  @Override
     void printLine(NumberWithPosition numberWithPosition) {
         int lastMultPos = print.getStorage().getRepresentations().size() - 2;
         if (numberWithPosition == print.getStorage().getRepresentations().get(lastMultPos)) {
@@ -31,5 +32,5 @@ class SecondLineAndDelimiterPrinter extends LinePrinter {
                 repeatCharSomeTimes(DASH, getPrintedLength(numberWithPosition.getNumber())),
                 repeatCharSomeTimes(SPACE, spacesAmount),
                 print.getStorage().getResult());
-    }
+    }*/
 }
