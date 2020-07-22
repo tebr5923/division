@@ -3,14 +3,10 @@ package com.foxminded.printer.println;
 import com.foxminded.storage.NumberWithPosition;
 import com.foxminded.storage.Storage;
 
-import java.util.Iterator;
+import java.util.ListIterator;
 
 public class FirstLinePrinter extends LinePrinter {
     private final Storage<?> storage;
-
-   /* FirstLinePrinter(Print print) {
-        super(print);
-    }*/
 
     FirstLinePrinter(Print print, Storage<?> storage) {
         super(print);
@@ -18,7 +14,7 @@ public class FirstLinePrinter extends LinePrinter {
     }
 
     @Override
-    void printLine(Iterator<NumberWithPosition> iterator) {
+    void printLine(ListIterator<NumberWithPosition> iterator) {
         NumberWithPosition numberWithPosition = iterator.next();
         System.out.printf("%s%s%s|%s%n",
                 MINUS,
@@ -45,15 +41,4 @@ public class FirstLinePrinter extends LinePrinter {
 
         print.setLinePrinter(new ShortDividendPrinter(print));
     }
-
-    /*@Override
-    void printLine(NumberWithPosition numberWithPosition) {
-        print.setLinePrinter(new SecondLineAndDelimiterPrinter(print));
-        System.out.printf("%s%s%s|%s%n",
-                MINUS,
-                repeatCharSomeTimes(SPACE, numberWithPosition.getPosition()),
-                numberWithPosition.getNumber(),
-                print.getStorage().getDivider());
-    }*/
-
 }

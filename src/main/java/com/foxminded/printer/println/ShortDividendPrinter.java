@@ -2,7 +2,7 @@ package com.foxminded.printer.println;
 
 import com.foxminded.storage.NumberWithPosition;
 
-import java.util.Iterator;
+import java.util.ListIterator;
 
 class ShortDividendPrinter extends LinePrinter {
     ShortDividendPrinter(Print print) {
@@ -10,7 +10,7 @@ class ShortDividendPrinter extends LinePrinter {
     }
 
     @Override
-    void printLine(Iterator<NumberWithPosition> iterator) {
+    void printLine(ListIterator<NumberWithPosition> iterator) {
         NumberWithPosition numberWithPosition = iterator.next();
         if (iterator.hasNext()) {
             System.out.printf("%s%s%s%n",
@@ -19,16 +19,8 @@ class ShortDividendPrinter extends LinePrinter {
                     numberWithPosition.getNumber());
             print.setLinePrinter(new MultiplicationResultAndDelimiterPrinter(print));
         } else {
+            iterator.previous();
             print.setLinePrinter(new RemainderPrinter(print));
         }
     }
-
-  /*  @Override
-    void printLine(NumberWithPosition numberWithPosition) {
-        print.setLinePrinter(new MultiplicationResultAndDelimiterPrinter(print));
-        System.out.printf("%s%s%s%n",
-                repeatCharSomeTimes(SPACE, numberWithPosition.getPosition()),
-                MINUS,
-                numberWithPosition.getNumber());
-    }*/
 }

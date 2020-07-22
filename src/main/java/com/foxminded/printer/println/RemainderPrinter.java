@@ -2,7 +2,7 @@ package com.foxminded.printer.println;
 
 import com.foxminded.storage.NumberWithPosition;
 
-import java.util.Iterator;
+import java.util.ListIterator;
 
 class RemainderPrinter extends LinePrinter {
     RemainderPrinter(Print print) {
@@ -10,17 +10,10 @@ class RemainderPrinter extends LinePrinter {
     }
 
     @Override
-    void printLine(Iterator<NumberWithPosition> iterator) {
+    void printLine(ListIterator<NumberWithPosition> iterator) {
         NumberWithPosition numberWithPosition = iterator.next();
         System.out.printf("%s%s%n",
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
                 numberWithPosition.getNumber());
     }
-
-   /* @Override
-    void printLine(NumberWithPosition numberWithPosition) {
-        System.out.printf("%s%s%n",
-                repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
-                numberWithPosition.getNumber());
-    }*/
 }
