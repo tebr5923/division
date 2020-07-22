@@ -1,7 +1,6 @@
 package com.foxminded.printer.println;
 
 import com.foxminded.storage.NumberWithPosition;
-import com.foxminded.storage.Storage;
 
 public class FirstLinePrinter extends LinePrinter{
 

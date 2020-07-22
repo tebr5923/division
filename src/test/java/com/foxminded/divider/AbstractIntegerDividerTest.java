@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public abstract class AbstractIntegerDividerTest {
+abstract class AbstractIntegerDividerTest {
     protected IntegerDividerTemplate integerDivider;
 
     protected AbstractIntegerDividerTest(IntegerDividerTemplate divider) {
@@ -18,7 +18,7 @@ public abstract class AbstractIntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldThrowIllegalArgumentException_whenDividendIsNegative() {
+    void divide_shouldThrowIllegalArgumentException_whenDividendIsNegative() {
         int dividend = -1;
         int divider = 55;
 
@@ -29,7 +29,7 @@ public abstract class AbstractIntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldThrowIllegalArgumentException_whenDividerIsZero() {
+    void divide_shouldThrowIllegalArgumentException_whenDividerIsZero() {
         int dividend = 999999;
         int divider = 0;
 
@@ -40,7 +40,7 @@ public abstract class AbstractIntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldThrowIllegalArgumentException_whenDividerIsNegative() {
+    void divide_shouldThrowIllegalArgumentException_whenDividerIsNegative() {
         int dividend = 999999;
         int divider = -1;
 
@@ -51,7 +51,7 @@ public abstract class AbstractIntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldReturnResult_whenDividerMoreThenDividend() {
+    void divide_shouldReturnResult_whenDividerMoreThenDividend() {
         int dividend = 999;
         int divider = 9999;
         List<NumberWithPosition> representations = new ArrayList<>();
@@ -66,7 +66,7 @@ public abstract class AbstractIntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldReturnResult_whenDividendEqualsDivider() {
+    void divide_shouldReturnResult_whenDividendEqualsDivider() {
         int dividend = 55;
         int divider = 55;
         List<NumberWithPosition> representations = new ArrayList<>();
@@ -81,7 +81,7 @@ public abstract class AbstractIntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldReturnResult_whenOneDigitDividendAndDivider() {
+    void divide_shouldReturnResult_whenOneDigitDividendAndDivider() {
         int dividend = 9;
         int divider = 5;
         List<NumberWithPosition> representations = new ArrayList<>();
@@ -96,7 +96,7 @@ public abstract class AbstractIntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldReturnResult_whenOneDigitDividerAndBitLargerDividend() {
+    void divide_shouldReturnResult_whenOneDigitDividerAndBitLargerDividend() {
         int dividend = 84;
         int divider = 5;
         List<NumberWithPosition> representations = new ArrayList<>();
@@ -113,7 +113,7 @@ public abstract class AbstractIntegerDividerTest {
     }
 
     @Test
-    public void divide_shouldReturnResultWithZeroReminder() {
+    void divide_shouldReturnResultWithZeroReminder() {
         int dividend = 840;
         int divider = 24;
         List<NumberWithPosition> representations = new ArrayList<>();

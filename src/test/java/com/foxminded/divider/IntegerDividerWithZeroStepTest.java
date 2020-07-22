@@ -9,14 +9,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest{
+class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest {
 
     public IntegerDividerWithZeroStepTest() {
         super(new IntegerDividerWithZeroStep());
     }
 
     @Test
-    public void divide_shouldReturnResultWithPositiveReminder() {
+    void divide_shouldReturnResultWithPositiveReminder() {
         int dividend = 100154;
         int divider = 249;
         List<NumberWithPosition> representations = new ArrayList<>();
@@ -35,7 +35,7 @@ class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest{
     }
 
     @Test
-    public void divide_shouldReturnResult_whenDividendAndDividerMultipleOfTen() {
+    void divide_shouldReturnResult_whenDividendAndDividerMultipleOfTen() {
         int dividend = 10000;
         int divider = 10;
         List<NumberWithPosition> representations = new ArrayList<>();
@@ -55,7 +55,7 @@ class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest{
 
 
     @Test
-    public void divide_shouldReturnResultWithZeroStage() {
+    void divide_shouldReturnResultWithZeroStage() {
         int dividend = 80468;
         int divider = 5;
         List<NumberWithPosition> representations = new ArrayList<>();
@@ -78,7 +78,7 @@ class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest{
     }
 
     @Test
-    public void divide_shouldReturnResultWithConsequentZeroStage() {
+    void divide_shouldReturnResultWithConsequentZeroStage() {
         int dividend = 999100084;
         int divider = 998;
         List<NumberWithPosition> representations = new ArrayList<>();
@@ -105,7 +105,7 @@ class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest{
     }
 
     @Test
-    public void divide_shouldReturnResultWithConsequentZeroStage2() {
+    void divide_shouldReturnResultWithConsequentZeroStage2() {
         int dividend = 1000010123;
         int divider = 10;
         List<NumberWithPosition> representations = new ArrayList<>();
