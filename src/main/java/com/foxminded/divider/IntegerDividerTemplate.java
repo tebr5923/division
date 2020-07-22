@@ -15,49 +15,52 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
         if (mainDividend < divider) {
             representations.add(new NumberWithPosition(0, lengthInt(mainDividend) - 1));
             representations.add(new NumberWithPosition(mainDividend, 0));
-        } else {
-            int currentPosition = 0;
-            int intermediateDividend = findFirstShortDividend(mainDividend, divider);
-            int positionInMainDividend = lengthInt(intermediateDividend);
-            while (lengthInt(mainDividend) - positionInMainDividend > 0) {
-                StepResultStorage stepResult = doOneStep(intermediateDividend, divider);
-                representations.add(stepResult.getMultiplicationResult().addOffset(currentPosition));
-                if (intermediateDividend == 0) {
-                    currentPosition++;
-                }
-                NumberWithPosition nextShortDividendWithPosition = nextShortDividend(mainDividend,
-                        stepResult.getRemainder(), positionInMainDividend, divider);
-
-                positionInMainDividend = positionInMainDividend + nextShortDividendWithPosition.getPosition();
-                nextShortDividendWithPosition = nextShortDividendWithPosition.addOffset(stepResult.getRemainderPosition());
-
-                representations.add(nextShortDividendWithPosition.addOffset(currentPosition));
-                currentPosition = currentPosition + (stepResult.getMultiplicationResultNumber() == 0
-                        ? stepResult.getRemainderPosition()
-                        : Math.max(stepResult.getMultiplicationResultPosition(), nextShortDividendWithPosition.getPosition()));
-
-                intermediateDividend = nextShortDividendWithPosition.getNumber();
-                positionInMainDividend = positionInMainDividend +
-                        lengthInt(nextShortDividendWithPosition.getNumber()) -
-                        lengthInt(stepResult.getRemainderNumber());
-                if (stepResult.getRemainderNumber() == 0) {
-                    positionInMainDividend++;
-                }
+            return new IntegerStorage(representations,
+                    mainDividend,
+                    divider);
+        }
+        int currentPosition = 0;
+        int intermediateDividend = findFirstShortDividend(mainDividend, divider);
+        int positionInMainDividend = lengthInt(intermediateDividend);
+        while (lengthInt(mainDividend) - positionInMainDividend > 0) {
+            StepResultStorage stepResult = doOneStep(intermediateDividend, divider);
+            representations.add(stepResult.getMultiplicationResult().addOffset(currentPosition));
+            if (intermediateDividend == 0) {
+                currentPosition++;
             }
-            if (intermediateDividend != 0 && positionInMainDividend <= lengthInt(mainDividend)) {
-                int multiplicationResult = computeMultiplicationResult(intermediateDividend, divider);
-                NumberWithPosition multiplicationResultWithPosition =
-                        new NumberWithPosition(multiplicationResult, currentPosition);
-                representations.add(multiplicationResultWithPosition
-                        .addOffset(lengthInt(intermediateDividend)
-                                - lengthInt(multiplicationResult)));
-                int reminder = mainDividend % divider;
-                NumberWithPosition reminderWithPosition = new NumberWithPosition(reminder, currentPosition);
-                representations.add(reminderWithPosition
-                        .addOffset(lengthInt(intermediateDividend)
-                                - lengthInt(reminder)));
+            NumberWithPosition nextShortDividendWithPosition = nextShortDividend(mainDividend,
+                    stepResult.getRemainder(), positionInMainDividend, divider);
+
+            positionInMainDividend = positionInMainDividend + nextShortDividendWithPosition.getPosition();
+            nextShortDividendWithPosition = nextShortDividendWithPosition.addOffset(stepResult.getRemainderPosition());
+
+            representations.add(nextShortDividendWithPosition.addOffset(currentPosition));
+            currentPosition = currentPosition + (stepResult.getMultiplicationResultNumber() == 0
+                    ? stepResult.getRemainderPosition()
+                    : Math.max(stepResult.getMultiplicationResultPosition(), nextShortDividendWithPosition.getPosition()));
+
+            intermediateDividend = nextShortDividendWithPosition.getNumber();
+            positionInMainDividend = positionInMainDividend +
+                    lengthInt(nextShortDividendWithPosition.getNumber()) -
+                    lengthInt(stepResult.getRemainderNumber());
+            if (stepResult.getRemainderNumber() == 0) {
+                positionInMainDividend++;
             }
         }
+        if (intermediateDividend != 0 && positionInMainDividend <= lengthInt(mainDividend)) {
+            int multiplicationResult = computeMultiplicationResult(intermediateDividend, divider);
+            NumberWithPosition multiplicationResultWithPosition =
+                    new NumberWithPosition(multiplicationResult, currentPosition);
+            representations.add(multiplicationResultWithPosition
+                    .addOffset(lengthInt(intermediateDividend)
+                            - lengthInt(multiplicationResult)));
+            int reminder = mainDividend % divider;
+            NumberWithPosition reminderWithPosition = new NumberWithPosition(reminder, currentPosition);
+            representations.add(reminderWithPosition
+                    .addOffset(lengthInt(intermediateDividend)
+                            - lengthInt(reminder)));
+        }
+
         return new IntegerStorage(representations,
                 mainDividend,
                 divider);
@@ -117,7 +120,7 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
     }
 
     protected abstract NumberWithPosition nextShortDividend(int mainDividend,
-                                                  NumberWithPosition reminderWithPosition,
-                                                  int positionInMainDividend,
-                                                  int divider);
+                                                            NumberWithPosition reminderWithPosition,
+                                                            int positionInMainDividend,
+                                                            int divider);
 }
