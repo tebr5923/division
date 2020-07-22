@@ -1,13 +1,9 @@
 package com.foxminded.divider;
 
 import com.foxminded.storage.IntegerStorage;
-import com.foxminded.storage.NumberWithPosition;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest {
 
@@ -19,15 +15,15 @@ class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest {
     void divide_shouldReturnResultWithPositiveReminder() {
         int dividend = 100154;
         int divider = 249;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(996, 1));
-        representations.add(new NumberWithPosition(55, 3));
-        representations.add(new NumberWithPosition(0, 4));
-        representations.add(new NumberWithPosition(554, 3));
-        representations.add(new NumberWithPosition(498, 3));
-        representations.add(new NumberWithPosition(56, 4));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
+        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+                .addStep(dividend, 0)
+                .addStep(996, 1)
+                .addStep(55, 3)
+                .addStep(0, 4)
+                .addStep(554, 3)
+                .addStep(498, 3)
+                .addStep(56, 4)
+                .build();
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
@@ -38,15 +34,15 @@ class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest {
     void divide_shouldReturnResult_whenDividendAndDividerMultipleOfTen() {
         int dividend = 10000;
         int divider = 10;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(10, 0));
-        representations.add(new NumberWithPosition(0, 2));
-        representations.add(new NumberWithPosition(0, 2));
-        representations.add(new NumberWithPosition(0, 3));
-        representations.add(new NumberWithPosition(0, 3));
-        representations.add(new NumberWithPosition(0, 4));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
+        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+                .addStep(dividend, 0)
+                .addStep(10, 0)
+                .addStep(0, 2)
+                .addStep(0, 2)
+                .addStep(0, 3)
+                .addStep(0, 3)
+                .addStep(0, 4)
+                .build();
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
@@ -58,19 +54,19 @@ class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest {
     void divide_shouldReturnResultWithZeroStage() {
         int dividend = 80468;
         int divider = 5;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(5, 0));
-        representations.add(new NumberWithPosition(30, 0));
-        representations.add(new NumberWithPosition(30, 0));
-        representations.add(new NumberWithPosition(4, 2));
-        representations.add(new NumberWithPosition(0, 2));
-        representations.add(new NumberWithPosition(46, 2));
-        representations.add(new NumberWithPosition(45, 2));
-        representations.add(new NumberWithPosition(18, 3));
-        representations.add(new NumberWithPosition(15, 3));
-        representations.add(new NumberWithPosition(3, 4));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
+        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+                .addStep(dividend, 0)
+                .addStep(5, 0)
+                .addStep(30, 0)
+                .addStep(30, 0)
+                .addStep(4, 2)
+                .addStep(0, 2)
+                .addStep(46, 2)
+                .addStep(45, 2)
+                .addStep(18, 3)
+                .addStep(15, 3)
+                .addStep(3, 4)
+                .build();
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
@@ -81,23 +77,23 @@ class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest {
     void divide_shouldReturnResultWithConsequentZeroStage() {
         int dividend = 999100084;
         int divider = 998;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(998, 0));
-        representations.add(new NumberWithPosition(11, 2));
-        representations.add(new NumberWithPosition(0, 3));
-        representations.add(new NumberWithPosition(110, 2));
-        representations.add(new NumberWithPosition(0, 4));
-        representations.add(new NumberWithPosition(1100, 2));
-        representations.add(new NumberWithPosition(998, 3));
-        representations.add(new NumberWithPosition(1020, 3));
-        representations.add(new NumberWithPosition(998, 4));
-        representations.add(new NumberWithPosition(228, 5));
-        representations.add(new NumberWithPosition(0, 7));
-        representations.add(new NumberWithPosition(2284, 5));
-        representations.add(new NumberWithPosition(1996, 5));
-        representations.add(new NumberWithPosition(288, 6));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
+        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+                .addStep(dividend, 0)
+                .addStep(998, 0)
+                .addStep(11, 2)
+                .addStep(0, 3)
+                .addStep(110, 2)
+                .addStep(0, 4)
+                .addStep(1100, 2)
+                .addStep(998, 3)
+                .addStep(1020, 3)
+                .addStep(998, 4)
+                .addStep(228, 5)
+                .addStep(0, 7)
+                .addStep(2284, 5)
+                .addStep(1996, 5)
+                .addStep(288, 6)
+                .build();
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
@@ -108,34 +104,27 @@ class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest {
     void divide_shouldReturnResultWithConsequentZeroStage2() {
         int dividend = 1000010123;
         int divider = 10;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(10, 0));
-        representations.add(new NumberWithPosition(0, 2));
-        representations.add(new NumberWithPosition(0, 2));
-        representations.add(new NumberWithPosition(0, 3));
-        representations.add(new NumberWithPosition(0, 3));
-        representations.add(new NumberWithPosition(0, 4));
-        representations.add(new NumberWithPosition(0, 4));
-
-        representations.add(new NumberWithPosition(1, 5));
-        representations.add(new NumberWithPosition(0, 5));
-
-        representations.add(new NumberWithPosition(10, 5));
-        representations.add(new NumberWithPosition(10, 5));
-
-        representations.add(new NumberWithPosition(1, 7));
-        representations.add(new NumberWithPosition(0, 7));
-
-        representations.add(new NumberWithPosition(12, 7));
-        representations.add(new NumberWithPosition(10, 7));
-
-        representations.add(new NumberWithPosition(23, 8));
-        representations.add(new NumberWithPosition(20, 8));
-
-        representations.add(new NumberWithPosition(3, 9));
-
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
+        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+                .addStep(dividend, 0)
+                .addStep(10, 0)
+                .addStep(0, 2)
+                .addStep(0, 2)
+                .addStep(0, 3)
+                .addStep(0, 3)
+                .addStep(0, 4)
+                .addStep(0, 4)
+                .addStep(1, 5)
+                .addStep(0, 5)
+                .addStep(10, 5)
+                .addStep(10, 5)
+                .addStep(1, 7)
+                .addStep(0, 7)
+                .addStep(12, 7)
+                .addStep(10, 7)
+                .addStep(23, 8)
+                .addStep(20, 8)
+                .addStep(3, 9)
+                .build();
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 

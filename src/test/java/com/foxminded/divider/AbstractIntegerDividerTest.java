@@ -1,13 +1,10 @@
 package com.foxminded.divider;
 
 import com.foxminded.storage.IntegerStorage;
-import com.foxminded.storage.NumberWithPosition;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 abstract class AbstractIntegerDividerTest {
@@ -54,11 +51,11 @@ abstract class AbstractIntegerDividerTest {
     void divide_shouldReturnResult_whenDividerMoreThenDividend() {
         int dividend = 999;
         int divider = 9999;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(0, 2));
-        representations.add(new NumberWithPosition(dividend, 0));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
+        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+                .addStep(dividend, 0)
+                .addStep(0, 2)
+                .addStep(dividend, 0)
+                .build();
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
@@ -69,11 +66,11 @@ abstract class AbstractIntegerDividerTest {
     void divide_shouldReturnResult_whenDividendEqualsDivider() {
         int dividend = 55;
         int divider = 55;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(55, 0));
-        representations.add(new NumberWithPosition(0, 1));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
+        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+                .addStep(dividend, 0)
+                .addStep(55, 0)
+                .addStep(0, 1)
+                .build();
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
@@ -84,11 +81,11 @@ abstract class AbstractIntegerDividerTest {
     void divide_shouldReturnResult_whenOneDigitDividendAndDivider() {
         int dividend = 9;
         int divider = 5;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(5, 0));
-        representations.add(new NumberWithPosition(4, 0));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
+        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+                .addStep(dividend, 0)
+                .addStep(5, 0)
+                .addStep(4, 0)
+                .build();
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
@@ -99,13 +96,13 @@ abstract class AbstractIntegerDividerTest {
     void divide_shouldReturnResult_whenOneDigitDividerAndBitLargerDividend() {
         int dividend = 84;
         int divider = 5;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(5, 0));
-        representations.add(new NumberWithPosition(34, 0));
-        representations.add(new NumberWithPosition(30, 0));
-        representations.add(new NumberWithPosition(4, 1));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
+        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+                .addStep(dividend, 0)
+                .addStep(5, 0)
+                .addStep(34, 0)
+                .addStep(30, 0)
+                .addStep(4, 1)
+                .build();
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
@@ -116,13 +113,13 @@ abstract class AbstractIntegerDividerTest {
     void divide_shouldReturnResultWithZeroReminder() {
         int dividend = 840;
         int divider = 24;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(72, 0));
-        representations.add(new NumberWithPosition(120, 0));
-        representations.add(new NumberWithPosition(120, 0));
-        representations.add(new NumberWithPosition(0, 2));
-        IntegerStorage excepted = new IntegerStorage(representations, dividend, divider);
+        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+                .addStep(dividend, 0)
+                .addStep(72, 0)
+                .addStep(120, 0)
+                .addStep(120, 0)
+                .addStep(0, 2)
+                .build();
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
