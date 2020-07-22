@@ -10,7 +10,12 @@ class SecondLineAndDelimiterPrinter extends LinePrinter {
 
     @Override
     void printLine(NumberWithPosition numberWithPosition) {
-        print.setLinePrinter(new ShortDividendPrinter(print));
+        int lastMultPos = print.getStorage().getRepresentations().size() - 2;
+        if (numberWithPosition == print.getStorage().getRepresentations().get(lastMultPos)) {
+            print.setLinePrinter(new RemainderPrinter(print));
+        } else {
+            print.setLinePrinter(new ShortDividendPrinter(print));
+        }
         int spacesAmount = getPrintedLength(print.getStorage().getDividend()) -
                 getPrintedLength(numberWithPosition.getNumber()) -
                 numberWithPosition.getPosition();

@@ -16,10 +16,6 @@ public class Print {
         this.linePrinter = linePrinter;
     }
 
-    public void setRemainderPrinter() {
-        this.linePrinter = new RemainderPrinter(this);
-    }
-
     public void printLine(NumberWithPosition numberWithPosition) {
         linePrinter.printLine(numberWithPosition);
     }

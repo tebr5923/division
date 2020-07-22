@@ -9,7 +9,12 @@ class MultiplicationResultAndDelimiterPrinter extends LinePrinter {
 
     @Override
     void printLine(NumberWithPosition numberWithPosition) {
-        print.setLinePrinter(new ShortDividendPrinter(print));
+        int lastMultPos = print.getStorage().getRepresentations().size() - 2;
+        if (numberWithPosition == print.getStorage().getRepresentations().get(lastMultPos)) {
+            print.setLinePrinter(new RemainderPrinter(print));
+        } else {
+            print.setLinePrinter(new ShortDividendPrinter(print));
+        }
         System.out.printf("%s%s%n",
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
                 numberWithPosition.getNumber());
