@@ -74,19 +74,19 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
         if (shortDividend < divider) {
             multiplicationResultWithPosition = new NumberWithPosition<>(0, lengthInt(shortDividend) - 1);
             reminderWithPosition = new NumberWithPosition<>(shortDividend, position);
-        } else {
-            int multiplicationResult = computeMultiplicationResult(shortDividend, divider);
-            if (lengthInt(shortDividend) > lengthInt(multiplicationResult)) {
-                position++;
-            }
-            multiplicationResultWithPosition = new NumberWithPosition<>(multiplicationResult, position);
-            int reminder = shortDividend - multiplicationResult;
-            position = position + lengthInt(multiplicationResult) - lengthInt(reminder);
-            if (reminder == 0) {
-                position++;
-            }
-            reminderWithPosition = new NumberWithPosition<>(reminder, position);
+            return new StepResultStorage<>(multiplicationResultWithPosition, reminderWithPosition);
         }
+        int multiplicationResult = computeMultiplicationResult(shortDividend, divider);
+        if (lengthInt(shortDividend) > lengthInt(multiplicationResult)) {
+            position++;
+        }
+        multiplicationResultWithPosition = new NumberWithPosition<>(multiplicationResult, position);
+        int reminder = shortDividend - multiplicationResult;
+        position = position + lengthInt(multiplicationResult) - lengthInt(reminder);
+        if (reminder == 0) {
+            position++;
+        }
+        reminderWithPosition = new NumberWithPosition<>(reminder, position);
         return new StepResultStorage<>(multiplicationResultWithPosition, reminderWithPosition);
     }
 
@@ -120,7 +120,7 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
     }
 
     protected abstract NumberWithPosition<Integer> nextShortDividend(int mainDividend,
-                                                            NumberWithPosition<Integer> reminderWithPosition,
-                                                            int positionInMainDividend,
-                                                            int divider);
+                                                                     NumberWithPosition<Integer> reminderWithPosition,
+                                                                     int positionInMainDividend,
+                                                                     int divider);
 }
