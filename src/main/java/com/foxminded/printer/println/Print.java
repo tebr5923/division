@@ -9,7 +9,7 @@ public class Print {
     private LinePrinter linePrinter;
 
     public Print(Storage<?> storage) {
-        this.linePrinter = new FirstLinePrinter(this, storage);
+        this.linePrinter = new HeaderPrinter(this, storage);
     }
 
     void setLinePrinter(LinePrinter linePrinter) {
