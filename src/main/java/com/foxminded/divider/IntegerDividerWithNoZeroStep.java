@@ -4,8 +4,8 @@ import com.foxminded.storage.NumberWithPosition;
 
 public class IntegerDividerWithNoZeroStep extends IntegerDividerTemplate {
     @Override
-    protected NumberWithPosition nextShortDividend(int mainDividend,
-                                                   NumberWithPosition reminderWithPosition,
+    protected NumberWithPosition<Integer> nextShortDividend(int mainDividend,
+                                                   NumberWithPosition<Integer> reminderWithPosition,
                                                    int positionInMainDividend,
                                                    int divider) {
         int nextShortDividend = reminderWithPosition.getNumber();
@@ -24,6 +24,6 @@ public class IntegerDividerWithNoZeroStep extends IntegerDividerTemplate {
                 positionShift++;
             }
         }
-        return new NumberWithPosition(nextShortDividend, positionShift);
+        return new NumberWithPosition<>(nextShortDividend, positionShift);
     }
 }

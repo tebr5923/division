@@ -10,8 +10,8 @@ class ShortDividendPrinter extends LinePrinter {
     }
 
     @Override
-    void printLine(ListIterator<NumberWithPosition> iterator) {
-        NumberWithPosition numberWithPosition = iterator.next();
+    void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
+        NumberWithPosition<?> numberWithPosition = iterator.next();
         if (iterator.hasNext()) {
             System.out.printf("%s%s%s%n",
                     repeatCharSomeTimes(SPACE, numberWithPosition.getPosition()),

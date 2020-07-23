@@ -26,5 +26,5 @@ abstract class LinePrinter {
         return new String(chars);
     }
 
-    abstract void printLine(ListIterator<NumberWithPosition> iterator);
+    abstract void printLine(ListIterator<? extends NumberWithPosition<?>> iterator);
 }

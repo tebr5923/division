@@ -2,23 +2,16 @@ package com.foxminded.divider;
 
 import com.foxminded.storage.NumberWithPosition;
 
-class StepResultStorage {
-    private final NumberWithPosition multiplicationResult;
-    private final NumberWithPosition remainder;
+class StepResultStorage<T> {
+    private final NumberWithPosition<T> multiplicationResult;
+    private final NumberWithPosition<T> remainder;
 
-    StepResultStorage(NumberWithPosition multiplicationResult, NumberWithPosition remainder) {
+    StepResultStorage(NumberWithPosition<T> multiplicationResult, NumberWithPosition<T> remainder) {
         this.multiplicationResult = multiplicationResult;
         this.remainder = remainder;
     }
 
-    int getNextPosition(int currentPosition) {
-        return currentPosition
-                + (getMultiplicationResultNumber() == 0
-                ? getRemainderPosition()
-                : Math.max(getMultiplicationResultPosition(), getRemainderPosition()));
-    }
-
-    int getMultiplicationResultNumber() {
+    T getMultiplicationResultNumber() {
         return multiplicationResult.getNumber();
     }
 
@@ -26,7 +19,7 @@ class StepResultStorage {
         return multiplicationResult.getPosition();
     }
 
-    int getRemainderNumber() {
+    T getRemainderNumber() {
         return remainder.getNumber();
     }
 
@@ -34,11 +27,11 @@ class StepResultStorage {
         return remainder.getPosition();
     }
 
-    NumberWithPosition getMultiplicationResult() {
+    NumberWithPosition<T> getMultiplicationResult() {
         return multiplicationResult;
     }
 
-    NumberWithPosition getRemainder() {
+    NumberWithPosition<T> getRemainder() {
         return remainder;
     }
 }

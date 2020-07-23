@@ -47,16 +47,16 @@ class ConsoleStoragePrinterTest {
 
         int dividend = 999999;
         int divider = 255;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(765, 0));
-        representations.add(new NumberWithPosition(2349, 0));
-        representations.add(new NumberWithPosition(2295, 0));
-        representations.add(new NumberWithPosition(549, 2));
-        representations.add(new NumberWithPosition(510, 2));
-        representations.add(new NumberWithPosition(399, 3));
-        representations.add(new NumberWithPosition(255, 3));
-        representations.add(new NumberWithPosition(144, 3));
+        List<NumberWithPosition<Integer>> representations = new ArrayList<>();
+        representations.add(new NumberWithPosition<>(dividend, 0));
+        representations.add(new NumberWithPosition<>(765, 0));
+        representations.add(new NumberWithPosition<>(2349, 0));
+        representations.add(new NumberWithPosition<>(2295, 0));
+        representations.add(new NumberWithPosition<>(549, 2));
+        representations.add(new NumberWithPosition<>(510, 2));
+        representations.add(new NumberWithPosition<>(399, 3));
+        representations.add(new NumberWithPosition<>(255, 3));
+        representations.add(new NumberWithPosition<>(144, 3));
         IntegerStorage integerStorage = new IntegerStorage(representations, dividend, divider);
         ConsoleStoragePrinter consolePrinter = new ConsoleStoragePrinter();
         consolePrinter.print(integerStorage);
@@ -75,10 +75,10 @@ class ConsoleStoragePrinterTest {
 
         int dividend = 8;
         int divider = 5;
-        List<NumberWithPosition> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition(dividend, 0));
-        representations.add(new NumberWithPosition(5, 0));
-        representations.add(new NumberWithPosition(3, 0));
+        List<NumberWithPosition<Integer>> representations = new ArrayList<>();
+        representations.add(new NumberWithPosition<>(dividend, 0));
+        representations.add(new NumberWithPosition<>(5, 0));
+        representations.add(new NumberWithPosition<>(3, 0));
         IntegerStorage integerStorage = new IntegerStorage(representations, dividend, divider);
         ConsoleStoragePrinter consolePrinter = new ConsoleStoragePrinter();
         consolePrinter.print(integerStorage);

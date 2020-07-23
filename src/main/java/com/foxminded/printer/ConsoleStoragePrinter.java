@@ -10,7 +10,7 @@ public class ConsoleStoragePrinter implements StoragePrinter<Storage<?>> {
     @Override
     public void print(Storage<?> storage) {
         Print print = new Print(storage);
-        ListIterator<NumberWithPosition> iterator = storage.getRepresentations().listIterator();
+        ListIterator<? extends NumberWithPosition<?>> iterator = storage.getRepresentations().listIterator();
         while (iterator.hasNext()) {
             print.printLine(iterator);
         }

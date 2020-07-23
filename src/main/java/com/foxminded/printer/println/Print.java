@@ -16,7 +16,7 @@ public class Print {
         this.linePrinter = linePrinter;
     }
 
-    public void printLine(ListIterator<NumberWithPosition> iterator) {
+    public void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
         linePrinter.printLine(iterator);
     }
 }
