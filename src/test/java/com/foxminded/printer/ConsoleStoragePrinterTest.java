@@ -1,15 +1,13 @@
 package com.foxminded.printer;
 
+import com.foxminded.divider.IntegerStorageBuilder;
 import com.foxminded.storage.IntegerStorage;
-import com.foxminded.storage.NumberWithPosition;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringJoiner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +27,7 @@ class ConsoleStoragePrinterTest {
 
     @Test
     void print_shouldPrintToSystemOut_whenNotOneStep() {
-        StringJoiner excepted = new StringJoiner(System.lineSeparator())
+        StringJoiner excepted = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("_999999|255")
                 .add(" 765   |----")
                 .add(" ---   |3921")
@@ -42,22 +40,21 @@ class ConsoleStoragePrinterTest {
                 .add("   _399")
                 .add("    255")
                 .add("    ---")
-                .add("    144")
-                .add("");
+                .add("    144");
 
         int dividend = 999999;
         int divider = 255;
-        List<NumberWithPosition<Integer>> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition<>(dividend, 0));
-        representations.add(new NumberWithPosition<>(765, 0));
-        representations.add(new NumberWithPosition<>(2349, 0));
-        representations.add(new NumberWithPosition<>(2295, 0));
-        representations.add(new NumberWithPosition<>(549, 2));
-        representations.add(new NumberWithPosition<>(510, 2));
-        representations.add(new NumberWithPosition<>(399, 3));
-        representations.add(new NumberWithPosition<>(255, 3));
-        representations.add(new NumberWithPosition<>(144, 3));
-        IntegerStorage integerStorage = new IntegerStorage(representations, dividend, divider);
+        IntegerStorage integerStorage = new IntegerStorageBuilder(dividend, divider)
+                .addStep(dividend, 0)
+                .addStep(765, 0)
+                .addStep(2349, 0)
+                .addStep(2295, 0)
+                .addStep(549, 2)
+                .addStep(510, 2)
+                .addStep(399, 3)
+                .addStep(255, 3)
+                .addStep(144, 3)
+                .build();
         ConsoleStoragePrinter consolePrinter = new ConsoleStoragePrinter();
         consolePrinter.print(integerStorage);
 
@@ -66,20 +63,19 @@ class ConsoleStoragePrinterTest {
 
     @Test
     void print_shouldPrintOnlyHeaderAndReminder_whenOnlyOneStep() {
-        StringJoiner excepted = new StringJoiner(System.lineSeparator())
+        StringJoiner excepted = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("_8|5")
                 .add(" 5|-")
                 .add(" -|1")
-                .add(" 3")
-                .add("");
+                .add(" 3");
 
         int dividend = 8;
         int divider = 5;
-        List<NumberWithPosition<Integer>> representations = new ArrayList<>();
-        representations.add(new NumberWithPosition<>(dividend, 0));
-        representations.add(new NumberWithPosition<>(5, 0));
-        representations.add(new NumberWithPosition<>(3, 0));
-        IntegerStorage integerStorage = new IntegerStorage(representations, dividend, divider);
+        IntegerStorage integerStorage = new IntegerStorageBuilder(dividend, divider)
+                .addStep(dividend, 0)
+                .addStep(5, 0)
+                .addStep(3, 0)
+                .build();
         ConsoleStoragePrinter consolePrinter = new ConsoleStoragePrinter();
         consolePrinter.print(integerStorage);
 

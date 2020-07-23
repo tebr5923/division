@@ -108,14 +108,11 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
     }
 
     private void checkArguments(int dividend, int divider) {
-        if (divider == 0) {
-            throw new IllegalArgumentException("division by zero");
-        }
-        if (divider < 0) {
-            throw new IllegalArgumentException("divider must be positive");
+        if (divider <= 0) {
+            throw new IllegalArgumentException("divider must be > 0");
         }
         if (dividend < 0) {
-            throw new IllegalArgumentException("dividend must be positive");
+            throw new IllegalArgumentException("dividend must be non-negative");
         }
     }
 

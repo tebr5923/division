@@ -17,15 +17,9 @@ public class IntegerStorageBuilder {
         this.representations = new ArrayList<>();
     }
 
-    private IntegerStorageBuilder(List<NumberWithPosition<Integer>> representations, int dividend, int divider) {
-        this.representations = representations;
-        this.dividend = dividend;
-        this.divider = divider;
-    }
-
     public IntegerStorageBuilder addStep(int number, int position) {
         representations.add(new NumberWithPosition<>(number, position));
-        return new IntegerStorageBuilder(representations, dividend, divider);
+        return this;
     }
 
     public IntegerStorage build() {
