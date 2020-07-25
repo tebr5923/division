@@ -14,9 +14,15 @@ class HeaderPrinter extends LinePrinter {
     }
 
     @Override
-    protected void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
+    protected LinePrinter getNextLinePrinter() {
+        return new ShortDividendPrinter(print);
+    }
+
+    @SuppressWarnings("squid:S1192")
+    @Override
+    protected String formatLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
         NumberWithPosition<?> numberWithPosition = iterator.next();
-        System.out.printf("%s%s%s|%s%n",
+        String line1 = String.format("%s%s%s|%s%n",
                 MINUS,
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition()),
                 numberWithPosition.getNumber(),
@@ -28,22 +34,16 @@ class HeaderPrinter extends LinePrinter {
                 numberWithPosition.getPosition();
         int dashAmount = Math.max(getPrintedLength(storage.getDivider()),
                 getPrintedLength(storage.getResult()));
-        System.out.printf("%s%s%s|%s%n",
+        String line2 = String.format("%s%s%s|%s%n",
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
                 numberWithPosition.getNumber(),
                 repeatCharSomeTimes(SPACE, spacesAmount),
                 repeatCharSomeTimes(DASH, dashAmount));
-        System.out.printf("%s%s%s|%s%n",
+        String line3 = String.format("%s%s%s|%s%n",
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
                 repeatCharSomeTimes(DASH, getPrintedLength(numberWithPosition.getNumber())),
                 repeatCharSomeTimes(SPACE, spacesAmount),
                 storage.getResult());
-
-        print.setLinePrinter(getNextLinePrinter());
-    }
-
-    @Override
-    protected LinePrinter getNextLinePrinter() {
-        return new ShortDividendPrinter(print);
+        return line1 + line2 + line3;
     }
 }

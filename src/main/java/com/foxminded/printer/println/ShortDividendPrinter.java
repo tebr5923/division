@@ -10,22 +10,16 @@ class ShortDividendPrinter extends LinePrinter {
     }
 
     @Override
-    protected void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
-        NumberWithPosition<?> numberWithPosition = iterator.next();
-        if (iterator.hasNext()) {
-            System.out.printf("%s%s%s%n",
-                    repeatCharSomeTimes(SPACE, numberWithPosition.getPosition()),
-                    MINUS,
-                    numberWithPosition.getNumber());
-            print.setLinePrinter(getNextLinePrinter());
-        } else {
-            iterator.previous();
-            print.setLinePrinter(new RemainderPrinter(print));
-        }
+    protected LinePrinter getNextLinePrinter() {
+        return new MultiplicationResult(print);
     }
 
     @Override
-    protected LinePrinter getNextLinePrinter() {
-        return new MultiplicationResultAndDelimiterPrinter(print);
+    protected String formatLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
+        NumberWithPosition<?> numberWithPosition = iterator.next();
+        return String.format("%s%s%s%n",
+                repeatCharSomeTimes(SPACE, numberWithPosition.getPosition()),
+                iterator.hasNext() ? MINUS : SPACE,
+                numberWithPosition.getNumber());
     }
 }

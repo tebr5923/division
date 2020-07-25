@@ -26,9 +26,17 @@ abstract class LinePrinter {
         return new String(chars);
     }
 
-    protected abstract void printLine(ListIterator<? extends NumberWithPosition<?>> iterator);
+    protected void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
+            print.setLinePrinter(getNextLinePrinter());
+            printFormattedLine(formatLine(iterator));
+    }
+
+    @SuppressWarnings("squid:S106")
+    private void printFormattedLine(String formattedLine) {
+        System.out.print(formattedLine);
+    }
 
     protected abstract LinePrinter getNextLinePrinter();
 
-   // protected abstract String formatLine();
+    protected abstract String formatLine(ListIterator<? extends NumberWithPosition<?>> iterator);
 }
