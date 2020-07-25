@@ -10,7 +10,7 @@ class MultiplicationResultAndDelimiterPrinter extends LinePrinter {
     }
 
     @Override
-    void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
+    protected void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
         NumberWithPosition<?> numberWithPosition = iterator.next();
         System.out.printf("%s%s%n",
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
@@ -18,6 +18,11 @@ class MultiplicationResultAndDelimiterPrinter extends LinePrinter {
         System.out.printf("%s%s%n",
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
                 repeatCharSomeTimes(DASH, getPrintedLength(numberWithPosition.getNumber())));
-        print.setLinePrinter(new ShortDividendPrinter(print));
+        print.setLinePrinter(getNextLinePrinter());
+    }
+
+    @Override
+    protected LinePrinter getNextLinePrinter() {
+        return new ShortDividendPrinter(print);
     }
 }

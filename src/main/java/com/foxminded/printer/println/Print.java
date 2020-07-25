@@ -7,16 +7,21 @@ import java.util.ListIterator;
 
 public class Print {
     private LinePrinter linePrinter;
+    private final Storage<?> storage;
 
     public Print(Storage<?> storage) {
-        this.linePrinter = new HeaderPrinter(this, storage);
+        this.storage = storage;
     }
 
     void setLinePrinter(LinePrinter linePrinter) {
         this.linePrinter = linePrinter;
     }
 
-    public void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
-        linePrinter.printLine(iterator);
+    public void print() {
+        this.linePrinter = new HeaderPrinter(this, storage);
+        ListIterator<? extends NumberWithPosition<?>> iterator = storage.getRepresentations().listIterator();
+        while (iterator.hasNext()) {
+            linePrinter.printLine(iterator);
+        }
     }
 }

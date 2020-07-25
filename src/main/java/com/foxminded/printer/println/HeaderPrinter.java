@@ -5,7 +5,7 @@ import com.foxminded.storage.Storage;
 
 import java.util.ListIterator;
 
-public class HeaderPrinter extends LinePrinter {
+class HeaderPrinter extends LinePrinter {
     private final Storage<?> storage;
 
     HeaderPrinter(Print print, Storage<?> storage) {
@@ -14,7 +14,7 @@ public class HeaderPrinter extends LinePrinter {
     }
 
     @Override
-    void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
+    protected void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
         NumberWithPosition<?> numberWithPosition = iterator.next();
         System.out.printf("%s%s%s|%s%n",
                 MINUS,
@@ -39,6 +39,11 @@ public class HeaderPrinter extends LinePrinter {
                 repeatCharSomeTimes(SPACE, spacesAmount),
                 storage.getResult());
 
-        print.setLinePrinter(new ShortDividendPrinter(print));
+        print.setLinePrinter(getNextLinePrinter());
+    }
+
+    @Override
+    protected LinePrinter getNextLinePrinter() {
+        return new ShortDividendPrinter(print);
     }
 }

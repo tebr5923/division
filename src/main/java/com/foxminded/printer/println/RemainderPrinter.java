@@ -10,10 +10,15 @@ class RemainderPrinter extends LinePrinter {
     }
 
     @Override
-    void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
+    protected void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
         NumberWithPosition<?> numberWithPosition = iterator.next();
         System.out.printf("%s%s%n",
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
                 numberWithPosition.getNumber());
+    }
+
+    @Override
+    protected LinePrinter getNextLinePrinter() {
+        return null;
     }
 }
