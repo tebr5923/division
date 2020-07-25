@@ -17,12 +17,10 @@ class MultiplicationResult extends LinePrinter {
     @Override
     protected String formatLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
         NumberWithPosition<?> numberWithPosition = iterator.next();
-        String line1 = String.format("%s%s%n",
+        return String.format("%s%s%n%s%s%n",
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
-                numberWithPosition.getNumber());
-        String line2 = String.format("%s%s%n",
+                numberWithPosition.getNumber(),
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
                 repeatCharSomeTimes(DASH, getPrintedLength(numberWithPosition.getNumber())));
-        return String.join("", line1, line2);
     }
 }

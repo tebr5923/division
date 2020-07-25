@@ -22,11 +22,12 @@ class HeaderPrinter extends LinePrinter {
     @Override
     protected String formatLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
         NumberWithPosition<?> numberWithPosition = iterator.next();
-        String line1 = String.format("%s%s%s|%s%n",
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.format("%s%s%s|%s%n",
                 MINUS,
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition()),
                 numberWithPosition.getNumber(),
-                storage.getDivider());
+                storage.getDivider()));
 
         numberWithPosition = iterator.next();
         int spacesAmount = getPrintedLength(storage.getDividend()) -
@@ -34,16 +35,16 @@ class HeaderPrinter extends LinePrinter {
                 numberWithPosition.getPosition();
         int dashAmount = Math.max(getPrintedLength(storage.getDivider()),
                 getPrintedLength(storage.getResult()));
-        String line2 = String.format("%s%s%s|%s%n",
+        stringBuilder.append(String.format("%s%s%s|%s%n",
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
                 numberWithPosition.getNumber(),
                 repeatCharSomeTimes(SPACE, spacesAmount),
-                repeatCharSomeTimes(DASH, dashAmount));
-        String line3 = String.format("%s%s%s|%s%n",
+                repeatCharSomeTimes(DASH, dashAmount)));
+        stringBuilder.append(String.format("%s%s%s|%s%n",
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
                 repeatCharSomeTimes(DASH, getPrintedLength(numberWithPosition.getNumber())),
                 repeatCharSomeTimes(SPACE, spacesAmount),
-                storage.getResult());
-        return String.join("", line1, line2, line3);
+                storage.getResult()));
+        return stringBuilder.toString();
     }
 }
