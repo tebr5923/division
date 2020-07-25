@@ -44,6 +44,6 @@ class HeaderPrinter extends LinePrinter {
                 repeatCharSomeTimes(DASH, getPrintedLength(numberWithPosition.getNumber())),
                 repeatCharSomeTimes(SPACE, spacesAmount),
                 storage.getResult());
-        return line1 + line2 + line3;
+        return String.join("", line1, line2, line3);
     }
 }

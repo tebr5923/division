@@ -23,6 +23,6 @@ class MultiplicationResult extends LinePrinter {
         String line2 = String.format("%s%s%n",
                 repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
                 repeatCharSomeTimes(DASH, getPrintedLength(numberWithPosition.getNumber())));
-        return line1 + line2;
+        return String.join("", line1, line2);
     }
 }
