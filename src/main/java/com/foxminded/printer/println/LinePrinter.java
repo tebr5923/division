@@ -20,15 +20,15 @@ abstract class LinePrinter {
         return String.valueOf(object).length();
     }
 
-    protected String repeatCharSomeTimes(char ch, int times) {
+    protected String repeatChar(char ch, int times) {
         char[] chars = new char[times];
         Arrays.fill(chars, ch);
         return new String(chars);
     }
 
     protected void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
-            print.setLinePrinter(getNextLinePrinter());
-            printFormattedLine(formatLine(iterator));
+        print.setLinePrinter(getNextLinePrinter());
+        printFormattedLine(formatLine(iterator));
     }
 
     @SuppressWarnings("squid:S106")

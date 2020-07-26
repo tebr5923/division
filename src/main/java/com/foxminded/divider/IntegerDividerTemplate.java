@@ -39,9 +39,9 @@ public abstract class IntegerDividerTemplate implements Divider<Integer> {
                     ? stepResult.getRemainderPosition()
                     : Math.max(stepResult.getMultiplicationResultPosition(), nextShortDividendWithPosition.getPosition()));
 
-            intermediateDividend = nextShortDividendWithPosition.getNumber();
+            intermediateDividend = nextShortDividendWithPosition.getValue();
             positionInMainDividend = positionInMainDividend +
-                    lengthInt(nextShortDividendWithPosition.getNumber()) -
+                    lengthInt(nextShortDividendWithPosition.getValue()) -
                     lengthInt(stepResult.getRemainderNumber());
             if (stepResult.getRemainderNumber() == 0) {
                 positionInMainDividend++;

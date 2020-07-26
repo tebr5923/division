@@ -8,12 +8,12 @@ public class IntegerDividerWithNoZeroStep extends IntegerDividerTemplate {
                                                    NumberWithPosition<Integer> reminderWithPosition,
                                                    int positionInMainDividend,
                                                    int divider) {
-        int nextShortDividend = reminderWithPosition.getNumber();
+        int nextShortDividend = reminderWithPosition.getValue();
         int i = 0;
         int positionShift = 0;
         while (nextShortDividend < divider) {
             i++;
-            nextShortDividend = Integer.parseInt(reminderWithPosition.getNumber() +
+            nextShortDividend = Integer.parseInt(reminderWithPosition.getValue() +
                     Integer.toString(mainDividend).
                             substring(positionInMainDividend, positionInMainDividend + i));
 

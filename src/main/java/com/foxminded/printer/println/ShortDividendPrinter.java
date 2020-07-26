@@ -11,15 +11,15 @@ class ShortDividendPrinter extends LinePrinter {
 
     @Override
     protected LinePrinter getNextLinePrinter() {
-        return new MultiplicationResult(print);
+        return new MultiplicationResultPrinter(print);
     }
 
     @Override
     protected String formatLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
         NumberWithPosition<?> numberWithPosition = iterator.next();
         return String.format("%s%s%s%n",
-                repeatCharSomeTimes(SPACE, numberWithPosition.getPosition()),
+                repeatChar(SPACE, numberWithPosition.getPosition()),
                 iterator.hasNext() ? MINUS : SPACE,
-                numberWithPosition.getNumber());
+                numberWithPosition.getValue());
     }
 }

@@ -10,7 +10,7 @@ public class IntegerDividerWithZeroStep extends IntegerDividerTemplate {
                                                    int divider) {
         String nextDigitFromMainDividend = Integer.toString(mainDividend).
                 substring(positionInMainDividend, positionInMainDividend + 1);
-        String nextShortDividend = reminderWithPosition.getNumber() + nextDigitFromMainDividend;
+        String nextShortDividend = reminderWithPosition.getValue() + nextDigitFromMainDividend;
         return new NumberWithPosition<>(Integer.parseInt(nextShortDividend), 0);
     }
 }

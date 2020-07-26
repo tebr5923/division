@@ -18,7 +18,7 @@ class RemainderPrinter extends LinePrinter {
     protected String formatLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
         NumberWithPosition<?> numberWithPosition = iterator.next();
         return String.format("%s%s%n",
-                repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
-                numberWithPosition.getNumber());
+                repeatChar(SPACE, numberWithPosition.getPosition() + 1),
+                numberWithPosition.getValue());
     }
 }

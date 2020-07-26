@@ -12,7 +12,7 @@ class StepResultStorage<T> {
     }
 
     T getMultiplicationResultNumber() {
-        return multiplicationResult.getNumber();
+        return multiplicationResult.getValue();
     }
 
     int getMultiplicationResultPosition() {
@@ -20,7 +20,7 @@ class StepResultStorage<T> {
     }
 
     T getRemainderNumber() {
-        return remainder.getNumber();
+        return remainder.getValue();
     }
 
     int getRemainderPosition() {

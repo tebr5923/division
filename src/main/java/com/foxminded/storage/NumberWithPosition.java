@@ -11,7 +11,7 @@ public class NumberWithPosition<T> {
         this.position = position;
     }
 
-    public T getNumber() {
+    public T getValue() {
         return number;
     }
 

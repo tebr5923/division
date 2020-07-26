@@ -18,33 +18,46 @@ class HeaderPrinter extends LinePrinter {
         return new ShortDividendPrinter(print);
     }
 
-    @SuppressWarnings("squid:S1192")
     @Override
     protected String formatLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
         NumberWithPosition<?> numberWithPosition = iterator.next();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("%s%s%s|%s%n",
-                MINUS,
-                repeatCharSomeTimes(SPACE, numberWithPosition.getPosition()),
-                numberWithPosition.getNumber(),
-                storage.getDivider()));
-
+        StringBuilder stringBuilder = new StringBuilder(getFirstLine(numberWithPosition));
         numberWithPosition = iterator.next();
+        stringBuilder.append(getSecondLine(numberWithPosition))
+        .append(getThirdLine(numberWithPosition));
+        return stringBuilder.toString();
+    }
+
+    @SuppressWarnings("squid:S1192") // reused format String
+    private String getFirstLine(NumberWithPosition<?> numberWithPosition) {
+        return String.format("%s%s%s|%s%n",
+                MINUS,
+                repeatChar(SPACE, numberWithPosition.getPosition()),
+                numberWithPosition.getValue(),
+                storage.getDivider());
+    }
+
+    private String getSecondLine(NumberWithPosition<?> numberWithPosition) {
         int spacesAmount = getPrintedLength(storage.getDividend()) -
-                getPrintedLength(numberWithPosition.getNumber()) -
+                getPrintedLength(numberWithPosition.getValue()) -
                 numberWithPosition.getPosition();
         int dashAmount = Math.max(getPrintedLength(storage.getDivider()),
                 getPrintedLength(storage.getResult()));
-        stringBuilder.append(String.format("%s%s%s|%s%n",
-                repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
-                numberWithPosition.getNumber(),
-                repeatCharSomeTimes(SPACE, spacesAmount),
-                repeatCharSomeTimes(DASH, dashAmount)));
-        stringBuilder.append(String.format("%s%s%s|%s%n",
-                repeatCharSomeTimes(SPACE, numberWithPosition.getPosition() + 1),
-                repeatCharSomeTimes(DASH, getPrintedLength(numberWithPosition.getNumber())),
-                repeatCharSomeTimes(SPACE, spacesAmount),
-                storage.getResult()));
-        return stringBuilder.toString();
+        return String.format("%s%s%s|%s%n",
+                repeatChar(SPACE, numberWithPosition.getPosition() + 1),
+                numberWithPosition.getValue(),
+                repeatChar(SPACE, spacesAmount),
+                repeatChar(DASH, dashAmount));
+    }
+
+    private String getThirdLine(NumberWithPosition<?> numberWithPosition) {
+        int spacesAmount = getPrintedLength(storage.getDividend()) -
+                getPrintedLength(numberWithPosition.getValue()) -
+                numberWithPosition.getPosition();
+        return String.format("%s%s%s|%s%n",
+                repeatChar(SPACE, numberWithPosition.getPosition() + 1),
+                repeatChar(DASH, getPrintedLength(numberWithPosition.getValue())),
+                repeatChar(SPACE, spacesAmount),
+                storage.getResult());
     }
 }
