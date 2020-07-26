@@ -5,13 +5,13 @@ import com.foxminded.storage.NumberWithPosition;
 import java.util.ListIterator;
 
 class ShortDividendPrinter extends LinePrinter {
-    ShortDividendPrinter(Print print) {
-        super(print);
+    ShortDividendPrinter(Printer printer) {
+        super(printer);
     }
 
     @Override
     protected LinePrinter getNextLinePrinter() {
-        return new MultiplicationResultPrinter(print);
+        return new MultiplicationResultPrinter(printer);
     }
 
     @Override

@@ -127,7 +127,24 @@ abstract class AbstractIntegerDividerTest {
     }
 
     @Test
-    abstract void divide_shouldReturnResultWithPositiveReminder();
+    void divide_shouldReturnResultWithPositiveReminder() {
+        int dividend = 100154;
+        int divider = 24;
+        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+                .addStep(dividend, 0)
+                .addStep(96, 1)
+                .addStep(41, 2)
+                .addStep(24, 2)
+                .addStep(175,2)
+                .addStep(168,2)
+                .addStep(74,4)
+                .addStep(72,4)
+                .addStep(2,5)
+                .build();
+        IntegerStorage actual = integerDivider.divide(dividend, divider);
+
+        assertEquals(excepted, actual);
+    }
 
     @Test
     abstract void divide_shouldReturnResult_whenDividendAndDividerMultipleOfTen();
@@ -138,6 +155,4 @@ abstract class AbstractIntegerDividerTest {
     @Test
     abstract void divide_shouldReturnResultWithConsequentZeroStage();
 
-    @Test
-    abstract void divide_shouldReturnResultWithConsequentZeroStage2();
 }

@@ -5,11 +5,11 @@ import com.foxminded.storage.Storage;
 
 import java.util.ListIterator;
 
-public class Print {
+public class Printer {
     private LinePrinter linePrinter;
     private final Storage<?> storage;
 
-    public Print(Storage<?> storage) {
+    public Printer(Storage<?> storage) {
         this.storage = storage;
     }
 

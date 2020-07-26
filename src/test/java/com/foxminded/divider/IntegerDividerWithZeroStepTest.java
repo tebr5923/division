@@ -12,25 +12,6 @@ class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest {
     }
 
     @Test
-    void divide_shouldReturnResultWithPositiveReminder() {
-        int dividend = 100154;
-        int divider = 249;
-        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
-                .addStep(dividend, 0)
-                .addStep(996, 1)
-                .addStep(55, 3)
-                .addStep(0, 4)
-                .addStep(554, 3)
-                .addStep(498, 3)
-                .addStep(56, 4)
-                .build();
-
-        IntegerStorage actual = integerDivider.divide(dividend, divider);
-
-        assertEquals(excepted, actual);
-    }
-
-    @Test
     void divide_shouldReturnResult_whenDividendAndDividerMultipleOfTen() {
         int dividend = 10000;
         int divider = 10;
@@ -75,33 +56,6 @@ class IntegerDividerWithZeroStepTest extends AbstractIntegerDividerTest {
 
     @Test
     void divide_shouldReturnResultWithConsequentZeroStage() {
-        int dividend = 999100084;
-        int divider = 998;
-        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
-                .addStep(dividend, 0)
-                .addStep(998, 0)
-                .addStep(11, 2)
-                .addStep(0, 3)
-                .addStep(110, 2)
-                .addStep(0, 4)
-                .addStep(1100, 2)
-                .addStep(998, 3)
-                .addStep(1020, 3)
-                .addStep(998, 4)
-                .addStep(228, 5)
-                .addStep(0, 7)
-                .addStep(2284, 5)
-                .addStep(1996, 5)
-                .addStep(288, 6)
-                .build();
-
-        IntegerStorage actual = integerDivider.divide(dividend, divider);
-
-        assertEquals(excepted, actual);
-    }
-
-    @Test
-    void divide_shouldReturnResultWithConsequentZeroStage2() {
         int dividend = 1000010123;
         int divider = 10;
         IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)

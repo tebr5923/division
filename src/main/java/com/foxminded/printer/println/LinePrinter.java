@@ -10,10 +10,10 @@ abstract class LinePrinter {
     protected static final char DASH = '-';
     protected static final char SPACE = ' ';
 
-    protected final Print print;
+    protected final Printer printer;
 
-    protected LinePrinter(Print print) {
-        this.print = print;
+    protected LinePrinter(Printer printer) {
+        this.printer = printer;
     }
 
     protected int getPrintedLength(Object object) {
@@ -27,7 +27,7 @@ abstract class LinePrinter {
     }
 
     protected void printLine(ListIterator<? extends NumberWithPosition<?>> iterator) {
-        print.setLinePrinter(getNextLinePrinter());
+        printer.setLinePrinter(getNextLinePrinter());
         printFormattedLine(formatLine(iterator));
     }
 

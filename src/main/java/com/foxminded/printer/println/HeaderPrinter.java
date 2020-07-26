@@ -8,14 +8,14 @@ import java.util.ListIterator;
 class HeaderPrinter extends LinePrinter {
     private final Storage<?> storage;
 
-    HeaderPrinter(Print print, Storage<?> storage) {
-        super(print);
+    HeaderPrinter(Printer printer, Storage<?> storage) {
+        super(printer);
         this.storage = storage;
     }
 
     @Override
     protected LinePrinter getNextLinePrinter() {
-        return new ShortDividendPrinter(print);
+        return new ShortDividendPrinter(printer);
     }
 
     @Override
