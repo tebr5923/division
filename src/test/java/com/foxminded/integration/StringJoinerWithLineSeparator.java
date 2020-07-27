@@ -13,10 +13,13 @@ public class StringJoinerWithLineSeparator {
         this.stringJoiner = new StringJoiner(DELIMITER, PREFIX, SUFFIX);
     }
 
-    public StringJoiner add(String string) {
+    public StringJoinerWithLineSeparator add(String string) {
         stringJoiner.add(string);
-        return stringJoiner;
+        return this;
     }
 
-
+    @Override
+    public String toString() {
+        return stringJoiner.toString();
+    }
 }

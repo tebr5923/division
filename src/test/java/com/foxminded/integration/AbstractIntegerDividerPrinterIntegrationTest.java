@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.StringJoiner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -32,8 +31,8 @@ abstract class AbstractIntegerDividerPrinterIntegrationTest {
     }
 
     @Test
-    void printIntegerDivider_shouldPrintCorrectResult_whenOnlyOneStep() {
-        StringJoiner excepted = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+    void printIntegerDivider_shouldPrintCorrectResult_whenOnlyOneStepDivider() {
+        StringJoinerWithLineSeparator excepted = new StringJoinerWithLineSeparator()
                 .add("_8|5")
                 .add(" 5|-")
                 .add(" -|1")
@@ -41,6 +40,32 @@ abstract class AbstractIntegerDividerPrinterIntegrationTest {
 
         int dividend = 8;
         int divider = 5;
+        IntegerStorage integerStorage = integerDivider.divide(dividend, divider);
+        ConsoleStoragePrinter consolePrinter = new ConsoleStoragePrinter();
+        consolePrinter.print(integerStorage);
+
+        assertEquals(excepted.toString(), output.toString());
+    }
+
+    @Test
+    void printIntegerDivider_shouldPrintCorrectResult_whenNotOneStepDivider() {
+        StringJoinerWithLineSeparator excepted = new StringJoinerWithLineSeparator()
+                .add("_999999|255")
+                .add(" 765   |----")
+                .add(" ---   |3921")
+                .add("_2349")
+                .add(" 2295")
+                .add(" ----")
+                .add("  _549")
+                .add("   510")
+                .add("   ---")
+                .add("   _399")
+                .add("    255")
+                .add("    ---")
+                .add("    144");
+
+        int dividend = 999999;
+        int divider = 255;
         IntegerStorage integerStorage = integerDivider.divide(dividend, divider);
         ConsoleStoragePrinter consolePrinter = new ConsoleStoragePrinter();
         consolePrinter.print(integerStorage);
