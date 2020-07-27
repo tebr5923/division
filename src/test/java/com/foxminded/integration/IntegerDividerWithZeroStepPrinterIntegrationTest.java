@@ -2,8 +2,8 @@ package com.foxminded.integration;
 
 import com.foxminded.divider.IntegerDividerWithZeroStep;
 
-public class IntegerDividerWithZeroStepPrinterIntegrationTest extends AbstractIntegerDividerPrinterIntegrationTest {
-    public IntegerDividerWithZeroStepPrinterIntegrationTest() {
+class IntegerDividerWithZeroStepPrinterIntegrationTest extends AbstractIntegerDividerPrinterIntegrationTest {
+    protected IntegerDividerWithZeroStepPrinterIntegrationTest() {
         super(new IntegerDividerWithZeroStep());
     }
 }

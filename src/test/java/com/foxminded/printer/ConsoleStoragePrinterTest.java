@@ -1,6 +1,6 @@
 package com.foxminded.printer;
 
-import com.foxminded.divider.IntegerStorageBuilder;
+import com.foxminded.util.IntegerStorageBuilder;
 import com.foxminded.storage.IntegerStorage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,6 +1,7 @@
 package com.foxminded.divider;
 
 import com.foxminded.storage.IntegerStorage;
+import com.foxminded.util.IntegerStorageBuilder;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,4 +1,4 @@
-package com.foxminded.divider;
+package com.foxminded.util;
 
 import com.foxminded.storage.IntegerStorage;
 import com.foxminded.storage.NumberWithPosition;

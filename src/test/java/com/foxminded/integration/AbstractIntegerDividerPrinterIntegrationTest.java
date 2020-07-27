@@ -3,6 +3,7 @@ package com.foxminded.integration;
 import com.foxminded.divider.IntegerDividerTemplate;
 import com.foxminded.printer.ConsoleStoragePrinter;
 import com.foxminded.storage.IntegerStorage;
+import com.foxminded.util.LineStringJoiner;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ abstract class AbstractIntegerDividerPrinterIntegrationTest {
     protected IntegerDividerTemplate integerDivider;
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
-    public AbstractIntegerDividerPrinterIntegrationTest(IntegerDividerTemplate integerDivider) {
+    protected AbstractIntegerDividerPrinterIntegrationTest(IntegerDividerTemplate integerDivider) {
         this.integerDivider = integerDivider;
     }
 
@@ -32,7 +33,7 @@ abstract class AbstractIntegerDividerPrinterIntegrationTest {
 
     @Test
     void printIntegerDivider_shouldPrintCorrectResult_whenOnlyOneStepDivider() {
-        StringJoinerWithLineSeparator excepted = new StringJoinerWithLineSeparator()
+        LineStringJoiner excepted = new LineStringJoiner()
                 .add("_8|5")
                 .add(" 5|-")
                 .add(" -|1")
@@ -49,7 +50,7 @@ abstract class AbstractIntegerDividerPrinterIntegrationTest {
 
     @Test
     void printIntegerDivider_shouldPrintCorrectResult_whenNotOneStepDivider() {
-        StringJoinerWithLineSeparator excepted = new StringJoinerWithLineSeparator()
+        LineStringJoiner excepted = new LineStringJoiner()
                 .add("_999999|255")
                 .add(" 765   |----")
                 .add(" ---   |3921")
