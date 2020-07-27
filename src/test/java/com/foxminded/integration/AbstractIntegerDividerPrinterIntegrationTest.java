@@ -32,24 +32,20 @@ abstract class AbstractIntegerDividerPrinterIntegrationTest {
     }
 
     @Test
-    void printIntegerDivider_shouldPrintCorrectResult_whenOnlyOneStepDivider() {
+    void printIntegerDivider_shouldPrintCorrectResult_whenOneDigitDividendAndDivider() {
         LineStringJoiner excepted = new LineStringJoiner()
                 .add("_8|5")
                 .add(" 5|-")
                 .add(" -|1")
                 .add(" 3");
 
-        int dividend = 8;
-        int divider = 5;
-        IntegerStorage integerStorage = integerDivider.divide(dividend, divider);
-        ConsoleStoragePrinter consolePrinter = new ConsoleStoragePrinter();
-        consolePrinter.print(integerStorage);
+        performDivisionPrint(8, 5);
 
-        assertEquals(excepted.toString(), output.toString());
+        assertEquals(excepted.toString(), getOutputAsString());
     }
 
     @Test
-    void printIntegerDivider_shouldPrintCorrectResult_whenNotOneStepDivider() {
+    void printIntegerDivider_shouldPrintCorrectResult_whenDividendMuchLargerDivider() {
         LineStringJoiner excepted = new LineStringJoiner()
                 .add("_999999|255")
                 .add(" 765   |----")
@@ -65,12 +61,37 @@ abstract class AbstractIntegerDividerPrinterIntegrationTest {
                 .add("    ---")
                 .add("    144");
 
-        int dividend = 999999;
-        int divider = 255;
+        performDivisionPrint(999999, 255);
+
+        assertEquals(excepted.toString(), getOutputAsString());
+    }
+
+    @Test
+    void printIntegerDivider_shouldPrintCorrectResult_whenResultWithZeroReminder() {
+        LineStringJoiner excepted = new LineStringJoiner()
+                .add("_840|24")
+                .add(" 72 |--")
+                .add(" -- |35")
+                .add("_120")
+                .add(" 120")
+                .add(" ---")
+                .add("   0");
+
+        performDivisionPrint(840, 24);
+
+        assertEquals(excepted.toString(), getOutputAsString());
+    }
+
+    @Test
+    abstract void printIntegerDivider_shouldPrintCorrectResult_whenResultWithZeroStage();
+
+    protected void performDivisionPrint(int dividend, int divider) {
         IntegerStorage integerStorage = integerDivider.divide(dividend, divider);
         ConsoleStoragePrinter consolePrinter = new ConsoleStoragePrinter();
         consolePrinter.print(integerStorage);
+    }
 
-        assertEquals(excepted.toString(), output.toString());
+    protected String getOutputAsString() {
+        return output.toString();
     }
 }

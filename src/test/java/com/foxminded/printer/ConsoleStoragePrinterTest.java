@@ -1,14 +1,14 @@
 package com.foxminded.printer;
 
-import com.foxminded.util.IntegerStorageBuilder;
 import com.foxminded.storage.IntegerStorage;
+import com.foxminded.util.IntegerStorageBuilder;
+import com.foxminded.util.LineStringJoiner;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.StringJoiner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,7 +27,7 @@ class ConsoleStoragePrinterTest {
 
     @Test
     void print_shouldPrintToSystemOut_whenNotOneStep() {
-        StringJoiner excepted = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+        LineStringJoiner excepted = new LineStringJoiner()
                 .add("_999999|255")
                 .add(" 765   |----")
                 .add(" ---   |3921")
@@ -63,7 +63,7 @@ class ConsoleStoragePrinterTest {
 
     @Test
     void print_shouldPrintOnlyHeaderAndReminder_whenOnlyOneStep() {
-        StringJoiner excepted = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
+        LineStringJoiner excepted = new LineStringJoiner()
                 .add("_8|5")
                 .add(" 5|-")
                 .add(" -|1")
