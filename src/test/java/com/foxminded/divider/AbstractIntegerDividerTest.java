@@ -19,7 +19,6 @@ abstract class AbstractIntegerDividerTest {
         int dividend = -1;
         int divider = 55;
 
-        // TODO: 24.06.2020 add test message
         assertThrows(IllegalArgumentException.class, () ->
                 integerDivider.divide(dividend, divider)
         );
@@ -30,7 +29,6 @@ abstract class AbstractIntegerDividerTest {
         int dividend = 999999;
         int divider = 0;
 
-        // TODO: 24.06.2020 add test message
         assertThrows(IllegalArgumentException.class, () ->
                 integerDivider.divide(dividend, divider)
         );
@@ -41,7 +39,6 @@ abstract class AbstractIntegerDividerTest {
         int dividend = 999999;
         int divider = -1;
 
-        // TODO: 24.06.2020 add test message
         assertThrows(IllegalArgumentException.class, () ->
                 integerDivider.divide(dividend, divider)
         );

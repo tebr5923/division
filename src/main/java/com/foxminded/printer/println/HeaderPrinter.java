@@ -5,6 +5,7 @@ import com.foxminded.storage.Storage;
 
 import java.util.ListIterator;
 
+@SuppressWarnings("squid:S1192") // reused format String
 class HeaderPrinter extends LinePrinter {
     private final Storage<?> storage;
 
@@ -28,7 +29,6 @@ class HeaderPrinter extends LinePrinter {
         return stringBuilder.toString();
     }
 
-    @SuppressWarnings("squid:S1192") // reused format String
     private String getFirstLine(NumberWithPosition<?> numberWithPosition) {
         return String.format("%s%s%s|%s%n",
                 MINUS,
