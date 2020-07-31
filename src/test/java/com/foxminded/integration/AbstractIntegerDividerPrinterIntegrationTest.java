@@ -33,7 +33,7 @@ abstract class AbstractIntegerDividerPrinterIntegrationTest {
 
     @Test
     void printIntegerDivider_shouldPrintCorrectResult_whenOneDigitDividendAndDivider() {
-        LineStringJoiner excepted = new LineStringJoiner()
+        LineStringJoiner expected = new LineStringJoiner()
                 .add("_8|5")
                 .add(" 5|-")
                 .add(" -|1")
@@ -41,12 +41,12 @@ abstract class AbstractIntegerDividerPrinterIntegrationTest {
 
         performDivisionPrint(8, 5);
 
-        assertEquals(excepted.toString(), getOutputAsString());
+        assertEquals(expected.toString(), getOutputAsString());
     }
 
     @Test
     void printIntegerDivider_shouldPrintCorrectResult_whenDividendMuchLargerDivider() {
-        LineStringJoiner excepted = new LineStringJoiner()
+        LineStringJoiner expected = new LineStringJoiner()
                 .add("_999999|255")
                 .add(" 765   |----")
                 .add(" ---   |3921")
@@ -63,12 +63,12 @@ abstract class AbstractIntegerDividerPrinterIntegrationTest {
 
         performDivisionPrint(999999, 255);
 
-        assertEquals(excepted.toString(), getOutputAsString());
+        assertEquals(expected.toString(), getOutputAsString());
     }
 
     @Test
     void printIntegerDivider_shouldPrintCorrectResult_whenResultWithZeroReminder() {
-        LineStringJoiner excepted = new LineStringJoiner()
+        LineStringJoiner expected = new LineStringJoiner()
                 .add("_840|24")
                 .add(" 72 |--")
                 .add(" -- |35")
@@ -79,7 +79,7 @@ abstract class AbstractIntegerDividerPrinterIntegrationTest {
 
         performDivisionPrint(840, 24);
 
-        assertEquals(excepted.toString(), getOutputAsString());
+        assertEquals(expected.toString(), getOutputAsString());
     }
 
     @Test

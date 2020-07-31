@@ -16,7 +16,7 @@ class IntegerDividerWithNoZeroStepTest extends AbstractIntegerDividerTest {
     void divide_shouldReturnResult_whenDividendAndDividerMultipleOfTen() {
         int dividend = 10000;
         int divider = 10;
-        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+        IntegerStorage expected = new IntegerStorageBuilder(dividend, divider)
                 .addStep(dividend, 0)
                 .addStep(10, 0)
                 .addStep(0, 4)
@@ -24,14 +24,14 @@ class IntegerDividerWithNoZeroStepTest extends AbstractIntegerDividerTest {
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     void divide_shouldReturnResultWithZeroStage() {
         int dividend = 80468;
         int divider = 5;
-        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+        IntegerStorage expected = new IntegerStorageBuilder(dividend, divider)
                 .addStep(dividend, 0)
                 .addStep(5, 0)
                 .addStep(30, 0)
@@ -45,14 +45,14 @@ class IntegerDividerWithNoZeroStepTest extends AbstractIntegerDividerTest {
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     void divide_shouldReturnResultWithConsequentZeroStage() {
         int dividend = 1000010123;
         int divider = 10;
-        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+        IntegerStorage expected = new IntegerStorageBuilder(dividend, divider)
                 .addStep(dividend, 0)
                 .addStep(10, 0)
                 .addStep(10, 5)
@@ -66,6 +66,6 @@ class IntegerDividerWithNoZeroStepTest extends AbstractIntegerDividerTest {
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, actual);
+        assertEquals(expected, actual);
     }
 }

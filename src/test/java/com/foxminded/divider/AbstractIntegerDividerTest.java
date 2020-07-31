@@ -49,7 +49,7 @@ abstract class AbstractIntegerDividerTest {
     void divide_shouldReturnResult_whenDividerMoreThenDividend() {
         int dividend = 999;
         int divider = 9999;
-        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+        IntegerStorage expected = new IntegerStorageBuilder(dividend, divider)
                 .addStep(dividend, 0)
                 .addStep(0, 2)
                 .addStep(dividend, 0)
@@ -57,14 +57,14 @@ abstract class AbstractIntegerDividerTest {
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     void divide_shouldReturnResult_whenDividendEqualsDivider() {
         int dividend = 55;
         int divider = 55;
-        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+        IntegerStorage expected = new IntegerStorageBuilder(dividend, divider)
                 .addStep(dividend, 0)
                 .addStep(55, 0)
                 .addStep(0, 1)
@@ -72,14 +72,14 @@ abstract class AbstractIntegerDividerTest {
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     void divide_shouldReturnResult_whenOneDigitDividendAndDivider() {
         int dividend = 9;
         int divider = 5;
-        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+        IntegerStorage expected = new IntegerStorageBuilder(dividend, divider)
                 .addStep(dividend, 0)
                 .addStep(5, 0)
                 .addStep(4, 0)
@@ -87,14 +87,14 @@ abstract class AbstractIntegerDividerTest {
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     void divide_shouldReturnResult_whenOneDigitDividerAndBitLargerDividend() {
         int dividend = 84;
         int divider = 5;
-        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+        IntegerStorage expected = new IntegerStorageBuilder(dividend, divider)
                 .addStep(dividend, 0)
                 .addStep(5, 0)
                 .addStep(34, 0)
@@ -104,14 +104,14 @@ abstract class AbstractIntegerDividerTest {
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     void divide_shouldReturnResultWithZeroReminder() {
         int dividend = 840;
         int divider = 24;
-        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+        IntegerStorage expected = new IntegerStorageBuilder(dividend, divider)
                 .addStep(dividend, 0)
                 .addStep(72, 0)
                 .addStep(120, 0)
@@ -121,14 +121,14 @@ abstract class AbstractIntegerDividerTest {
 
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     void divide_shouldReturnResultWithPositiveReminder() {
         int dividend = 100154;
         int divider = 24;
-        IntegerStorage excepted = new IntegerStorageBuilder(dividend, divider)
+        IntegerStorage expected = new IntegerStorageBuilder(dividend, divider)
                 .addStep(dividend, 0)
                 .addStep(96, 1)
                 .addStep(41, 2)
@@ -141,7 +141,7 @@ abstract class AbstractIntegerDividerTest {
                 .build();
         IntegerStorage actual = integerDivider.divide(dividend, divider);
 
-        assertEquals(excepted, actual);
+        assertEquals(expected, actual);
     }
 
     @Test

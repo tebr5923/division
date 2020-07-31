@@ -14,7 +14,7 @@ class IntegerDividerWithZeroStepPrinterIntegrationTest extends AbstractIntegerDi
     @Override
     @Test
     void printIntegerDivider_shouldPrintCorrectResult_whenResultWithZeroStage() {
-        LineStringJoiner excepted = new LineStringJoiner()
+        LineStringJoiner expected = new LineStringJoiner()
                 .add("_80468|5")
                 .add(" 5    |-----")
                 .add(" -    |16093")
@@ -34,6 +34,6 @@ class IntegerDividerWithZeroStepPrinterIntegrationTest extends AbstractIntegerDi
 
         performDivisionPrint(80468, 5);
 
-        assertEquals(excepted.toString(), getOutputAsString());
+        assertEquals(expected.toString(), getOutputAsString());
     }
 }

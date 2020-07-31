@@ -27,7 +27,7 @@ class ConsoleStoragePrinterTest {
 
     @Test
     void print_shouldPrintToSystemOut_whenNotOneStep() {
-        LineStringJoiner excepted = new LineStringJoiner()
+        LineStringJoiner expected = new LineStringJoiner()
                 .add("_999999|255")
                 .add(" 765   |----")
                 .add(" ---   |3921")
@@ -58,12 +58,12 @@ class ConsoleStoragePrinterTest {
         ConsoleStoragePrinter consolePrinter = new ConsoleStoragePrinter();
         consolePrinter.print(integerStorage);
 
-        assertEquals(excepted.toString(), output.toString());
+        assertEquals(expected.toString(), output.toString());
     }
 
     @Test
     void print_shouldPrintOnlyHeaderAndReminder_whenOnlyOneStep() {
-        LineStringJoiner excepted = new LineStringJoiner()
+        LineStringJoiner expected = new LineStringJoiner()
                 .add("_8|5")
                 .add(" 5|-")
                 .add(" -|1")
@@ -79,6 +79,6 @@ class ConsoleStoragePrinterTest {
         ConsoleStoragePrinter consolePrinter = new ConsoleStoragePrinter();
         consolePrinter.print(integerStorage);
 
-        assertEquals(excepted.toString(), output.toString());
+        assertEquals(expected.toString(), output.toString());
     }
 }
